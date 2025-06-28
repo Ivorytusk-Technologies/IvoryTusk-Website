@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IvoryTusk - AI Voice Agent Solutions | Transform Your Business Communication</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="IvoryTusk provides cutting-edge AI Voice Agent solutions for businesses. Automate calls, qualify leads, and enhance customer engagement with our intelligent voice agents.">
+    <meta name="keywords" content="AI Voice Agents, Conversational AI, Business Automation, Voice Technology, Lead Qualification, Customer Service AI, IvoryTusk">
+    <meta name="author" content="IvoryTusk">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="IvoryTusk - AI Voice Agent Solutions">
+    <meta property="og:description" content="Transform your business communication with intelligent AI voice agents.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ivorytusk.co.in">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23B7472A'/><path d='M30 25 Q50 40 70 25 Q55 55 50 75 Q45 55 30 25' fill='white'/></svg>">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #B7472A;
+            --primary-light: #CD853F;
+            --primary-dark: #8B3A2B;
+            --accent-rust: #D2691E;
+            --bg-dark: #1a1a1a;
+            --bg-dark-secondary: #2a2a2a;
+            --text-light: #e5e5e5;
+            --text-dark: #b0b0b0;
+            --bg-light: #252525;
+            --white: #ffffff;
+            --glass-light: rgba(255, 255, 255, 0.1);
+            --glass-medium: rgba(255, 255, 255, 0.15);
+            --glass-heavy: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--bg-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .logo svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 4px rgba(183, 71, 42, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover .logo svg {
+            filter: drop-shadow(0 4px 8px rgba(183, 71, 42, 0.4));
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-light);
+            background: rgba(183, 71, 42, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(183, 71, 42, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(183, 71, 42, 0.1);
+            color: var(--primary-light);
+            transform: scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(183, 71, 42, 0.1) 0%, rgba(205, 133, 63, 0.1) 100%),
+                        radial-gradient(ellipse at center, rgba(183, 71, 42, 0.05) 0%, transparent 70%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(205, 133, 63, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 20%;
+            right: 10%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(183, 71, 42, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .hero-buttons .btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Cards */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(42, 42, 42, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            background: rgba(52, 52, 52, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(183, 71, 42, 0.2), 0 8px 32px rgba(0, 0, 0, 0.5);
+            border-color: rgba(183, 71, 42, 0.3);
+        }
+
+        .stat-card .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .label {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--glass-medium);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 48px rgba(183, 71, 42, 0.2), 0 8px 32px rgba(0, 0, 0, 0.4);
+            background: var(--glass-heavy);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-color);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            font-size: 2rem;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: var(--primary-light);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 25px rgba(183, 71, 42, 0.4);
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .feature-card p {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Platform Section */
+        .platform {
+            padding: 5rem 0;
+            background: var(--bg-dark);
+        }
+
+        .platform-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .platform-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .platform-text p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .platform-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .platform-features li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-light);
+        }
+
+        .platform-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .platform-visual {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .platform-visual:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(183, 71, 42, 0.3);
+        }
+
+        .platform-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><circle cx="50" cy="50" r="25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
+            animation: rotate 20s linear infinite;
+        }
+
+        .platform-visual .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .platform-visual h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-form {
+            background: var(--glass-medium);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--glass-border);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            transition: border-color 0.3s ease;
+            background: var(--glass-light);
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-dark);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .contact-details {
+            background: var(--glass-medium);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .contact-details:hover {
+            background: var(--glass-heavy);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 0.5rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-icon:hover {
+            background: var(--primary-light);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(183, 71, 42, 0.4);
+        }
+
+        .contact-item div h4 {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text-light);
+        }
+
+        .contact-item div p {
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-dark-secondary);
+            color: var(--text-light);
+            padding: 3rem 0 1rem 0;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-rust);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-dark);
+            text-decoration: none;
+            line-height: 1.6;
+        }
+
+        .footer-section a:hover {
+            color: var(--text-light);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 1rem;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        /* Chatbot */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(183, 71, 42, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            background: var(--primary-dark);
+        }
+
+        .chatbot-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: var(--glass-medium);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            border: 1px solid var(--glass-border);
+        }
+
+        .chatbot-widget.active {
+            display: flex;
+        }
+
+        .chatbot-header {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.7rem 1rem;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.bot {
+            background: var(--glass-heavy);
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+            align-self: flex-start;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+        }
+
+        .message.user {
+            background: var(--primary-color);
+            color: var(--white);
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        .chatbot-input {
+            padding: 1rem;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            gap: 0.5rem;
+            background: var(--glass-light);
+            backdrop-filter: blur(10px);
+            border-radius: 0 0 15px 15px;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.7rem;
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            outline: none;
+            font-family: inherit;
+            background: var(--glass-light);
+            backdrop-filter: blur(10px);
+            color: var(--text-light);
+        }
+
+        .chatbot-input input::placeholder {
+            color: var(--text-dark);
+        }
+
+        .chatbot-input button {
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .chatbot-input button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--glass-heavy);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                border: 1px solid var(--glass-border);
+                border-top: none;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .platform-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .chatbot-widget {
+                width: calc(100vw - 40px);
+                height: 400px;
+                right: 20px;
+                left: 20px;
+            }
+
+            .stats-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <div class="logo-container">
+                <div class="logo">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#B7472A;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#CD853F;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#D2691E;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="50" cy="50" r="45" fill="url(#logoGradient)" />
+                        <path d="M30 25 Q50 40 70 25 Q55 55 50 75 Q45 55 30 25" fill="white" opacity="0.9"/>
+                        <circle cx="50" cy="45" r="8" fill="white" opacity="0.7"/>
+                    </svg>
+                </div>
+                <a href="#home" class="brand-name">IvoryTusk</a>
+            </div>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#platform">Platform</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="btn btn-primary">Get Started</a></li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1>
+                    <span class="gradient-text">AI-First</span><br>
+                    Voice Agent Solutions
+                </h1>
+                <p class="subtitle">
+                    Transform your business communication with intelligent voice agents that automate calls, 
+                    qualify leads, and enhance customer engagement with precision and intelligence.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Start Free Trial</a>
+                    <a href="#platform" class="btn btn-secondary">Watch Demo</a>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="number">99.9%</div>
+                        <div class="label">Uptime</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">50+</div>
+                        <div class="label">Languages</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">24/7</div>
+                        <div class="label">Support</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="number">10K+</div>
+                        <div class="label">Daily Calls</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="gradient-text">Why Choose</span> IvoryTusk?
+                </h2>
+                <p class="section-subtitle">
+                    Our AI-powered voice agents provide intelligent, scalable solutions for modern businesses
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI-Powered Intelligence</h3>
+                    <p>Advanced conversational AI with natural language processing, sentiment analysis, and dynamic response generation for human-like interactions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multi-Language Support</h3>
+                    <p>Support for 50+ languages including Hindi, English, and regional languages with cultural context understanding and natural accent adaptation.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Seamless Integration</h3>
+                    <p>Easy integration with existing CRM systems, telephony providers, and business workflows with minimal setup time.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Comprehensive dashboards with call analytics, performance metrics, and actionable insights for continuous business optimization.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Lead Qualification</h3>
+                    <p>Intelligent lead scoring and qualification with automated follow-ups, conversion tracking, and detailed prospect insights.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Enterprise Security</h3>
+                    <p>Bank-grade security with end-to-end encryption, GDPR compliance, and comprehensive privacy protection for all communications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Section -->
+    <section class="platform" id="platform">
+        <div class="container">
+            <div class="platform-content">
+                <div class="platform-text">
+                    <h2>
+                        <span class="gradient-text">Comprehensive</span><br>
+                        Voice Agent Platform
+                    </h2>
+                    <p>
+                        Our voice agent platform provides end-to-end solutions for businesses looking to automate 
+                        their communication processes. From lead generation to customer support, our AI agents 
+                        handle it all with precision and intelligence.
+                    </p>
+                    
+                    <ul class="platform-features">
+                        <li>Automated outbound calling campaigns</li>
+                        <li>Intelligent call routing and distribution</li>
+                        <li>Real-time conversation monitoring</li>
+                        <li>Custom voice personas and scripts</li>
+                        <li>Integration with popular CRM systems</li>
+                        <li>Advanced reporting and analytics</li>
+                        <li>Multi-channel communication support</li>
+                        <li>24/7 automated customer service</li>
+                    </ul>
+                    
+                    <a href="#contact" class="btn btn-primary">Schedule a Demo</a>
+                </div>
+                
+                <div class="platform-visual">
+                    <div class="content">
+                        <h3>🚀 AI-First Technology</h3>
+                        <p>Powered by advanced machine learning algorithms and natural language processing</p>
+                        <br>
+                        <h3>📈 Scalable Solutions</h3>
+                        <p>From startup to enterprise, our platform grows with your business needs</p>
+                        <br>
+                        <h3>🔧 Custom Integration</h3>
+                        <p>Seamlessly integrates with your existing business tools and workflows</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="gradient-text">Get Started</span> with IvoryTusk
+                </h2>
+                <p class="section-subtitle">
+                    Ready to transform your business communication? Let's discuss your specific requirements.
+                </p>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Company Name</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="use-case">Primary Use Case *</label>
+                            <select id="use-case" name="use-case" required>
+                                <option value="">Select Use Case</option>
+                                <option value="lead-generation">Lead Generation</option>
+                                <option value="customer-support">Customer Support</option>
+                                <option value="appointment-scheduling">Appointment Scheduling</option>
+                                <option value="survey-research">Survey & Research</option>
+                                <option value="sales-follow-up">Sales Follow-up</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Project Requirements</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your specific requirements, expected call volume, and business goals..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>
+                        Our team of AI specialists is ready to help you implement the perfect voice agent 
+                        solution for your business. Reach out to us for a personalized consultation.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>contact@ivorytusk.co.in</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📱</div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 84690 92075</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🏢</div>
+                            <div>
+                                <h4>Office</h4>
+                                <p>India & Global</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">⏰</div>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p>24/7 Support Available</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo-container" style="margin-bottom: 1rem;">
+                        <div class="logo">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="footerLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#D2691E;stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:#CD853F;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#B7472A;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="50" cy="50" r="45" fill="url(#footerLogoGradient)" />
+                                <path d="M30 25 Q50 40 70 25 Q55 55 50 75 Q45 55 30 25" fill="white" opacity="0.9"/>
+                                <circle cx="50" cy="45" r="8" fill="white" opacity="0.7"/>
+                            </svg>
+                        </div>
+                        <span style="color: var(--text-light); font-size: 1.5rem; font-weight: 700;">IvoryTusk</span>
+                    </div>
+                    <p>
+                        Transforming business communication with AI-first voice agent solutions. 
+                        Automate, scale, and optimize your customer interactions.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Platform</h3>
+                    <p><a href="#features">Voice Agents</a></p>
+                    <p><a href="#platform">Analytics Dashboard</a></p>
+                    <p><a href="#contact">API Integration</a></p>
+                    <p><a href="#contact">Custom Solutions</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <p><a href="#home">About Us</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                    <p><a href="#contact">Support</a></p>
+                    <p><a href="#contact">Careers</a></p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <p><a href="#contact">Privacy Policy</a></p>
+                    <p><a href="#contact">Terms of Service</a></p>
+                    <p><a href="#contact">Data Security</a></p>
+                    <p><a href="#contact">Compliance</a></p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 IvoryTusk. All rights reserved. | AI-First Voice Agent Solutions</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <button class="chatbot-toggle" id="chatbot-toggle">💬</button>
+    
+    <div class="chatbot-widget" id="chatbot-widget">
+        <div class="chatbot-header">
+            <h4>IvoryTusk Assistant</h4>
+            <button class="chatbot-close" id="chatbot-close">×</button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot">
+                Hello! I'm your IvoryTusk assistant. I can help you learn more about our AI voice agent platform. What would you like to know?
+            </div>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" id="chatbot-input" placeholder="Ask me anything about our platform...">
+            <button type="button" id="chatbot-send">→</button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                // Close mobile menu if open
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(26, 26, 26, 0.95)';
+                header.style.backdropFilter = 'blur(25px)';
+            } else {
+                header.style.background = 'rgba(26, 26, 26, 0.8)';
+                header.style.backdropFilter = 'blur(20px)';
+            }
+        });
+
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.7';
+            
+            // Get form data
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                // Simulate API call (replace with your actual form handler)
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Show success message
+                alert('Thank you for your message! Our team will contact you within 24 hours.');
+                e.target.reset();
+                
+            } catch (error) {
+                alert('Sorry, there was an error sending your message. Please try again or contact us directly at contact@ivorytusk.co.in');
+            } finally {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+            }
+        });
+
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbot-toggle');
+        const chatbotWidget = document.getElementById('chatbot-widget');
+        const chatbotClose = document.getElementById('chatbot-close');
+        const chatbotMessages = document.getElementById('chatbot-messages');
+        const chatbotInput = document.getElementById('chatbot-input');
+        const chatbotSend = document.getElementById('chatbot-send');
+
+        // FAQ responses
+        const faqResponses = {
+            'pricing': 'Our voice agent platform offers flexible pricing based on usage. We have plans starting from ₹5,000/month for small businesses. Contact us for a customized quote based on your requirements.',
+            'features': 'Our platform includes AI-powered voice agents, multi-language support, real-time analytics, CRM integration, call recording, lead qualification, and 24/7 customer support.',
+            'integration': 'We integrate with popular CRM systems, telephony providers (Airtel, Jio, Twilio), and business tools. Our API allows custom integrations for your specific workflow needs.',
+            'languages': 'We support 50+ languages including Hindi, English, Tamil, Telugu, Bengali, Marathi, and major international languages. Our AI understands cultural context and regional dialects.',
+            'security': 'We implement bank-grade security with end-to-end encryption, GDPR compliance, and regular security audits. Your data is stored securely with redundant backups.',
+            'demo': 'Yes! We offer free demos and trial periods. You can schedule a personalized demo through our contact form or request a 7-day trial to test our platform.',
+            'support': 'We provide 24/7 customer support via chat, email, and phone. Our technical team offers onboarding assistance and ongoing platform optimization.',
+            'setup': 'Setup typically takes 24-48 hours. Our team handles the complete configuration including voice training, script optimization, and system integration.',
+            'default': 'I can help you with information about our voice agent platform, pricing, features, integrations, language support, security, demos, and technical support. What specific area interests you?'
+        };
+
+        function addMessage(text, isUser = false) {
+            const message = document.createElement('div');
+            message.className = `message ${isUser ? 'user' : 'bot'}`;
+            message.textContent = text;
+            chatbotMessages.appendChild(message);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function getBotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            
+            // Simple keyword matching for FAQ responses
+            for (const [keyword, response] of Object.entries(faqResponses)) {
+                if (keyword !== 'default' && lowerMessage.includes(keyword)) {
+                    return response;
+                }
+            }
+            
+            // Check for common question patterns
+            if (lowerMessage.includes('how much') || lowerMessage.includes('cost') || lowerMessage.includes('price')) {
+                return faqResponses.pricing;
+            }
+            
+            if (lowerMessage.includes('what can') || lowerMessage.includes('what do') || lowerMessage.includes('capabilities')) {
+                return faqResponses.features;
+            }
+            
+            if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return 'Hello! Welcome to IvoryTusk. I\'m here to help you learn about our AI voice agent platform. What would you like to know?';
+            }
+            
+            if (lowerMessage.includes('contact') || lowerMessage.includes('talk to') || lowerMessage.includes('human')) {
+                return 'You can reach our team at contact@ivorytusk.co.in or fill out the contact form on this page. We typically respond within 2-4 hours during business hours.';
+            }
+            
+            return faqResponses.default;
+        }
+
+        chatbotToggle.addEventListener('click', () => {
+            chatbotWidget.classList.add('active');
+            chatbotInput.focus();
+        });
+
+        chatbotClose.addEventListener('click', () => {
+            chatbotWidget.classList.remove('active');
+        });
+
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                chatbotInput.value = '';
+                
+                // Show typing indicator and respond
+                setTimeout(() => {
+                    const response = getBotResponse(message);
+                    addMessage(response);
+                }, 1000);
+            }
+        }
+
+        chatbotSend.addEventListener('click', sendMessage);
+
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Close chatbot when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!chatbotWidget.contains(e.target) && !chatbotToggle.contains(e.target)) {
+                chatbotWidget.classList.remove('active');
+            }
+        });
+
+        // Add fade-in animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe feature cards for animation
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
