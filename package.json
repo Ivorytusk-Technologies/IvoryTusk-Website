@@ -1,0 +1,26 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "build-css": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tirthpandya1/IvoryTusk-Website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tirthpandya1/IvoryTusk-Website/issues"
+  },
+  "homepage": "https://github.com/tirthpandya1/IvoryTusk-Website#readme",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^4.1.12"
+  }
+}

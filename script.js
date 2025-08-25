@@ -603,6 +603,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Audio can play through');
             });
             
+            voiceAgentsAudio.addEventListener('play', () => {
+                console.log('Audio PLAY event fired');
+            });
+            
+            voiceAgentsAudio.addEventListener('playing', () => {
+                console.log('Audio PLAYING event fired');
+            });
+            
+            voiceAgentsAudio.addEventListener('timeupdate', () => {
+                console.log('Audio time update:', voiceAgentsAudio.currentTime);
+            }, { once: true }); // Only log first time update
+            
+            voiceAgentsAudio.addEventListener('stalled', () => {
+                console.log('Audio STALLED');
+            });
+            
+            voiceAgentsAudio.addEventListener('waiting', () => {
+                console.log('Audio WAITING for data');
+            });
+            
+            // Add a simple test button functionality
+            window.testAudioSimple = function() {
+                console.log('=== SIMPLE AUDIO TEST ===');
+                const audio = document.getElementById('voice-agents-audio');
+                audio.currentTime = 0;
+                audio.play().then(() => {
+                    console.log('Simple audio test: SUCCESS');
+                }).catch(err => {
+                    console.log('Simple audio test: FAILED', err);
+                });
+            };
+            
             playVoiceAgentsBtn.addEventListener('click', async () => {
                 console.log('Voice agents play button clicked');
                 
