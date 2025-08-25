@@ -1,0 +1,45 @@
+/* IvoryTusk Website Styles */
+
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Minimal meaningful animations only */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 0.5s ease-out forwards;
+}
+
+/* Canvas Audio Visualizer */
+.voice-visualizer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.audio-canvas {
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.modal {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.blur-bg {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Dark mode button shadow fixes */
+.dark .shadow-orange-200\/50 {
+    box-shadow: 0 10px 15px -3px rgba(251, 146, 60, 0.3), 0 4px 6px -2px rgba(251, 146, 60, 0.15);
+}

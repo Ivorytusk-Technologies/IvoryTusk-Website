@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200">
+  <!-- IVORYTUSK text -->
+  <text x="400" y="70" 
+        font-family="Arial, Helvetica, sans-serif" 
+        font-size="48" 
+        font-weight="bold" 
+        fill="#FFFFF0" 
+        text-anchor="middle" 
+        letter-spacing="8px">IVORYTUSK</text>
+  
+  <!-- Thin rounded orange line -->
+  <rect x="200" y="95" 
+        width="400" 
+        height="2" 
+        fill="#FF8C42" 
+        rx="1" 
+        ry="1"/>
+  
+  <!-- AI SOLUTIONS text -->
+  <text x="400" y="140" 
+        font-family="Arial, Helvetica, sans-serif" 
+        font-size="24" 
+        font-weight="normal" 
+        fill="#FFFFF0" 
+        text-anchor="middle" 
+        letter-spacing="12px">AI SOLUTIONS</text>
+</svg>

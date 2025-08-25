@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Test</title>
+</head>
+<body>
+    <h1>Audio Playback Test</h1>
+    
+    <audio id="test-audio" preload="auto" controls>
+        <source src="assets/recording.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <br><br>
+    
+    <button id="play-btn">Play Audio</button>
+    <button id="pause-btn">Pause Audio</button>
+    
+    <div id="status"></div>
+    
+    <script>
+        const audio = document.getElementById('test-audio');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const status = document.getElementById('status');
+        
+        function updateStatus(message) {
+            status.innerHTML = message + '<br>' + status.innerHTML;
+            console.log(message);
+        }
+        
+        audio.addEventListener('loadstart', () => updateStatus('Loading started'));
+        audio.addEventListener('loadeddata', () => updateStatus('Data loaded'));
+        audio.addEventListener('canplay', () => updateStatus('Can play'));
+        audio.addEventListener('canplaythrough', () => updateStatus('Can play through'));
+        audio.addEventListener('play', () => updateStatus('Playing started'));
+        audio.addEventListener('pause', () => updateStatus('Paused'));
+        audio.addEventListener('ended', () => updateStatus('Ended'));
+        audio.addEventListener('error', (e) => {
+            updateStatus('Error: ' + (audio.error ? audio.error.message : 'Unknown error'));
+        });
+        
+        playBtn.addEventListener('click', async () => {
+            updateStatus('Play button clicked');
+            updateStatus('Audio src: ' + audio.src);
+            updateStatus('Audio readyState: ' + audio.readyState);
+            updateStatus('Audio networkState: ' + audio.networkState);
+            
+            try {
+                await audio.play();
+                updateStatus('Play successful');
+            } catch (error) {
+                updateStatus('Play failed: ' + error.message);
+            }
+        });
+        
+        pauseBtn.addEventListener('click', () => {
+            audio.pause();
+            updateStatus('Pause clicked');
+        });
+    </script>
+</body>
+</html>
