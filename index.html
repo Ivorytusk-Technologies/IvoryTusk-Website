@@ -1,1433 +1,697 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IvoryTusk - AI Voice Agent Solutions | Transform Your Business Communication</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="IvoryTusk provides cutting-edge AI Voice Agent solutions for businesses. Automate calls, qualify leads, and enhance customer engagement with our intelligent voice agents.">
-    <meta name="keywords" content="AI Voice Agents, Conversational AI, Business Automation, Voice Technology, Lead Qualification, Customer Service AI, IvoryTusk">
-    <meta name="author" content="IvoryTusk">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="IvoryTusk - AI Voice Agent Solutions">
-    <meta property="og:description" content="Transform your business communication with intelligent AI voice agents.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ivorytusk.co.in">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23B7472A'/><path d='M30 25 Q50 40 70 25 Q55 55 50 75 Q45 55 30 25' fill='white'/></svg>">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #B7472A;
-            --primary-light: #CD853F;
-            --primary-dark: #8B3A2B;
-            --accent-rust: #D2691E;
-            --bg-dark: #1a1a1a;
-            --bg-dark-secondary: #2a2a2a;
-            --text-light: #e5e5e5;
-            --text-dark: #b0b0b0;
-            --bg-light: #252525;
-            --white: #ffffff;
-            --glass-light: rgba(255, 255, 255, 0.1);
-            --glass-medium: rgba(255, 255, 255, 0.15);
-            --glass-heavy: rgba(255, 255, 255, 0.2);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --gray-100: #f3f4f6;
-            --gray-200: #e5e7eb;
-            --success: #10b981;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-light);
-            background: var(--bg-dark);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        .header {
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: blur(20px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .logo-container:hover {
-            transform: scale(1.05);
-        }
-
-        .logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .logo svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 2px 4px rgba(183, 71, 42, 0.2));
-            transition: all 0.3s ease;
-        }
-
-        .logo-container:hover .logo svg {
-            filter: drop-shadow(0 4px 8px rgba(183, 71, 42, 0.4));
-        }
-
-        .brand-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-light);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-light);
-            background: rgba(183, 71, 42, 0.1);
-            transform: translateY(-1px);
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .btn {
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(183, 71, 42, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-color);
-            color: var(--white);
-        }
-
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-light);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu-toggle:hover {
-            background: rgba(183, 71, 42, 0.1);
-            color: var(--primary-light);
-            transform: scale(1.1);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(183, 71, 42, 0.1) 0%, rgba(205, 133, 63, 0.1) 100%),
-                        radial-gradient(ellipse at center, rgba(183, 71, 42, 0.05) 0%, transparent 70%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 20%;
-            left: 10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(205, 133, 63, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 20%;
-            right: 10%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(183, 71, 42, 0.15) 0%, transparent 70%);
-            border-radius: 50%;
-            animation: float 10s ease-in-out infinite reverse;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            color: var(--text-dark);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .hero-buttons .btn {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-        }
-
-        /* Stats Cards */
-        .stats-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .stat-card {
-            background: rgba(42, 42, 42, 0.8);
-            backdrop-filter: blur(20px);
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .stat-card:hover {
-            background: rgba(52, 52, 52, 0.9);
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(183, 71, 42, 0.2), 0 8px 32px rgba(0, 0, 0, 0.5);
-            border-color: rgba(183, 71, 42, 0.3);
-        }
-
-        .stat-card .number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-card .label {
-            color: var(--text-dark);
-            font-weight: 500;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 5rem 0;
-            background: var(--bg-light);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--glass-medium);
-            backdrop-filter: blur(20px);
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            border: 1px solid var(--glass-border);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 16px 48px rgba(183, 71, 42, 0.2), 0 8px 32px rgba(0, 0, 0, 0.4);
-            background: var(--glass-heavy);
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--primary-color);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem auto;
-            font-size: 2rem;
-            color: var(--white);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            background: var(--primary-light);
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 25px rgba(183, 71, 42, 0.4);
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-
-        .feature-card p {
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* Platform Section */
-        .platform {
-            padding: 5rem 0;
-            background: var(--bg-dark);
-        }
-
-        .platform-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .platform-text h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .platform-text p {
-            font-size: 1.1rem;
-            color: var(--text-dark);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-
-        .platform-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .platform-features li {
-            padding: 0.5rem 0;
-            padding-left: 2rem;
-            position: relative;
-            color: var(--text-light);
-        }
-
-        .platform-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .platform-visual {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-            border-radius: 20px;
-            padding: 3rem;
-            text-align: center;
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .platform-visual:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(183, 71, 42, 0.3);
-        }
-
-        .platform-visual::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><circle cx="50" cy="50" r="25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>');
-            animation: rotate 20s linear infinite;
-        }
-
-        .platform-visual .content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .platform-visual h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 5rem 0;
-            background: var(--bg-light);
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .contact-form {
-            background: var(--glass-medium);
-            backdrop-filter: blur(20px);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--glass-border);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--glass-border);
-            border-radius: 10px;
-            font-size: 1rem;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            transition: border-color 0.3s ease;
-            background: var(--glass-light);
-            backdrop-filter: blur(10px);
-            color: var(--text-light);
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: var(--text-dark);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-light);
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .contact-info h3 {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-info p {
-            color: var(--text-dark);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-
-        .contact-details {
-            background: var(--glass-medium);
-            backdrop-filter: blur(20px);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--glass-border);
-            transition: all 0.3s ease;
-        }
-
-        .contact-details:hover {
-            background: var(--glass-heavy);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-            transform: translateY(-2px);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 0.5rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(5px);
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .contact-icon:hover {
-            background: var(--primary-light);
-            transform: scale(1.1);
-            box-shadow: 0 4px 15px rgba(183, 71, 42, 0.4);
-        }
-
-        .contact-item div h4 {
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-            color: var(--text-light);
-        }
-
-        .contact-item div p {
-            color: var(--text-dark);
-            margin: 0;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--bg-dark-secondary);
-            color: var(--text-light);
-            padding: 3rem 0 1rem 0;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: var(--accent-rust);
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: var(--text-dark);
-            text-decoration: none;
-            line-height: 1.6;
-        }
-
-        .footer-section a:hover {
-            color: var(--text-light);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid var(--glass-border);
-            padding-top: 1rem;
-            text-align: center;
-            color: var(--text-dark);
-        }
-
-        /* Chatbot */
-        .chatbot-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            background: var(--primary-color);
-            border: none;
-            border-radius: 50%;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(183, 71, 42, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .chatbot-toggle:hover {
-            transform: scale(1.1);
-            background: var(--primary-dark);
-        }
-
-        .chatbot-widget {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            width: 350px;
-            height: 500px;
-            background: var(--glass-medium);
-            backdrop-filter: blur(20px);
-            border-radius: 15px;
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-            border: 1px solid var(--glass-border);
-        }
-
-        .chatbot-widget.active {
-            display: flex;
-        }
-
-        .chatbot-header {
-            background: var(--primary-color);
-            color: var(--white);
-            padding: 1rem;
-            border-radius: 15px 15px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .chatbot-close {
-            background: none;
-            border: none;
-            color: var(--white);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .chatbot-messages {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .message {
-            margin-bottom: 1rem;
-            padding: 0.7rem 1rem;
-            border-radius: 15px;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-
-        .message.bot {
-            background: var(--glass-heavy);
-            backdrop-filter: blur(10px);
-            color: var(--text-light);
-            align-self: flex-start;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-        }
-
-        .message.user {
-            background: var(--primary-color);
-            color: var(--white);
-            align-self: flex-end;
-            margin-left: auto;
-        }
-
-        .chatbot-input {
-            padding: 1rem;
-            border-top: 1px solid var(--glass-border);
-            display: flex;
-            gap: 0.5rem;
-            background: var(--glass-light);
-            backdrop-filter: blur(10px);
-            border-radius: 0 0 15px 15px;
-        }
-
-        .chatbot-input input {
-            flex: 1;
-            padding: 0.7rem;
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            outline: none;
-            font-family: inherit;
-            background: var(--glass-light);
-            backdrop-filter: blur(10px);
-            color: var(--text-light);
-        }
-
-        .chatbot-input input::placeholder {
-            color: var(--text-dark);
-        }
-
-        .chatbot-input button {
-            background: var(--primary-color);
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .chatbot-input button:hover {
-            background: var(--primary-dark);
-        }
-
-        /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .mobile-menu-toggle {
-                display: block;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--glass-heavy);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                padding: 2rem;
-                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-                border: 1px solid var(--glass-border);
-                border-top: none;
-            }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .platform-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .chatbot-widget {
-                width: calc(100vw - 40px);
-                height: 400px;
-                right: 20px;
-                left: 20px;
-            }
-
-            .stats-cards {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .stats-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; -webkit-text-stroke: #000000; min-height: 14.0px}
+    span.s1 {font-kerning: none}
+  </style>
 </head>
-
 <body>
-    <!-- Header -->
-    <header class="header" id="header">
-        <nav class="nav container">
-            <div class="logo-container">
-                <div class="logo">
-                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#B7472A;stop-opacity:1" />
-                                <stop offset="50%" style="stop-color:#CD853F;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#D2691E;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="50" cy="50" r="45" fill="url(#logoGradient)" />
-                        <path d="M30 25 Q50 40 70 25 Q55 55 50 75 Q45 55 30 25" fill="white" opacity="0.9"/>
-                        <circle cx="50" cy="45" r="8" fill="white" opacity="0.7"/>
-                    </svg>
-                </div>
-                <a href="#home" class="brand-name">IvoryTusk</a>
-            </div>
-            
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#platform">Platform</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#contact" class="btn btn-primary">Get Started</a></li>
-            </ul>
-            
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content fade-in-up">
-                <h1>
-                    <span class="gradient-text">AI-First</span><br>
-                    Voice Agent Solutions
-                </h1>
-                <p class="subtitle">
-                    Transform your business communication with intelligent voice agents that automate calls, 
-                    qualify leads, and enhance customer engagement with precision and intelligence.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Start Free Trial</a>
-                    <a href="#platform" class="btn btn-secondary">Watch Demo</a>
-                </div>
-                
-                <!-- Stats Cards -->
-                <div class="stats-cards">
-                    <div class="stat-card">
-                        <div class="number">99.9%</div>
-                        <div class="label">Uptime</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="number">50+</div>
-                        <div class="label">Languages</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="number">24/7</div>
-                        <div class="label">Support</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="number">10K+</div>
-                        <div class="label">Daily Calls</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="gradient-text">Why Choose</span> IvoryTusk?
-                </h2>
-                <p class="section-subtitle">
-                    Our AI-powered voice agents provide intelligent, scalable solutions for modern businesses
-                </p>
-            </div>
-            
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI-Powered Intelligence</h3>
-                    <p>Advanced conversational AI with natural language processing, sentiment analysis, and dynamic response generation for human-like interactions.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Multi-Language Support</h3>
-                    <p>Support for 50+ languages including Hindi, English, and regional languages with cultural context understanding and natural accent adaptation.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Seamless Integration</h3>
-                    <p>Easy integration with existing CRM systems, telephony providers, and business workflows with minimal setup time.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Real-Time Analytics</h3>
-                    <p>Comprehensive dashboards with call analytics, performance metrics, and actionable insights for continuous business optimization.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Lead Qualification</h3>
-                    <p>Intelligent lead scoring and qualification with automated follow-ups, conversion tracking, and detailed prospect insights.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3>Enterprise Security</h3>
-                    <p>Bank-grade security with end-to-end encryption, GDPR compliance, and comprehensive privacy protection for all communications.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Platform Section -->
-    <section class="platform" id="platform">
-        <div class="container">
-            <div class="platform-content">
-                <div class="platform-text">
-                    <h2>
-                        <span class="gradient-text">Comprehensive</span><br>
-                        Voice Agent Platform
-                    </h2>
-                    <p>
-                        Our voice agent platform provides end-to-end solutions for businesses looking to automate 
-                        their communication processes. From lead generation to customer support, our AI agents 
-                        handle it all with precision and intelligence.
-                    </p>
-                    
-                    <ul class="platform-features">
-                        <li>Automated outbound calling campaigns</li>
-                        <li>Intelligent call routing and distribution</li>
-                        <li>Real-time conversation monitoring</li>
-                        <li>Custom voice personas and scripts</li>
-                        <li>Integration with popular CRM systems</li>
-                        <li>Advanced reporting and analytics</li>
-                        <li>Multi-channel communication support</li>
-                        <li>24/7 automated customer service</li>
-                    </ul>
-                    
-                    <a href="#contact" class="btn btn-primary">Schedule a Demo</a>
-                </div>
-                
-                <div class="platform-visual">
-                    <div class="content">
-                        <h3>🚀 AI-First Technology</h3>
-                        <p>Powered by advanced machine learning algorithms and natural language processing</p>
-                        <br>
-                        <h3>📈 Scalable Solutions</h3>
-                        <p>From startup to enterprise, our platform grows with your business needs</p>
-                        <br>
-                        <h3>🔧 Custom Integration</h3>
-                        <p>Seamlessly integrates with your existing business tools and workflows</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <span class="gradient-text">Get Started</span> with IvoryTusk
-                </h2>
-                <p class="section-subtitle">
-                    Ready to transform your business communication? Let's discuss your specific requirements.
-                </p>
-            </div>
-            
-            <div class="contact-content">
-                <div class="contact-form">
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="company">Company Name</label>
-                            <input type="text" id="company" name="company">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="use-case">Primary Use Case *</label>
-                            <select id="use-case" name="use-case" required>
-                                <option value="">Select Use Case</option>
-                                <option value="lead-generation">Lead Generation</option>
-                                <option value="customer-support">Customer Support</option>
-                                <option value="appointment-scheduling">Appointment Scheduling</option>
-                                <option value="survey-research">Survey & Research</option>
-                                <option value="sales-follow-up">Sales Follow-up</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Project Requirements</label>
-                            <textarea id="message" name="message" placeholder="Tell us about your specific requirements, expected call volume, and business goals..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Send Message</button>
-                    </form>
-                </div>
-                
-                <div class="contact-info">
-                    <h3>Let's Connect</h3>
-                    <p>
-                        Our team of AI specialists is ready to help you implement the perfect voice agent 
-                        solution for your business. Reach out to us for a personalized consultation.
-                    </p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">📧</div>
-                            <div>
-                                <h4>Email</h4>
-                                <p>contact@ivorytusk.co.in</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">📱</div>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+91 84690 92075</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">🏢</div>
-                            <div>
-                                <h4>Office</h4>
-                                <p>India & Global</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">⏰</div>
-                            <div>
-                                <h4>Business Hours</h4>
-                                <p>24/7 Support Available</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <div class="logo-container" style="margin-bottom: 1rem;">
-                        <div class="logo">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="footerLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#D2691E;stop-opacity:1" />
-                                        <stop offset="50%" style="stop-color:#CD853F;stop-opacity:1" />
-                                        <stop offset="100%" style="stop-color:#B7472A;stop-opacity:1" />
-                                    </linearGradient>
-                                </defs>
-                                <circle cx="50" cy="50" r="45" fill="url(#footerLogoGradient)" />
-                                <path d="M30 25 Q50 40 70 25 Q55 55 50 75 Q45 55 30 25" fill="white" opacity="0.9"/>
-                                <circle cx="50" cy="45" r="8" fill="white" opacity="0.7"/>
-                            </svg>
-                        </div>
-                        <span style="color: var(--text-light); font-size: 1.5rem; font-weight: 700;">IvoryTusk</span>
-                    </div>
-                    <p>
-                        Transforming business communication with AI-first voice agent solutions. 
-                        Automate, scale, and optimize your customer interactions.
-                    </p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Platform</h3>
-                    <p><a href="#features">Voice Agents</a></p>
-                    <p><a href="#platform">Analytics Dashboard</a></p>
-                    <p><a href="#contact">API Integration</a></p>
-                    <p><a href="#contact">Custom Solutions</a></p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Company</h3>
-                    <p><a href="#home">About Us</a></p>
-                    <p><a href="#contact">Contact</a></p>
-                    <p><a href="#contact">Support</a></p>
-                    <p><a href="#contact">Careers</a></p>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Legal</h3>
-                    <p><a href="#contact">Privacy Policy</a></p>
-                    <p><a href="#contact">Terms of Service</a></p>
-                    <p><a href="#contact">Data Security</a></p>
-                    <p><a href="#contact">Compliance</a></p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 IvoryTusk. All rights reserved. | AI-First Voice Agent Solutions</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Chatbot -->
-    <button class="chatbot-toggle" id="chatbot-toggle">💬</button>
-    
-    <div class="chatbot-widget" id="chatbot-widget">
-        <div class="chatbot-header">
-            <h4>IvoryTusk Assistant</h4>
-            <button class="chatbot-close" id="chatbot-close">×</button>
-        </div>
-        
-        <div class="chatbot-messages" id="chatbot-messages">
-            <div class="message bot">
-                Hello! I'm your IvoryTusk assistant. I can help you learn more about our AI voice agent platform. What would you like to know?
-            </div>
-        </div>
-        
-        <div class="chatbot-input">
-            <input type="text" id="chatbot-input" placeholder="Ask me anything about our platform...">
-            <button type="button" id="chatbot-send">→</button>
-        </div>
-    </div>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-        const navLinks = document.getElementById('nav-links');
-
-        mobileMenuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-                // Close mobile menu if open
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(26, 26, 26, 0.95)';
-                header.style.backdropFilter = 'blur(25px)';
-            } else {
-                header.style.background = 'rgba(26, 26, 26, 0.8)';
-                header.style.backdropFilter = 'blur(20px)';
-            }
-        });
-
-        // Contact form submission
-        document.getElementById('contact-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            // Show loading state
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            submitBtn.style.opacity = '0.7';
-            
-            // Get form data
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData);
-            
-            try {
-                // Simulate API call (replace with your actual form handler)
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                
-                // Show success message
-                alert('Thank you for your message! Our team will contact you within 24 hours.');
-                e.target.reset();
-                
-            } catch (error) {
-                alert('Sorry, there was an error sending your message. Please try again or contact us directly at contact@ivorytusk.co.in');
-            } finally {
-                // Reset button
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-            }
-        });
-
-        // Chatbot functionality
-        const chatbotToggle = document.getElementById('chatbot-toggle');
-        const chatbotWidget = document.getElementById('chatbot-widget');
-        const chatbotClose = document.getElementById('chatbot-close');
-        const chatbotMessages = document.getElementById('chatbot-messages');
-        const chatbotInput = document.getElementById('chatbot-input');
-        const chatbotSend = document.getElementById('chatbot-send');
-
-        // FAQ responses
-        const faqResponses = {
-            'pricing': 'Our voice agent platform offers flexible pricing based on usage. We have plans starting from ₹5,000/month for small businesses. Contact us for a customized quote based on your requirements.',
-            'features': 'Our platform includes AI-powered voice agents, multi-language support, real-time analytics, CRM integration, call recording, lead qualification, and 24/7 customer support.',
-            'integration': 'We integrate with popular CRM systems, telephony providers (Airtel, Jio, Twilio), and business tools. Our API allows custom integrations for your specific workflow needs.',
-            'languages': 'We support 50+ languages including Hindi, English, Tamil, Telugu, Bengali, Marathi, and major international languages. Our AI understands cultural context and regional dialects.',
-            'security': 'We implement bank-grade security with end-to-end encryption, GDPR compliance, and regular security audits. Your data is stored securely with redundant backups.',
-            'demo': 'Yes! We offer free demos and trial periods. You can schedule a personalized demo through our contact form or request a 7-day trial to test our platform.',
-            'support': 'We provide 24/7 customer support via chat, email, and phone. Our technical team offers onboarding assistance and ongoing platform optimization.',
-            'setup': 'Setup typically takes 24-48 hours. Our team handles the complete configuration including voice training, script optimization, and system integration.',
-            'default': 'I can help you with information about our voice agent platform, pricing, features, integrations, language support, security, demos, and technical support. What specific area interests you?'
-        };
-
-        function addMessage(text, isUser = false) {
-            const message = document.createElement('div');
-            message.className = `message ${isUser ? 'user' : 'bot'}`;
-            message.textContent = text;
-            chatbotMessages.appendChild(message);
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        }
-
-        function getBotResponse(userMessage) {
-            const lowerMessage = userMessage.toLowerCase();
-            
-            // Simple keyword matching for FAQ responses
-            for (const [keyword, response] of Object.entries(faqResponses)) {
-                if (keyword !== 'default' && lowerMessage.includes(keyword)) {
-                    return response;
-                }
-            }
-            
-            // Check for common question patterns
-            if (lowerMessage.includes('how much') || lowerMessage.includes('cost') || lowerMessage.includes('price')) {
-                return faqResponses.pricing;
-            }
-            
-            if (lowerMessage.includes('what can') || lowerMessage.includes('what do') || lowerMessage.includes('capabilities')) {
-                return faqResponses.features;
-            }
-            
-            if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-                return 'Hello! Welcome to IvoryTusk. I\'m here to help you learn about our AI voice agent platform. What would you like to know?';
-            }
-            
-            if (lowerMessage.includes('contact') || lowerMessage.includes('talk to') || lowerMessage.includes('human')) {
-                return 'You can reach our team at contact@ivorytusk.co.in or fill out the contact form on this page. We typically respond within 2-4 hours during business hours.';
-            }
-            
-            return faqResponses.default;
-        }
-
-        chatbotToggle.addEventListener('click', () => {
-            chatbotWidget.classList.add('active');
-            chatbotInput.focus();
-        });
-
-        chatbotClose.addEventListener('click', () => {
-            chatbotWidget.classList.remove('active');
-        });
-
-        function sendMessage() {
-            const message = chatbotInput.value.trim();
-            if (message) {
-                addMessage(message, true);
-                chatbotInput.value = '';
-                
-                // Show typing indicator and respond
-                setTimeout(() => {
-                    const response = getBotResponse(message);
-                    addMessage(response);
-                }, 1000);
-            }
-        }
-
-        chatbotSend.addEventListener('click', sendMessage);
-
-        chatbotInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        // Close chatbot when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!chatbotWidget.contains(e.target) && !chatbotToggle.contains(e.target)) {
-                chatbotWidget.classList.remove('active');
-            }
-        });
-
-        // Add fade-in animation to elements when they come into view
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-up');
-                }
-            });
-        }, observerOptions);
-
-        // Observe feature cards for animation
-        document.querySelectorAll('.feature-card').forEach(card => {
-            observer.observe(card);
-        });
-    </script>
+<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
+<p class="p1"><span class="s1">&lt;html lang="en"&gt;</span></p>
+<p class="p1"><span class="s1">&lt;head&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;IvoryTusk AI Solutions&lt;/title&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>-webkit-font-smoothing: antialiased;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>-moz-osx-font-smoothing: grayscale;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>/* Custom Keyframes for Animations */</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>@keyframes fadeInDown {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>from { opacity: 0; transform: translateY(-20px); }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>to { opacity: 1; transform: translateY(0); }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.animate-fade-in-down {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>animation: fadeInDown 0.5s ease-out forwards;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>@keyframes pulseSlow {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>0%, 100% { transform: scale(1); }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>50% { transform: scale(1.05); }</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.animate-pulse-slow {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>animation: pulseSlow 6s infinite ease-in-out;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.modal {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
+<p class="p1"><span class="s1">&lt;body class="min-h-screen text-slate-800 antialiased overflow-x-hidden"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Success Message (Toast Notification) --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="success-message" class="fixed top-6 left-1/2 -translate-x-1/2 z-[110] bg-orange-600 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-500 animate-fade-in-down hidden"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>Success! Your request has been sent.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- Main Container with subtle background gradient --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div class="bg-gradient-to-br from-stone-50 via-orange-50 to-stone-100 min-h-screen"&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- Navigation Bar (Glassmorphism Effect) --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="flex justify-between items-center py-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Logo Component --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-center space-x-3 transition-transform duration-300 transform group-hover:scale-105"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;svg width="120" height="30" viewBox="0 0 800 200" class="h-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;rect x="0" y="0" width="800" height="200" fill="transparent" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;text x="400" y="70"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>font-family="Inter, sans-serif"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>font-size="48"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>font-weight="bold"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>fill="#2B3A4A"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>text-anchor="middle"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>letter-spacing="8px"&gt;IVORYTUSK&lt;/text&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;rect x="200" y="95" width="400" height="2" fill="#FF8C42" rx="1" ry="1" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;text x="400" y="140"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>font-family="Inter, sans-serif"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>font-size="24"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>fill="#2B3A4A"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>text-anchor="middle"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>letter-spacing="12px"&gt;AI SOLUTIONS&lt;/text&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/svg&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Desktop Navigation Links --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="hidden md:flex space-x-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#solutions" class="text-slate-700 hover:text-orange-500 transition-colors duration-300 font-medium relative group"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Solutions</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"&gt;&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#industries" class="text-slate-700 hover:text-orange-500 transition-colors duration-300 font-medium relative group"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Industries</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"&gt;&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;a href="#ai-voice-agents" class="text-slate-700 hover:text-orange-500 transition-colors duration-300 font-medium relative group"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>AI Voice Agents</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"&gt;&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button id="contact-nav-btn" class="text-slate-700 hover:text-orange-500 transition-colors duration-300 font-medium relative group"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Contact</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"&gt;&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- CTA Button with advanced hover animation --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button id="demo-nav-btn" class="relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full font-semibold</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>shadow-lg shadow-orange-200/50 transform hover:scale-105 transition-all duration-300</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Book Demo</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/nav&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- Hero Section --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;section class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- Animated Background Elements --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="absolute inset-0 z-0"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="absolute -top-10 -left-20 w-80 h-80 bg-orange-300/10 rounded-full blur-[100px] animate-pulse-slow"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="absolute top-1/2 right-0 w-96 h-96 bg-orange-200/20 rounded-full blur-[120px] animate-pulse-slow delay-1000"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="absolute -bottom-20 left-1/4 w-72 h-72 bg-orange-100/30 rounded-full blur-[150px] animate-pulse-slow delay-2000"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Main Headline with text gradient --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 bg-clip-text text-transparent"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Your Business,</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Always Open</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/h1&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Subtitle --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Transforming customer communication with intelligent AI.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Stats Cards (Glassmorphism) --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="grid md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="backdrop-blur-lg bg-white/20 border border-white/50 rounded-2xl p-6 shadow-xl</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/30"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="text-3xl lg:text-4xl font-bold text-orange-600"&gt;₹5-20L&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="text-slate-600 mt-1"&gt;Annual Savings&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="backdrop-blur-lg bg-white/20 border border-white/50 rounded-2xl p-6 shadow-xl</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/30"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="text-3xl lg:text-4xl font-bold text-orange-600"&gt;24/7&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="text-slate-600 mt-1"&gt;Availability&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="backdrop-blur-lg bg-white/20 border border-white/50 rounded-2xl p-6 shadow-xl</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/30"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="text-3xl lg:text-4xl font-bold text-orange-600"&gt;98%&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="text-slate-600 mt-1"&gt;Call Success Rate&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- CTA Buttons --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button id="live-demo-hero-btn" class="group relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-orange-200/50</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>transform hover:scale-105 transition-all duration-300</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="relative z-10"&gt;Try Live Demo&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button class="backdrop-blur-lg bg-white/20 border border-white/50 text-slate-700 px-8 py-4 rounded-full font-semibold</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>hover:bg-white/30 transform hover:scale-105 transition-all duration-300"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Watch Video</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- Our Solutions Section --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;section id="solutions" class="py-24 relative"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="text-center mb-16"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Our Solutions</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-xl text-slate-600 max-w-3xl mx-auto"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>A suite of AI-powered solutions to automate and simplify your business operations.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div id="solutions-container" class="grid md:grid-cols-3 gap-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Solution cards will be dynamically inserted here by JavaScript --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- AI Voice Agents Section --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;section id="ai-voice-agents" class="py-24 relative"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/30 to-transparent"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="text-center mb-16"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Our AI Voice Agents</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-xl text-slate-600 max-w-3xl mx-auto"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>AI Voice Agents that never sleep, never miss a call, and convert inquiries into revenue 24/7.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;br&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Our advanced features ensure a seamless customer experience.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div id="voice-capabilities-container" class="grid md:grid-cols-3 gap-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Voice capability cards will be dynamically inserted here by JavaScript --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- Industries Section --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;section id="industries" class="py-24 relative"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="text-center mb-16"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Built for Your Industry</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-xl text-slate-600 max-w-3xl mx-auto"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Specialized AI agents that understand your business language and customer needs.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- Industry Tabs (Glassmorphism) --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="backdrop-blur-lg bg-white/30 border border-white/60 rounded-full p-2 mb-8 max-w-2xl mx-auto"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="grid grid-cols-2 md:grid-cols-4 gap-2"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button id="tab-builders" data-tab="builders" class="tab-btn px-4 py-3 rounded-full font-medium transition-all duration-300"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Home Builders</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button id="tab-furniture" data-tab="furniture" class="tab-btn px-4 py-3 rounded-full font-medium transition-all duration-300"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Furniture</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button id="tab-architects" data-tab="architects" class="tab-btn px-4 py-3 rounded-full font-medium transition-all duration-300"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Architects</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button id="tab-automation" data-tab="automation" class="tab-btn px-4 py-3 rounded-full font-medium transition-all duration-300"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Automation</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;!-- Industry Content (Glassmorphism) --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div id="industries-content" class="backdrop-blur-xl bg-white/20 border border-white/50 rounded-3xl p-8 md:p-12 shadow-2xl"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Tab content will be dynamically inserted here --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- CTA Section (Glassmorphism) --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;section class="py-24 relative"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-orange-600/20 to-orange-500/10"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="backdrop-blur-xl bg-white/20 border border-white/50 rounded-3xl p-12 shadow-2xl"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-6"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Ready to Transform Your Business?</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-xl text-slate-600 mb-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>Join the future of customer service. See your AI agent in action with a live demo.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex flex-col sm:flex-row gap-4 justify-center"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;button id="live-demo-cta-btn" class="group relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-semibold</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>shadow-lg shadow-orange-200/50 transform hover:scale-105 transition-all duration-300</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;span class="relative z-10"&gt;Schedule Live Demo&lt;/span&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- Footer (Dark Glassmorphism) --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;footer class="bg-gradient-to-b from-slate-800 to-slate-900 text-white py-16"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="grid md:grid-cols-4 gap-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;!-- Logo for dark background --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="flex items-center space-x-3"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;svg width="120" height="30" viewBox="0 0 800 200" class="h-8"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;rect x="0" y="0" width="800" height="200" fill="transparent" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;text x="400" y="70"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>font-family="Inter, sans-serif"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>font-size="48"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>font-weight="bold"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>fill="#FFFFF0"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>text-anchor="middle"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>letter-spacing="8px"&gt;IVORYTUSK&lt;/text&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;rect x="200" y="95" width="400" height="2" fill="#FF8C42" rx="1" ry="1" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;text x="400" y="140"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>font-family="Inter, sans-serif"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>font-size="24"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>fill="#FFFFF0"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>text-anchor="middle"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>letter-spacing="12px"&gt;AI SOLUTIONS&lt;/text&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/svg&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-slate-400 mt-4 leading-relaxed"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>Transforming business communications with intelligent AI voice agents.</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-semibold mb-4 text-orange-400"&gt;Solutions&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-2"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;Voice Agents&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;ExpenseIQ&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;OrraHome&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;Memora&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;ConciergeIQ&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;Procumatic&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-semibold mb-4 text-orange-400"&gt;Industries&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-2"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;Home Builders&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;Furniture&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;Architects&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200"&gt;Automation&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="font-semibold mb-4 text-orange-400"&gt;Contact&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="space-y-2 text-slate-400"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p&gt;hello@ivorytusk.co.in&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p&gt;+91 8469092075&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p&gt;Surat, India&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="border-t border-slate-700 mt-12 pt-8 text-center text-slate-400"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&amp;copy; 2025 IvoryTusk AI Solutions. All rights reserved.&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/footer&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- Modal Component --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="modal-wrapper" class="modal fixed inset-0 bg-black bg-opacity-70 z-[100] flex justify-center items-center p-4 opacity-0 invisible"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="modal-content-container" class="bg-orange-600/90 backdrop-blur-xl border border-white/20 p-8 rounded-2xl w-full max-w-lg shadow-2xl relative"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button id="close-modal-btn" class="absolute top-4 right-4 text-white hover:text-white/70 transition-colors"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/svg&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h2 id="modal-title" class="text-3xl font-bold text-white mb-6 text-center"&gt;&lt;/h2&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div id="modal-form-container"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;!-- Forms will be dynamically inserted here --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>document.addEventListener('DOMContentLoaded', () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// --- Data Arrays ---</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const solutionsData = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>id: 'voice-agents',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'AI Voice Agents',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: 'Our flagship solution. AI Voice Agents that never sleep, never miss a call, and convert inquiries into revenue 24/7.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>gradient: 'from-orange-500 to-orange-600',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>id: 'expenseiq',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'ExpenseIQ',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: 'Stop drowning in receipts. Your team snaps a photo — our AI extracts every detail and builds real-time expense reports for managers.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>gradient: 'from-blue-400 to-blue-600'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>id: 'orrahme',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'OrraHome',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: 'Control your world with your voice. OrraHome integrates seamlessly with existing smart home/company apps, turning AI into your universal remote.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>gradient: 'from-purple-400 to-purple-600'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>id: 'memora',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Memora',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: 'Never lose a document again. Your team uploads files and adds notes. Later, anyone can simply ask in plain English and the right doc appears.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>gradient: 'from-green-400 to-green-600'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>id: 'conciergeiq',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'ConciergeIQ',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: 'Turn WhatsApp into your smartest sales &amp; support assistant. ConciergeIQ reads customer messages and replies instantly with the right information.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>gradient: 'from-pink-400 to-pink-600'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>id: 'procumatic',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Procumatic',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: 'Procurement on the go. Procumatic lets construction teams log materials by voice ("20 bags cement received") and instantly generates a purchase order.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>gradient: 'from-teal-400 to-teal-600'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const voiceCapabilitiesData = [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Multilingual',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: 'Fluent in Hindi, English, and regional languages with perfect pronunciation. Gujarati and Tamil are coming soon.',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'RAG (Knowledge Retrieval)',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: "RAG allows the AI to look up information from your private documents and databases to provide accurate, up-to-date answers. It's like having a perfect memory for all your company's data.",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>iconPath: "M12 17c3.31 0 6-2.69 6-6V5c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v6c0 3.31 2.69 6 6 6zm1-12c0-.55-.45-1-1-1s-1 .45-1 1v6c0 .55.45 1 1 1s1-.45 1-1V5z"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Webhook Calls',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: "Webhooks allow the AI to trigger actions in other applications. For example, the AI can book an appointment, check inventory, or generate a support ticket automatically during a call.",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Advanced Turn Detection',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: "The AI seamlessly knows when to talk and when to listen, making the conversation feel natural and human-like.",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'BYOS (Bring Your Own SIP)',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: "Integrate the AI with your existing phone system using our 'Bring Your Own SIP' feature, ensuring a smooth transition and low cost.",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Sentiment Detection',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>description: "Our AI can understand the tone and emotion of the caller, allowing it to adapt its conversation to de-escalate or provide better support.",</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>];</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const industriesContentData = {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>builders: {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Home Builders',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>points: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'Never lose a ₹1.5 crore project', p: 'Handle inquiries while you\'re on construction sites' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'RERA &amp; Permit Questions', p: 'AI handles regulatory queries professionally' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'Vastu Compliance', p: 'Expert responses to traditional requirements' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>sample: '"For a 4 BHK in Bangalore with a ₹1.5 crore budget, that\'s definitely achievable. Including BBMP approvals and RERA compliance, we\'re looking at 14-16 months for completion. Shall I schedule a site visit with our senior architect?"'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>furniture: {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Furniture Stores',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>points: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'Complete Inventory Knowledge', p: 'AI knows every product, price, and availability' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'EMI &amp; Financing Options', p: 'Instant calculations and payment plans' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'After-Hours Sales', p: 'Convert ₹2-5 lakh orders while you sleep' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>sample: '"For 8 people dining set under ₹2 lakhs, we have excellent solid wood options starting at ₹1.5 lakhs. Current Diwali offers include 0% EMI for 12 months. Shall I check availability at your nearest showroom?"'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>architects: {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Architecture Firms',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>points: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'Project Pre-Qualification', p: 'Screen budgets and timelines efficiently' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'Sustainable Design Queries', p: 'LEED, GRIHA certification discussions' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: '₹5 Crore Projects', p: 'Never miss high-value commercial inquiries' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>sample: '"10,000 sq ft corporate office in Mumbai - excellent! Budgets typically range from ₹800-1500 per sq ft. Are you interested in LEED certification? I can schedule a consultation with our senior design team."'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>},</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>automation: {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>title: 'Home Automation',</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>points: [</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'Technical Expertise', p: 'Complex smart home system explanations' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: 'Energy Savings Calculations', p: 'ROI on electricity bills and efficiency' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>{ h4: '₹3-15 Lakh Projects', p: 'Schedule installations round-the-clock' },</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>],</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>sample: '"For 2500 sq ft, smart home packages range from ₹3.5 lakhs to ₹12 lakhs. Most clients see 25-30% electricity savings. This includes lighting, climate, and security. Shall I schedule a home assessment?"'</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// --- DOM Element References ---</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const navbar = document.getElementById('navbar');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const successMessage = document.getElementById('success-message');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const modalWrapper = document.getElementById('modal-wrapper');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const modalTitle = document.getElementById('modal-title');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const modalFormContainer = document.getElementById('modal-form-container');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const closeModalBtn = document.getElementById('close-modal-btn');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const demoNavBtn = document.getElementById('demo-nav-btn');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const contactNavBtn = document.getElementById('contact-nav-btn');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const liveDemoHeroBtn = document.getElementById('live-demo-hero-btn');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const liveDemoCtaBtn = document.getElementById('live-demo-cta-btn');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const solutionsContainer = document.getElementById('solutions-container');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const voiceCapabilitiesContainer = document.getElementById('voice-capabilities-container');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const industryTabButtons = document.querySelectorAll('.tab-btn');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const industriesContent = document.getElementById('industries-content');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let successTimeout;</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// --- Functions ---</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const renderSolutions = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>solutionsContainer.innerHTML = solutionsData.map(solution =&gt; `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;a href="${solution.id === 'voice-agents' ? '#ai-voice-agents' : '#'}"</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>class="group backdrop-blur-xl bg-white/20 border border-white/50 rounded-2xl p-8 hover:bg-white/30</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>transform transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:-translate-y-2"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="w-12 h-12 rounded-xl bg-gradient-to-r ${solution.gradient} flex items-center justify-center mb-6</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>transform group-hover:scale-110 transition-transform duration-300"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;!-- Placeholder icon --&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/svg&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold text-slate-800 mb-3"&gt;${solution.title}&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-slate-600 leading-relaxed"&gt;${solution.description}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/a&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`).join('');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const renderVoiceCapabilities = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>voiceCapabilitiesContainer.innerHTML = voiceCapabilitiesData.map(capability =&gt; `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="group backdrop-blur-xl bg-white/20 border border-white/50 rounded-2xl p-8 hover:bg-white/30</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>transform transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:-translate-y-2"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="w-12 h-12 rounded-xl bg-gradient-to-r from-orange-400 to-orange-600 flex items-center justify-center mb-6</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>transform group-hover:scale-110 transition-transform duration-300"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;path d="${capability.iconPath}" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/svg&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-semibold text-slate-800 mb-3"&gt;${capability.title}&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-slate-600 leading-relaxed"&gt;${capability.description}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`).join('');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const renderIndustryContent = (tab) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const data = industriesContentData[tab];</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const pointsHtml = data.points.map(p =&gt; `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex items-start space-x-3"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="w-6 h-6 rounded-full bg-gradient-to-r from-orange-400 to-orange-600 flex-shrink-0 mt-1"&gt;&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h4 class="font-semibold text-slate-800"&gt;${p.h4}&lt;/h4&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-600"&gt;${p.p}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`).join('');</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>industriesContent.innerHTML = `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="grid md:grid-cols-2 gap-8 items-center"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-3xl font-bold text-slate-800 mb-6"&gt;${data.title}&lt;/h3&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="space-y-4"&gt;${pointsHtml}&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="backdrop-blur-lg bg-white/10 border border-white/30 rounded-2xl p-6 italic"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="text-sm text-slate-500 mb-2"&gt;Sample AI Response:&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-slate-700"&gt;${data.sample}&lt;/p&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const openModal = (type) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (type === 'demo') {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>modalTitle.textContent = 'Book a Live Demo';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>modalFormContainer.innerHTML = `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;form id="demo-form" class="space-y-4 text-white/90"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="name" class="block text-white font-medium mb-1"&gt;Full Name&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;input type="text" id="name" name="name" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/70" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="company" class="block text-white font-medium mb-1"&gt;Company Name&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;input type="text" id="company" name="company" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/70" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="phone" class="block text-white font-medium mb-1"&gt;Phone Number&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;input type="tel" id="phone" name="phone" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/70" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="email" class="block text-white font-medium mb-1"&gt;Work Email&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;input type="email" id="email" name="email" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/70" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="usecase" class="block text-white font-medium mb-1"&gt;Interested Product / Use Case&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;select id="usecase" name="usecase" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white/80 focus:outline-none focus:ring-2 focus:ring-white/70"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="" disabled selected class="text-gray-400"&gt;Select an option&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Home Builders"&gt;Home Builders&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Furniture"&gt;Furniture&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Architects"&gt;Architects&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Home Automation"&gt;Home Automation&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Other"&gt;Other&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/select&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;button type="submit" class="w-full bg-white text-orange-600 font-bold py-3 rounded-full mt-4</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>shadow-lg shadow-orange-700/30 hover:scale-105 transition-transform duration-300"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>Submit Request</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/form&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>} else if (type === 'contact') {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>modalTitle.textContent = 'Contact Us';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>modalFormContainer.innerHTML = `</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;form id="contact-form" class="space-y-4 text-white/90"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="contact-name" class="block text-white font-medium mb-1"&gt;Name&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;input type="text" id="contact-name" name="contact-name" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/70" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="contact-email" class="block text-white font-medium mb-1"&gt;Email&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;input type="email" id="contact-email" name="contact-email" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/70" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="contact-phone" class="block text-white font-medium mb-1"&gt;Phone Number&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;input type="tel" id="contact-phone" name="contact-phone" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/70" /&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="contact-usecase" class="block text-white font-medium mb-1"&gt;Interested Product / Use Case&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;select id="contact-usecase" name="contact-usecase" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 text-white/80 focus:outline-none focus:ring-2 focus:ring-white/70"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="" disabled selected class="text-gray-400"&gt;Select an option&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Home Builders"&gt;Home Builders&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Furniture"&gt;Furniture&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Architects"&gt;Architects&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Home Automation"&gt;Home Automation&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>&lt;option value="Other"&gt;Other&lt;/option&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;/select&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;label for="message" class="block text-white font-medium mb-1"&gt;Message&lt;/label&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>&lt;textarea id="message" name="message" rows="4" required</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                    </span>class="w-full p-3 rounded-lg bg-white/20 border border-white/30 placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/70"&gt;&lt;/textarea&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;button type="submit" class="w-full bg-white text-orange-600 font-bold py-3 rounded-full mt-4</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>shadow-lg shadow-orange-700/30 hover:scale-105 transition-transform duration-300"&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                                </span>Send Message</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;/button&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/form&gt;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>`;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>modalWrapper.classList.remove('opacity-0', 'invisible');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>// Re-attach event listeners to the new form</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const form = document.getElementById(type === 'demo' ? 'demo-form' : 'contact-form');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>form.addEventListener('submit', handleFormSubmit);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const closeModal = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>modalWrapper.classList.add('opacity-0', 'invisible');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>modalFormContainer.innerHTML = '';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const handleFormSubmit = (event) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>event.preventDefault();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>closeModal();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>successMessage.classList.remove('hidden');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>clearTimeout(successTimeout);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>successTimeout = setTimeout(() =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>successMessage.classList.add('hidden');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}, 5000);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// --- Event Listeners and Initial Renders ---</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>window.addEventListener('scroll', () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (window.scrollY &gt; 50) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>navbar.classList.add('backdrop-blur-xl', 'bg-white/50', 'border-b', 'border-white/80', 'shadow-lg', 'shadow-orange-100/20');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>navbar.classList.remove('backdrop-blur-xl', 'bg-white/50', 'border-b', 'border-white/80', 'shadow-lg', 'shadow-orange-100/20');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>closeModalBtn.addEventListener('click', closeModal);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>modalWrapper.addEventListener('click', (e) =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (e.target === modalWrapper) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>closeModal();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Button Event Listeners to open the modal</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>demoNavBtn.addEventListener('click', () =&gt; openModal('demo'));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>contactNavBtn.addEventListener('click', () =&gt; openModal('contact'));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>liveDemoHeroBtn.addEventListener('click', () =&gt; openModal('demo'));</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>liveDemoCtaBtn.addEventListener('click', () =&gt; openModal('demo'));</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Industries tab logic</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let activeTab = 'builders';</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const updateTabs = () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>industryTabButtons.forEach(btn =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>if (btn.dataset.tab === activeTab) {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>btn.classList.add('bg-gradient-to-r', 'from-orange-500', 'to-orange-600', 'text-white', 'shadow-md');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>btn.classList.remove('text-slate-600', 'hover:text-orange-600', 'hover:bg-white/50');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>} else {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>btn.classList.add('text-slate-600', 'hover:text-orange-600', 'hover:bg-white/50');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>btn.classList.remove('bg-gradient-to-r', 'from-orange-500', 'to-orange-600', 'text-white', 'shadow-md');</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>}</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>renderIndustryContent(activeTab);</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>};</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>industryTabButtons.forEach(btn =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>btn.addEventListener('click', () =&gt; {</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>activeTab = btn.dataset.tab;</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>updateTabs();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>// Initial rendering of dynamic content</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderSolutions();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>renderVoiceCapabilities();</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>updateTabs(); // Render initial industry content and update styles</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>});</span></p>
+<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
+<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
 </body>
 </html>
