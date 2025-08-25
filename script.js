@@ -561,6 +561,17 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Audio current src:', voiceAgentsAudio.currentSrc);
             console.log('Full audio src URL:', new URL(voiceAgentsAudio.src || voiceAgentsAudio.getAttribute('src'), window.location.href).href);
             
+            // Test if audio URL is accessible
+            fetch(voiceAgentsAudio.src, { method: 'HEAD' })
+                .then(response => {
+                    console.log('Audio URL test - Status:', response.status);
+                    console.log('Audio URL test - Content-Type:', response.headers.get('content-type'));
+                    console.log('Audio URL test - Content-Length:', response.headers.get('content-length'));
+                })
+                .catch(error => {
+                    console.error('Audio URL test failed:', error);
+                });
+            
             // Draw initial static waveform
             drawStaticWaveform();
             
@@ -606,12 +617,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.log('Audio current time:', voiceAgentsAudio.currentTime);
                         console.log('Audio duration:', voiceAgentsAudio.duration);
                         
-                        // Simple approach - just try to play without waiting
+                        // Reset audio to beginning and play
                         console.log('Attempting to play audio directly...');
                         
                         try {
+                            // Always start from the beginning and ensure volume is up
+                            voiceAgentsAudio.currentTime = 0;
+                            voiceAgentsAudio.volume = 1.0;
+                            voiceAgentsAudio.muted = false;
+                            
                             await voiceAgentsAudio.play();
-                            console.log('Audio started playing successfully');
+                            console.log('Audio started playing successfully from beginning');
+                            console.log('Audio volume:', voiceAgentsAudio.volume);
+                            console.log('Audio muted:', voiceAgentsAudio.muted);
                         } catch (playError) {
                             console.error('Direct play failed:', playError);
                             
