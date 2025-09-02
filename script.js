@@ -429,6 +429,13 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             try {
+                // Wait for audio to be ready
+                if (voiceAgentsAudio.readyState < 2) {
+                    await new Promise((resolve) => {
+                        voiceAgentsAudio.addEventListener('canplay', resolve, { once: true });
+                    });
+                }
+                
                 // Only create if not already created
                 if (!audioContext) {
                     audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -533,22 +540,26 @@ document.addEventListener('DOMContentLoaded', function() {
             const width = audioCanvas.width;
             const height = audioCanvas.height;
             const centerY = height / 2;
-            const time = Date.now() * 0.005;
+            const time = Date.now() * 0.008;
             
             canvasCtx.moveTo(0, centerY);
             
-            // Create a fake animated waveform
-            for (let x = 0; x < width; x += 2) {
-                const frequency1 = 0.02;
-                const frequency2 = 0.05;
-                const frequency3 = 0.03;
+            // Create realistic voice-like waveform
+            for (let x = 0; x < width; x += 1) {
+                const progress = x / width;
                 
-                const amplitude = 15 + Math.sin(time * 0.5) * 5;
-                const y = centerY + 
-                    Math.sin(x * frequency1 + time) * amplitude * 0.8 +
-                    Math.sin(x * frequency2 + time * 1.5) * amplitude * 0.3 +
-                    Math.sin(x * frequency3 + time * 2) * amplitude * 0.2;
+                // Multiple frequency components to simulate human voice
+                const baseFreq = 0.05;
+                const voicePattern = 
+                    Math.sin(x * baseFreq + time * 2) * 25 * (0.5 + 0.5 * Math.sin(time * 0.3)) +
+                    Math.sin(x * baseFreq * 2.1 + time * 1.7) * 15 * (0.3 + 0.7 * Math.sin(time * 0.7)) +
+                    Math.sin(x * baseFreq * 0.5 + time * 0.9) * 35 * (0.4 + 0.6 * Math.sin(time * 0.2)) +
+                    (Math.random() - 0.5) * 6; // Add realistic noise
                 
+                // Natural envelope (stronger in middle, weaker at edges)
+                const envelope = Math.sin(progress * Math.PI) * 0.9 + 0.1;
+                
+                const y = centerY + voicePattern * envelope;
                 canvasCtx.lineTo(x, y);
             }
         };
