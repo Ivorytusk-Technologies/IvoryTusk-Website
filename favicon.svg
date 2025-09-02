@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Simplified favicon version - IT monogram with orange accent -->
+  <rect width="100" height="100" fill="#2B3A4A" rx="15"/>
+  
+  <!-- IT Letters -->
+  <text x="50" y="45" 
+        font-family="Arial, sans-serif" 
+        font-size="32" 
+        font-weight="bold" 
+        fill="#FFFFFF" 
+        text-anchor="middle">IT</text>
+  
+  <!-- Orange accent line -->
+  <rect x="20" y="60" 
+        width="60" 
+        height="3" 
+        fill="#FF8C42" 
+        rx="1.5"/>
+  
+  <!-- AI text -->
+  <text x="50" y="80" 
+        font-family="Arial, sans-serif" 
+        font-size="12" 
+        font-weight="normal" 
+        fill="#FFFFFF" 
+        text-anchor="middle" 
+        letter-spacing="2px">AI</text>
+</svg>
