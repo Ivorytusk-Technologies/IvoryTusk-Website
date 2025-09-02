@@ -421,39 +421,16 @@ document.addEventListener('DOMContentLoaded', function() {
         let analyser = null;
         let animationId = null;
         
-        // Initialize audio visualizer
+        // Initialize audio visualizer - Use fake animation to avoid CORS issues
         const initAudioVisualizer = async () => {
             if (!audioCanvas || !canvasCtx || !voiceAgentsAudio) {
                 console.log('Missing elements for audio visualizer');
                 return false;
             }
             
-            try {
-                // Wait for audio to be ready
-                if (voiceAgentsAudio.readyState < 2) {
-                    await new Promise((resolve) => {
-                        voiceAgentsAudio.addEventListener('canplay', resolve, { once: true });
-                    });
-                }
-                
-                // Only create if not already created
-                if (!audioContext) {
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    analyser = audioContext.createAnalyser();
-                    analyser.fftSize = 256;
-                    
-                    const source = audioContext.createMediaElementSource(voiceAgentsAudio);
-                    source.connect(analyser);
-                    analyser.connect(audioContext.destination);
-                }
-                
-                console.log('Audio visualizer initialized successfully');
-                return true;
-            } catch (error) {
-                console.error('Audio context initialization failed (likely CORS):', error);
-                console.log('Will use fake animation instead of real audio analysis');
-                return false;
-            }
+            // Skip Web Audio API to avoid CORS issues and use fake animation
+            console.log('Using fake animation for audio visualization');
+            return false;
         };
         
         // Draw static waveform when not playing
@@ -651,84 +628,38 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 try {
                     if (voiceAgentsAudio.paused) {
-                        console.log('Audio element:', voiceAgentsAudio);
-                        console.log('Audio src:', voiceAgentsAudio.src || voiceAgentsAudio.currentSrc);
-                        console.log('Audio readyState:', voiceAgentsAudio.readyState);
-                        console.log('Audio networkState:', voiceAgentsAudio.networkState);
-                        console.log('Audio error:', voiceAgentsAudio.error);
-                        console.log('Audio paused:', voiceAgentsAudio.paused);
-                        console.log('Audio current time:', voiceAgentsAudio.currentTime);
-                        console.log('Audio duration:', voiceAgentsAudio.duration);
+                        // Simple play - reset to beginning and play
+                        voiceAgentsAudio.currentTime = 0;
+                        voiceAgentsAudio.volume = 1.0;
+                        voiceAgentsAudio.muted = false;
                         
-                        // Reset audio to beginning and play
-                        console.log('Attempting to play audio directly...');
-                        
-                        try {
-                            // Always start from the beginning and ensure volume is up
-                            voiceAgentsAudio.currentTime = 0;
-                            voiceAgentsAudio.volume = 1.0;
-                            voiceAgentsAudio.muted = false;
-                            
-                            await voiceAgentsAudio.play();
-                            console.log('Audio started playing successfully from beginning');
-                            console.log('Audio volume:', voiceAgentsAudio.volume);
-                            console.log('Audio muted:', voiceAgentsAudio.muted);
-                        } catch (playError) {
-                            console.error('Direct play failed:', playError);
-                            
-                            // Try loading first
-                            console.log('Trying to load audio first...');
-                            voiceAgentsAudio.load();
-                            
-                            // Wait a moment for loading
-                            await new Promise(resolve => setTimeout(resolve, 100));
-                            
-                            console.log('Retrying play after load...');
-                            await voiceAgentsAudio.play();
-                            console.log('Audio started playing after reload');
-                        }
+                        await voiceAgentsAudio.play();
+                        console.log('Audio playing');
                         
                         // Update UI
                         if (voicePlayIcon) voicePlayIcon.classList.add('hidden');
                         if (voicePauseIcon) voicePauseIcon.classList.remove('hidden');
                         if (voicePlayText) voicePlayText.textContent = 'Pause';
                         
-                        // Try to initialize audio context for visualization (non-critical)
-                        // Skip visualization with file:// protocol to avoid CORS issues
-                        const isFileProtocol = window.location.protocol === 'file:';
-                        
-                        if (!isFileProtocol) {
-                            try {
-                                if (!audioContext) {
-                                    console.log('Initializing audio visualizer...');
-                                    const initialized = await initAudioVisualizer();
-                                    if (initialized && audioContext && audioContext.state === 'suspended') {
-                                        console.log('Resuming audio context...');
-                                        await audioContext.resume();
-                                    }
-                                }
-                                // Start animation (will fallback to static if visualizer failed)
-                                drawAnimatedWaveform();
-                            } catch (visualError) {
-                                console.warn('Audio visualization failed, using fake animation:', visualError);
-                                drawFakeWaveform();
-                            }
-                        } else {
-                            console.log('Using fake animation due to file:// protocol');
-                            drawAnimatedWaveform(); // This will use fake animation since analyser won't be set
-                        }
+                        // Start simple fake animation
+                        drawAnimatedWaveform();
                     } else {
-                        console.log('Pausing audio');
+                        // Simple pause
                         voiceAgentsAudio.pause();
+                        console.log('Audio paused');
+                        
+                        // Update UI
                         if (voicePlayIcon) voicePlayIcon.classList.remove('hidden');
                         if (voicePauseIcon) voicePauseIcon.classList.add('hidden');
                         if (voicePlayText) voicePlayText.textContent = 'Play Demo';
                         
-                        // Stop animation and show static waveform
+                        // Stop animation
                         if (animationId) {
                             cancelAnimationFrame(animationId);
                             animationId = null;
                         }
+                        
+                        // Draw static waveform
                         drawStaticWaveform();
                     }
                 } catch (error) {
