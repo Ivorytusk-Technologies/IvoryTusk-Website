@@ -19,7 +19,7 @@ const solutionsData = [
     {
         id: 'orrahome',
         title: 'OrraHome',
-        description: 'Upload floor plans and get instant 3D visualizations with AI-suggested furniture layouts. Perfect for interior designers and home buyers.',
+        description: 'Control your world with your voice. OrraHome integrates seamlessly with existing smart home/company apps, turning AI into your universal remote. Lights, fans, ACs — all respond instantly to simple commands. No complex menus. Just say it, and it’s done.',
         gradient: 'from-purple-400 to-purple-600',
         icon: 'M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25'
     },
@@ -414,169 +414,366 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Canvas Audio Visualizer
-        const audioCanvas = document.getElementById('audio-canvas');
-        const canvasCtx = audioCanvas ? audioCanvas.getContext('2d') : null;
-        let audioContext = null;
-        let analyser = null;
-        let animationId = null;
+        // 3D Orbital Audio Visualizer
+        let orbitalScene, orbitalCamera, orbitalRenderer;
+        let nucleus, waveforms = [], electrons = [];
+        let orbitalAnalyser, orbitalAudioContext, orbitalAudioSource;
+        let orbitalAnimationId = null;
+        let ringAnimationState = 'hidden';
+        let ringAnimationProgress = 0;
+        let animationStartTime = 0;
+        let lastAudioIntensity = 0;
         
-        // Initialize audio visualizer - Use fake animation to avoid CORS issues
-        const initAudioVisualizer = async () => {
-            if (!audioCanvas || !canvasCtx || !voiceAgentsAudio) {
-                console.log('Missing elements for audio visualizer');
-                return false;
-            }
+        // Orbital visualizer constants
+        const NUM_WAVEFORM_ORBITS = 3;
+        const WAVEFORM_POINTS = 128;
+        const NUM_ELECTRONS = 3;
+        const TRAIL_LENGTH = 6;
+        const ELECTRON_ORBIT_RADIUS = 0.2; // Reduced to keep electrons closer to nucleus
+        const ANIMATION_DURATION = 500;
+        const ORANGE_COLOR = '#FF5733'; // Change this hex code to any color you want 
+        
+        // Initialize 3D Orbital Visualizer
+        const initOrbitalVisualizer = () => {
+            const canvas = document.getElementById('orbitalCanvas');
+            if (!canvas) return false;
             
-            // Skip Web Audio API to avoid CORS issues and use fake animation
-            console.log('Using fake animation for audio visualization');
-            return false;
+            // Scene setup
+            orbitalScene = new THREE.Scene();
+            orbitalScene.background = new THREE.Color(0x000000);
+            
+            orbitalCamera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+            orbitalCamera.position.z = 8; // Moved camera back for better view
+            
+            orbitalRenderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            orbitalRenderer.setPixelRatio(window.devicePixelRatio);
+            orbitalRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+            orbitalScene.add(ambientLight);
+            
+            // Create central nucleus (wireframe sphere)
+            const nucleusGeometry = new THREE.IcosahedronGeometry(1.0, 2); // Slightly larger nucleus
+            const nucleusMaterial = new THREE.LineBasicMaterial({
+                color: new THREE.Color(ORANGE_COLOR),
+                linewidth: 2,
+                transparent: true,
+                opacity: 0.8,
+                blending: THREE.AdditiveBlending,
+            });
+            const edges = new THREE.EdgesGeometry(nucleusGeometry);
+            nucleus = new THREE.LineSegments(edges, nucleusMaterial);
+            orbitalScene.add(nucleus);
+            
+            // Create waveform orbits
+            createOrbitalWaveforms();
+            
+            // Create electrons
+            createOrbitalElectrons();
+            
+            // Try to initialize audio analysis
+            initOrbitalAudioAnalysis();
+            
+            // Initial render
+            orbitalRenderer.render(orbitalScene, orbitalCamera);
+            
+            console.log('3D Orbital visualizer initialized');
+            return true;
         };
         
-        // Draw static waveform when not playing
-        const drawStaticWaveform = () => {
-            if (!canvasCtx || !audioCanvas) return;
-            
-            const width = audioCanvas.width;
-            const height = audioCanvas.height;
-            
-            canvasCtx.clearRect(0, 0, width, height);
-            canvasCtx.strokeStyle = '#f97316';
-            canvasCtx.lineWidth = 2;
-            canvasCtx.beginPath();
-            
-            // Draw a subtle static waveform
-            const centerY = height / 2;
-            canvasCtx.moveTo(0, centerY);
-            
-            for (let x = 0; x < width; x += 4) {
-                const y = centerY + Math.sin(x * 0.02) * 8 + Math.sin(x * 0.05) * 4;
-                canvasCtx.lineTo(x, y);
-            }
-            
-            canvasCtx.stroke();
+        // Initialize audio analysis for the orbital visualizer (CORS-friendly)
+        const initOrbitalAudioAnalysis = () => {
+            // Skip Web Audio API initialization to avoid CORS issues
+            // We'll use a smart fake animation that responds to audio playback state
+            console.log('Using CORS-friendly audio visualization (fake animation)');
+            return false; // Always use fake animation to avoid CORS issues
         };
         
-        // Draw animated waveform when playing
-        const drawAnimatedWaveform = () => {
-            if (!canvasCtx || !audioCanvas) {
-                return;
+        // Create orbital waveforms
+        const createOrbitalWaveforms = () => {
+            const waveformMaterial = new THREE.LineBasicMaterial({
+                color: new THREE.Color(ORANGE_COLOR),
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                linewidth: 2,
+            });
+            
+            for (let i = 0; i < NUM_WAVEFORM_ORBITS; i++) {
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(WAVEFORM_POINTS * 3);
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                const waveform = new THREE.Line(geometry, waveformMaterial.clone());
+                waveforms.push(waveform);
+                orbitalScene.add(waveform);
             }
             
-            const width = audioCanvas.width;
-            const height = audioCanvas.height;
+            // Set different initial rotations
+            waveforms[0].rotation.x = Math.PI / 2;
+            waveforms[1].rotation.y = Math.PI / 2;
+            waveforms[2].rotation.z = Math.PI / 2;
+        };
+        
+        // Create orbital electrons
+        const createOrbitalElectrons = () => {
+            const electronGeometry = new THREE.SphereGeometry(0.06, 8, 8); // Slightly larger electrons
+            const trailGeometry = new THREE.SphereGeometry(0.03, 6, 6);
             
-            canvasCtx.clearRect(0, 0, width, height);
-            canvasCtx.strokeStyle = '#f97316';
-            canvasCtx.lineWidth = 2;
-            canvasCtx.beginPath();
+            for (let i = 0; i < NUM_ELECTRONS; i++) {
+                const electronMaterial = new THREE.MeshBasicMaterial({
+                    color: new THREE.Color(ORANGE_COLOR),
+                    blending: THREE.AdditiveBlending,
+                    transparent: true,
+                    opacity: 0.9,
+                });
+                
+                const electron = new THREE.Mesh(electronGeometry, electronMaterial);
+                electron.trail = [];
+                electron.orbitOffset = (i / NUM_ELECTRONS) * Math.PI * 2; // Distribute electrons evenly
+                
+                for (let j = 0; j < TRAIL_LENGTH; j++) {
+                    const trailMaterial = new THREE.MeshBasicMaterial({
+                        color: new THREE.Color(ORANGE_COLOR),
+                        blending: THREE.AdditiveBlending,
+                        transparent: true,
+                        opacity: (0.9 / (j + 1)) * 0.7,
+                    });
+                    const trailParticle = new THREE.Mesh(trailGeometry, trailMaterial);
+                    electron.trail.push(trailParticle);
+                    orbitalScene.add(trailParticle);
+                }
+                electrons.push(electron);
+                orbitalScene.add(electron);
+            }
+        };
+        
+        // Start orbital animation
+        const startOrbitalVisualizer = () => {
+            ringAnimationState = 'appearing';
+            animationStartTime = performance.now();
+        };
+        
+        // Stop orbital animation
+        const stopOrbitalVisualizer = () => {
+            ringAnimationState = 'disappearing';
+            animationStartTime = performance.now();
+        };
+        
+        // Orbital animation loop
+        const animateOrbitalVisualizer = () => {
+            if (!orbitalRenderer || !orbitalScene || !orbitalCamera) return;
             
-            // Try real audio analysis first
-            if (analyser) {
-                try {
-                    const bufferLength = analyser.frequencyBinCount;
-                    const dataArray = new Uint8Array(bufferLength);
-                    analyser.getByteTimeDomainData(dataArray);
+            const time = performance.now() * 0.008;
+            const currentTime = performance.now();
+            
+            // Handle ring appearance/disappearance animation
+            if (ringAnimationState === 'appearing') {
+                let progress = (currentTime - animationStartTime) / ANIMATION_DURATION;
+                ringAnimationProgress = THREE.MathUtils.lerp(0, 1, Math.min(1, progress));
+                if (progress >= 1) {
+                    ringAnimationState = 'visible';
+                }
+            } else if (ringAnimationState === 'disappearing') {
+                let progress = (currentTime - animationStartTime) / ANIMATION_DURATION;
+                ringAnimationProgress = THREE.MathUtils.lerp(1, 0, Math.min(1, progress));
+                if (progress >= 1) {
+                    ringAnimationState = 'hidden';
+                }
+            }
+            
+            // Smart fake animation that responds to audio playback state
+            let audioIntensity = 0.3; // Default intensity
+            let frequencyData = null;
+            
+            // Check if audio is actually playing
+            const isAudioPlaying = voiceAgentsAudio && !voiceAgentsAudio.paused && voiceAgentsAudio.currentTime > 0;
+            
+            if (isAudioPlaying) {
+                // Enhanced fake animation that simulates voice patterns
+                const voicePattern1 = Math.sin(time * 0.8 + Math.sin(time * 0.3)) * 0.4;
+                const voicePattern2 = Math.sin(time * 1.2 + Math.cos(time * 0.5)) * 0.3;
+                const voicePattern3 = Math.sin(time * 0.6 + Math.sin(time * 0.7)) * 0.2;
+                
+                // Add some randomness to simulate voice unpredictability
+                const randomness = (Math.random() - 0.5) * 0.1;
+                
+                const fakeAudioIntensity = 0.5 + voicePattern1 + voicePattern2 + voicePattern3 + randomness;
+                audioIntensity = Math.max(0.2, Math.min(1.0, fakeAudioIntensity)); // Clamp between 0.2 and 1.0
+                
+                // Smooth the intensity
+                audioIntensity = lastAudioIntensity * 0.8 + audioIntensity * 0.2;
+                
+                // Create fake frequency data for different rings
+                frequencyData = new Uint8Array(256);
+                for (let i = 0; i < 256; i++) {
+                    // Simulate different frequency ranges with varying intensities
+                    const freq = i / 256;
+                    let value = 0;
                     
-                    const sliceWidth = width / bufferLength;
-                    let x = 0;
-                    
-                    for (let i = 0; i < bufferLength; i++) {
-                        const v = dataArray[i] / 128.0;
-                        const y = v * height / 2;
-                        
-                        if (i === 0) {
-                            canvasCtx.moveTo(x, y);
-                        } else {
-                            canvasCtx.lineTo(x, y);
-                        }
-                        
-                        x += sliceWidth;
+                    if (freq < 0.2) {
+                        // Bass frequencies - more stable
+                        value = (Math.sin(time * 0.5 + i * 0.1) + 1) * 80 + 40;
+                    } else if (freq < 0.6) {
+                        // Mid frequencies - more active
+                        value = (Math.sin(time * 1.2 + i * 0.05) + 1) * 100 + 50;
+                    } else {
+                        // High frequencies - most active
+                        value = (Math.sin(time * 2.0 + i * 0.02) + 1) * 120 + 60;
                     }
-                } catch (error) {
-                    // Fall back to fake animation if audio analysis fails
-                    drawFakeWaveform();
+                    
+                    frequencyData[i] = Math.max(0, Math.min(255, value + (Math.random() - 0.5) * 20));
                 }
             } else {
-                // Use fake animation when real audio analysis isn't available
-                drawFakeWaveform();
+                // Static/minimal animation when audio is not playing
+                const staticIntensity = 0.2 + Math.sin(time * 0.2) * 0.1;
+                audioIntensity = lastAudioIntensity * 0.95 + staticIntensity * 0.05;
             }
             
-            canvasCtx.stroke();
+            lastAudioIntensity = audioIntensity;
             
-            // Continue animation
+            // Update waveforms with frequency data (like original visualizer)
+            waveforms.forEach((waveform, index) => {
+                const positions = waveform.geometry.attributes.position.array;
+                const baseRadius = 1.0; // Minimum radius as requested
+                const radius = baseRadius + index * 0.4;
+                
+                // Separate frequency ranges for each ring (like original)
+                let freqData = null;
+                if (frequencyData) {
+                    const freqRanges = [
+                        frequencyData.slice(0, 60),    // Bass frequencies for inner ring
+                        frequencyData.slice(60, 150),  // Mid frequencies for middle ring
+                        frequencyData.slice(150, 256)  // High frequencies for outer ring
+                    ];
+                    freqData = freqRanges[index];
+                }
+                
+                for (let i = 0; i < WAVEFORM_POINTS; i++) {
+                    const angle = (i / WAVEFORM_POINTS) * Math.PI * 2;
+                    
+                    let displacement;
+                    if (freqData) {
+                        // Use real frequency data
+                        const freqIndex = Math.floor((i / WAVEFORM_POINTS) * freqData.length);
+                        const freqValue = freqData[freqIndex] / 255.0;
+                        displacement = freqValue * audioIntensity * 1.2;
+                    } else {
+                        // Fallback fake animation
+                        displacement = audioIntensity * 0.8 * Math.sin(angle * 3 + time);
+                    }
+                    
+                    const x = radius * Math.sin(angle);
+                    const y = radius * Math.cos(angle);
+                    const z = displacement * Math.sin(angle * 2 + time * 0.5);
+                    
+                    positions[i * 3] = x;
+                    positions[i * 3 + 1] = y;
+                    positions[i * 3 + 2] = z;
+                }
+                waveform.geometry.attributes.position.needsUpdate = true;
+                
+                // Animate scale based on animation progress
+                const currentScale = THREE.MathUtils.lerp(0, 1, ringAnimationProgress);
+                waveform.scale.set(currentScale, currentScale, currentScale);
+                
+                // Rotate waveforms
+                waveform.rotation.y += (index * 0.002) + 0.003;
+                waveform.rotation.x += (index % 2 === 0 ? 0.002 : -0.002);
+            });
+            
+            // Animate nucleus
+            if (nucleus) {
+                nucleus.rotation.x += 0.002;
+                nucleus.rotation.y += 0.003;
+            }
+            
+            // Animate electrons - keep them closer to nucleus
+            const baseElectronRadius = 0.8; // Base orbit radius (smaller than nucleus)
+            const electronOrbitRadius = baseElectronRadius + (audioIntensity * 0.4); // Max radius 1.2
+            
+            electrons.forEach((electron, index) => {
+                // Update trail positions first
+                for (let j = TRAIL_LENGTH - 1; j > 0; j--) {
+                    electron.trail[j].position.copy(electron.trail[j - 1].position);
+                }
+                electron.trail[0].position.copy(electron.position);
+                
+                // Calculate electron position in stable orbit
+                const orbitSpeed = 0.5 + (index * 0.2); // Different speeds for each electron
+                const currentAngle = time * orbitSpeed + electron.orbitOffset;
+                
+                // Create stable orbital paths
+                electron.position.x = electronOrbitRadius * Math.cos(currentAngle);
+                electron.position.y = electronOrbitRadius * Math.sin(currentAngle) * Math.cos(index * Math.PI / 3);
+                electron.position.z = electronOrbitRadius * Math.sin(currentAngle) * Math.sin(index * Math.PI / 3);
+            });
+            
+            orbitalRenderer.render(orbitalScene, orbitalCamera);
+            
+            // Continue animation if playing
             if (voiceAgentsAudio && !voiceAgentsAudio.paused) {
-                animationId = requestAnimationFrame(drawAnimatedWaveform);
+                orbitalAnimationId = requestAnimationFrame(animateOrbitalVisualizer);
             }
         };
         
-        // Draw fake animated waveform when CORS blocks real analysis
-        const drawFakeWaveform = () => {
-            if (!canvasCtx || !audioCanvas) return;
-            
-            const width = audioCanvas.width;
-            const height = audioCanvas.height;
-            const centerY = height / 2;
-            const time = Date.now() * 0.008;
-            
-            canvasCtx.moveTo(0, centerY);
-            
-            // Create realistic voice-like waveform
-            for (let x = 0; x < width; x += 1) {
-                const progress = x / width;
-                
-                // Multiple frequency components to simulate human voice
-                const baseFreq = 0.05;
-                const voicePattern = 
-                    Math.sin(x * baseFreq + time * 2) * 25 * (0.5 + 0.5 * Math.sin(time * 0.3)) +
-                    Math.sin(x * baseFreq * 2.1 + time * 1.7) * 15 * (0.3 + 0.7 * Math.sin(time * 0.7)) +
-                    Math.sin(x * baseFreq * 0.5 + time * 0.9) * 35 * (0.4 + 0.6 * Math.sin(time * 0.2)) +
-                    (Math.random() - 0.5) * 6; // Add realistic noise
-                
-                // Natural envelope (stronger in middle, weaker at edges)
-                const envelope = Math.sin(progress * Math.PI) * 0.9 + 0.1;
-                
-                const y = centerY + voicePattern * envelope;
-                canvasCtx.lineTo(x, y);
-            }
-        };
-        
-        // Voice agents audio controls with canvas animation
+        // Voice agents audio controls with 3D orbital visualizer
         if (playVoiceAgentsBtn && voiceAgentsAudio) {
-            console.log('Setting up voice agents audio controls');
-            console.log('Audio element found:', voiceAgentsAudio);
-            console.log('Audio src:', voiceAgentsAudio.src);
-            console.log('Audio current src:', voiceAgentsAudio.currentSrc);
-            console.log('Full audio src URL:', new URL(voiceAgentsAudio.src || voiceAgentsAudio.getAttribute('src'), window.location.href).href);
+            console.log('Setting up voice agents audio controls with 3D visualizer');
             
-            // Test if audio URL is accessible
-            fetch(voiceAgentsAudio.src, { method: 'HEAD' })
-                .then(response => {
-                    console.log('Audio URL test - Status:', response.status);
-                    console.log('Audio URL test - Content-Type:', response.headers.get('content-type'));
-                    console.log('Audio URL test - Content-Length:', response.headers.get('content-length'));
-                })
-                .catch(error => {
-                    console.error('Audio URL test failed:', error);
-                });
-            
-            // Draw initial static waveform
-            drawStaticWaveform();
+            // Initialize the 3D orbital visualizer
+            initOrbitalVisualizer();
             
             // Add error handling for audio loading
             voiceAgentsAudio.addEventListener('error', (e) => {
                 console.error('Audio loading error:', e);
                 console.error('Audio error details:', voiceAgentsAudio.error);
-                if (voicePlayText) voicePlayText.textContent = 'Audio Error';
+                
+                // More user-friendly error handling
+                if (voiceAgentsAudio.error) {
+                    switch (voiceAgentsAudio.error.code) {
+                        case 1: // MEDIA_ERR_ABORTED
+                            console.log('Audio loading was aborted');
+                            if (voicePlayText) voicePlayText.textContent = 'Play Demo';
+                            break;
+                        case 2: // MEDIA_ERR_NETWORK
+                            console.log('Network error while loading audio');
+                            if (voicePlayText) voicePlayText.textContent = 'Network Error';
+                            break;
+                        case 3: // MEDIA_ERR_DECODE
+                            console.log('Audio decoding error');
+                            if (voicePlayText) voicePlayText.textContent = 'Audio Error';
+                            break;
+                        case 4: // MEDIA_ERR_SRC_NOT_SUPPORTED
+                            console.log('Audio format not supported');
+                            if (voicePlayText) voicePlayText.textContent = 'Format Error';
+                            break;
+                        default:
+                            if (voicePlayText) voicePlayText.textContent = 'Audio Error';
+                    }
+                } else {
+                    if (voicePlayText) voicePlayText.textContent = 'Play Demo'; // Reset on generic error
+                }
             });
             
             voiceAgentsAudio.addEventListener('canplay', () => {
                 console.log('Audio can play');
+                // Reset button text if it was showing an error
+                if (voicePlayText && voicePlayText.textContent !== 'Play Demo' && voicePlayText.textContent !== 'Pause') {
+                    voicePlayText.textContent = 'Play Demo';
+                }
             });
             
             voiceAgentsAudio.addEventListener('loadstart', () => {
                 console.log('Audio loading started');
+                if (voicePlayText) voicePlayText.textContent = 'Loading...';
             });
+            
+            voiceAgentsAudio.addEventListener('loadeddata', () => {
+                console.log('Audio data loaded');
+                if (voicePlayText && voicePlayText.textContent === 'Loading...') {
+                    voicePlayText.textContent = 'Play Demo';
+                }
+            });
+            
             
             voiceAgentsAudio.addEventListener('loadeddata', () => {
                 console.log('Audio data loaded');
@@ -641,8 +838,14 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (voicePauseIcon) voicePauseIcon.classList.remove('hidden');
                         if (voicePlayText) voicePlayText.textContent = 'Pause';
                         
-                        // Start simple fake animation
-                        drawAnimatedWaveform();
+                        // Try to resume audio context and start animation
+                        if (orbitalAudioContext && orbitalAudioContext.state === 'suspended') {
+                            orbitalAudioContext.resume();
+                        }
+                        
+                        // Start 3D orbital animation
+                        startOrbitalVisualizer();
+                        animateOrbitalVisualizer();
                     } else {
                         // Simple pause
                         voiceAgentsAudio.pause();
@@ -653,14 +856,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (voicePauseIcon) voicePauseIcon.classList.add('hidden');
                         if (voicePlayText) voicePlayText.textContent = 'Play Demo';
                         
-                        // Stop animation
-                        if (animationId) {
-                            cancelAnimationFrame(animationId);
-                            animationId = null;
+                        // Stop 3D orbital animation
+                        if (orbitalAnimationId) {
+                            cancelAnimationFrame(orbitalAnimationId);
+                            orbitalAnimationId = null;
                         }
                         
-                        // Draw static waveform
-                        drawStaticWaveform();
+                        stopOrbitalVisualizer();
                     }
                 } catch (error) {
                     console.error('Audio playback failed:', error);
@@ -687,12 +889,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (voicePauseIcon) voicePauseIcon.classList.add('hidden');
                 if (voicePlayText) voicePlayText.textContent = 'Play Demo';
                 
-                // Stop animation and show static waveform
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
+                // Stop 3D orbital animation
+                if (orbitalAnimationId) {
+                    cancelAnimationFrame(orbitalAnimationId);
+                    orbitalAnimationId = null;
                 }
-                drawStaticWaveform();
+                stopOrbitalVisualizer();
             });
         } else {
             console.log('Voice agents audio elements not found');

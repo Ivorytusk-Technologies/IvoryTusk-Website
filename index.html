@@ -11,6 +11,7 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -208,12 +209,12 @@
                         Our advanced features ensure a seamless customer experience.
                     </p>
                     
-                    <!-- AI Voice Demo with Recording -->
+                    <!-- AI Voice Demo with 3D Orbital Visualizer -->
                     <div class="flex justify-center mb-12">
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 shadow-xl max-w-md">
-                            <div class="flex justify-center mb-4">
-                                <div class="voice-visualizer" id="voice-agents-visualizer">
-                                    <canvas id="audio-canvas" class="audio-canvas" width="300" height="100"></canvas>
+                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 shadow-xl max-w-2xl">
+                            <div class="flex justify-center mb-4 relative">
+                                <div class="w-96 h-80 rounded-xl overflow-hidden bg-black/10 dark:bg-black/30">
+                                    <canvas id="orbitalCanvas" class="w-full h-full"></canvas>
                                 </div>
                             </div>
                             <p class="text-slate-700 dark:text-slate-300 text-sm italic mb-4 text-center">
@@ -230,10 +231,10 @@
                                     <span id="voice-play-text">Play Demo</span>
                                 </button>
                             </div>
-                                                          <audio id="voice-agents-audio" preload="auto">
-                                 <source src="https://assets.ivorytusk.co.in/recording.mp3" type="audio/mpeg">
-                                 Your browser does not support the audio element.
-                              </audio>
+                            <audio id="voice-agents-audio" preload="auto">
+                                <source src="https://assets.ivorytusk.co.in/recording.mp3" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
                         </div>
                     </div>
                 </div>
