@@ -424,14 +424,25 @@ document.addEventListener('DOMContentLoaded', function() {
         let animationStartTime = 0;
         let lastAudioIntensity = 0;
         
+        // Bar waveform visualization
+        let leftBars = [], rightBars = [];
+        let barWaveformData = null;
+        
         // Orbital visualizer constants
-        const NUM_WAVEFORM_ORBITS = 3;
-        const WAVEFORM_POINTS = 128;
-        const NUM_ELECTRONS = 3;
-        const TRAIL_LENGTH = 6;
-        const ELECTRON_ORBIT_RADIUS = 0.2; // Reduced to keep electrons closer to nucleus
+        const NUM_WAVEFORM_ORBITS = 5;
+        const WAVEFORM_POINTS = 256;
+        const NUM_ELECTRONS = 5;
+        const TRAIL_LENGTH = 15;
+        const ELECTRON_ORBIT_RADIUS = 0.8; // Good balance - visible but not too far from nucleus
         const ANIMATION_DURATION = 500;
-        const ORANGE_COLOR = '#FF5733'; // Change this hex code to any color you want 
+        const ORANGE_COLOR = '#37AFE1'; // Change this hex code to any color you want
+        
+        // Bar waveform constants
+        const NUM_BARS = 40; // Number of bars on each side for full width coverage
+        const BAR_WIDTH = 0.10;
+        const BAR_SPACING = 0.20;
+        const MAX_BAR_HEIGHT = 50.0;
+        const BAR_DISTANCE_FROM_CENTER = 9.0; // Extend further to edges 
         
         // Initialize 3D Orbital Visualizer
         const initOrbitalVisualizer = () => {
@@ -471,6 +482,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Create electrons
             createOrbitalElectrons();
             
+            // Create bar waveform
+            createBarWaveform();
+            
             // Try to initialize audio analysis
             initOrbitalAudioAnalysis();
             
@@ -479,6 +493,55 @@ document.addEventListener('DOMContentLoaded', function() {
             
             console.log('3D Orbital visualizer initialized');
             return true;
+        };
+        
+        // Create bar waveform visualization
+        const createBarWaveform = () => {
+            const barGeometry = new THREE.BoxGeometry(BAR_WIDTH, 0.1, BAR_WIDTH);
+            const barMaterial = new THREE.MeshBasicMaterial({
+                color: new THREE.Color(ORANGE_COLOR),
+                transparent: true,
+                opacity: 0.7,
+                blending: THREE.AdditiveBlending,
+            });
+            
+            // Create left side bars
+            for (let i = 0; i < NUM_BARS; i++) {
+                const bar = new THREE.Mesh(barGeometry, barMaterial.clone());
+                
+                                 // Position bars on the left side
+                 bar.position.x = -BAR_DISTANCE_FROM_CENTER + (i * BAR_SPACING);
+                 bar.position.y = 0; // Center position - bars will grow up and down from here
+                 bar.position.z = -2; // Behind the orbital sphere
+                 
+                 // Store original Y position for animation (center point)
+                 bar.originalY = 0;
+                bar.targetHeight = 0.1;
+                bar.currentHeight = 0.1;
+                
+                leftBars.push(bar);
+                orbitalScene.add(bar);
+            }
+            
+            // Create right side bars (mirrored)
+            for (let i = 0; i < NUM_BARS; i++) {
+                const bar = new THREE.Mesh(barGeometry, barMaterial.clone());
+                
+                                 // Position bars on the right side
+                 bar.position.x = BAR_DISTANCE_FROM_CENTER - (i * BAR_SPACING);
+                 bar.position.y = 0; // Center position - bars will grow up and down from here
+                 bar.position.z = -2; // Behind the orbital sphere
+                 
+                 // Store original Y position for animation (center point)
+                 bar.originalY = 0;
+                bar.targetHeight = 0.1;
+                bar.currentHeight = 0.1;
+                
+                rightBars.push(bar);
+                orbitalScene.add(bar);
+            }
+            
+            console.log(`Created ${NUM_BARS * 2} waveform bars`);
         };
         
         // Initialize audio analysis for the orbital visualizer (CORS-friendly)
@@ -507,36 +570,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 orbitalScene.add(waveform);
             }
             
-            // Set different initial rotations
-            waveforms[0].rotation.x = Math.PI / 2;
-            waveforms[1].rotation.y = Math.PI / 2;
-            waveforms[2].rotation.z = Math.PI / 2;
+            // Set different initial rotations for all 5 orbits
+            waveforms.forEach((waveform, index) => {
+                const rotationAngle = (index / NUM_WAVEFORM_ORBITS) * Math.PI * 2;
+                waveform.rotation.x = rotationAngle;
+                waveform.rotation.y = rotationAngle * 0.7;
+                waveform.rotation.z = rotationAngle * 0.3;
+            });
         };
         
-        // Create orbital electrons
+        // Create orbital electrons with enhanced comet-like trails
         const createOrbitalElectrons = () => {
-            const electronGeometry = new THREE.SphereGeometry(0.06, 8, 8); // Slightly larger electrons
-            const trailGeometry = new THREE.SphereGeometry(0.03, 6, 6);
+            const electronGeometry = new THREE.SphereGeometry(0.08, 12, 12); // Larger, higher quality electrons
             
             for (let i = 0; i < NUM_ELECTRONS; i++) {
                 const electronMaterial = new THREE.MeshBasicMaterial({
                     color: new THREE.Color(ORANGE_COLOR),
                     blending: THREE.AdditiveBlending,
                     transparent: true,
-                    opacity: 0.9,
+                    opacity: 1.0,
                 });
                 
                 const electron = new THREE.Mesh(electronGeometry, electronMaterial);
                 electron.trail = [];
                 electron.orbitOffset = (i / NUM_ELECTRONS) * Math.PI * 2; // Distribute electrons evenly
+                electron.orbitPlane = i; // Different orbital planes for variety
                 
+                // Create comet-like trail with varying sizes and opacity
                 for (let j = 0; j < TRAIL_LENGTH; j++) {
+                    const trailSize = 0.08 * (1 - j / TRAIL_LENGTH); // Gradually smaller trail particles
+                    const trailGeometry = new THREE.SphereGeometry(Math.max(0.01, trailSize), 8, 8);
+                    
                     const trailMaterial = new THREE.MeshBasicMaterial({
                         color: new THREE.Color(ORANGE_COLOR),
                         blending: THREE.AdditiveBlending,
                         transparent: true,
-                        opacity: (0.9 / (j + 1)) * 0.7,
+                        opacity: Math.pow(1 - j / TRAIL_LENGTH, 2) * 0.8, // Exponential fade for comet effect
                     });
+                    
                     const trailParticle = new THREE.Mesh(trailGeometry, trailMaterial);
                     electron.trail.push(trailParticle);
                     orbitalScene.add(trailParticle);
@@ -604,6 +675,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Create fake frequency data for different rings
                 frequencyData = new Uint8Array(256);
+                barWaveformData = new Uint8Array(NUM_BARS);
+                
                 for (let i = 0; i < 256; i++) {
                     // Simulate different frequency ranges with varying intensities
                     const freq = i / 256;
@@ -622,6 +695,22 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     frequencyData[i] = Math.max(0, Math.min(255, value + (Math.random() - 0.5) * 20));
                 }
+                
+                // Generate bar waveform data (simulate classic audio visualizer bars)
+                for (let i = 0; i < NUM_BARS; i++) {
+                    const barFreq = i / NUM_BARS;
+                    const baseValue = Math.sin(time * 1.5 + i * 0.3) * 0.5 + 0.5;
+                    const voiceModulation = Math.sin(time * 0.8 + i * 0.1) * 0.3;
+                    const randomVariation = (Math.random() - 0.5) * 0.2;
+                    
+                    let barValue = (baseValue + voiceModulation + randomVariation) * 255;
+                    
+                    // Make outer bars (edges) more prominent
+                    const edgeBoost = Math.abs(i - NUM_BARS / 2) / (NUM_BARS / 2);
+                    barValue *= (0.7 + edgeBoost * 0.6);
+                    
+                    barWaveformData[i] = Math.max(10, Math.min(255, barValue));
+                }
             } else {
                 // Static/minimal animation when audio is not playing
                 const staticIntensity = 0.2 + Math.sin(time * 0.2) * 0.1;
@@ -636,15 +725,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 const baseRadius = 1.0; // Minimum radius as requested
                 const radius = baseRadius + index * 0.4;
                 
-                // Separate frequency ranges for each ring (like original)
+                // Separate frequency ranges for each ring (5 rings now)
                 let freqData = null;
                 if (frequencyData) {
                     const freqRanges = [
-                        frequencyData.slice(0, 60),    // Bass frequencies for inner ring
-                        frequencyData.slice(60, 150),  // Mid frequencies for middle ring
-                        frequencyData.slice(150, 256)  // High frequencies for outer ring
+                        frequencyData.slice(0, 50),    // Sub-bass frequencies
+                        frequencyData.slice(50, 100),  // Bass frequencies  
+                        frequencyData.slice(100, 150), // Low-mid frequencies
+                        frequencyData.slice(150, 200), // High-mid frequencies
+                        frequencyData.slice(200, 256)  // High frequencies
                     ];
-                    freqData = freqRanges[index];
+                    freqData = freqRanges[index] || frequencyData.slice(0, 50); // Fallback for safety
                 }
                 
                 for (let i = 0; i < WAVEFORM_POINTS; i++) {
@@ -686,26 +777,86 @@ document.addEventListener('DOMContentLoaded', function() {
                 nucleus.rotation.y += 0.003;
             }
             
-            // Animate electrons - keep them closer to nucleus
-            const baseElectronRadius = 0.8; // Base orbit radius (smaller than nucleus)
-            const electronOrbitRadius = baseElectronRadius + (audioIntensity * 0.4); // Max radius 1.2
+            // Animate electrons with varied orbital patterns
+            const baseElectronRadius = 1.0; // Base orbit radius
+            const electronOrbitRadius = baseElectronRadius + (audioIntensity * 0.5); // Dynamic radius based on audio
             
             electrons.forEach((electron, index) => {
-                // Update trail positions first
+                // Update trail positions first (comet effect)
                 for (let j = TRAIL_LENGTH - 1; j > 0; j--) {
                     electron.trail[j].position.copy(electron.trail[j - 1].position);
+                    
+                    // Gradually reduce trail particle opacity for smooth comet fade
+                    const fadeRatio = Math.pow(1 - j / TRAIL_LENGTH, 2);
+                    electron.trail[j].material.opacity = fadeRatio * 0.8;
                 }
                 electron.trail[0].position.copy(electron.position);
+                electron.trail[0].material.opacity = 0.8;
                 
-                // Calculate electron position in stable orbit
-                const orbitSpeed = 0.5 + (index * 0.2); // Different speeds for each electron
+                // Create varied orbital patterns for each electron
+                const orbitSpeed = 0.3 + (index * 0.15); // Different speeds
                 const currentAngle = time * orbitSpeed + electron.orbitOffset;
                 
-                // Create stable orbital paths
-                electron.position.x = electronOrbitRadius * Math.cos(currentAngle);
-                electron.position.y = electronOrbitRadius * Math.sin(currentAngle) * Math.cos(index * Math.PI / 3);
-                electron.position.z = electronOrbitRadius * Math.sin(currentAngle) * Math.sin(index * Math.PI / 3);
+                // Different orbital planes and shapes for variety
+                const planeOffset = electron.orbitPlane * Math.PI / NUM_ELECTRONS;
+                const radiusVariation = 0.8 + (index % 2) * 0.4; // Alternate between closer and farther orbits
+                const currentRadius = electronOrbitRadius * radiusVariation;
+                
+                // Create 3D orbital paths (elliptical and tilted)
+                electron.position.x = currentRadius * Math.cos(currentAngle) * Math.cos(planeOffset);
+                electron.position.y = currentRadius * Math.sin(currentAngle);
+                electron.position.z = currentRadius * Math.cos(currentAngle) * Math.sin(planeOffset) * 0.6;
+                
+                // Add slight wobble based on audio intensity
+                const wobble = audioIntensity * 0.1;
+                electron.position.x += Math.sin(time * 2 + index) * wobble;
+                electron.position.y += Math.cos(time * 1.8 + index) * wobble;
+                electron.position.z += Math.sin(time * 2.2 + index) * wobble;
             });
+            
+            // Animate bar waveform
+            if (barWaveformData) {
+                                 // Animate left bars
+                 leftBars.forEach((bar, index) => {
+                     const barValue = barWaveformData[index] / 255.0;
+                     bar.targetHeight = 0.1 + (barValue * MAX_BAR_HEIGHT);
+                     
+                     // Smooth height animation
+                     bar.currentHeight = bar.currentHeight * 0.8 + bar.targetHeight * 0.2;
+                     
+                     // Update bar scale (grows from center - both up and down)
+                     bar.scale.y = bar.currentHeight;
+                     bar.position.y = bar.originalY; // Keep at center - scaling handles the growth
+                     
+                     // Add slight opacity variation based on height
+                     bar.material.opacity = 0.4 + (barValue * 0.4);
+                 });
+                
+                                 // Animate right bars (mirrored pattern)
+                 rightBars.forEach((bar, index) => {
+                     const barValue = barWaveformData[NUM_BARS - 1 - index] / 255.0; // Mirror the pattern
+                     bar.targetHeight = 0.1 + (barValue * MAX_BAR_HEIGHT);
+                     
+                     // Smooth height animation
+                     bar.currentHeight = bar.currentHeight * 0.8 + bar.targetHeight * 0.2;
+                     
+                     // Update bar scale (grows from center - both up and down)
+                     bar.scale.y = bar.currentHeight;
+                     bar.position.y = bar.originalY; // Keep at center - scaling handles the growth
+                     
+                     // Add slight opacity variation based on height
+                     bar.material.opacity = 0.4 + (barValue * 0.4);
+                 });
+            } else {
+                                 // Static bars when no audio data
+                 [...leftBars, ...rightBars].forEach(bar => {
+                     bar.targetHeight = 0.3 + Math.sin(time * 0.5 + bar.position.x * 0.1) * 0.2;
+                     bar.currentHeight = bar.currentHeight * 0.9 + bar.targetHeight * 0.1;
+                     bar.scale.y = bar.currentHeight;
+                     bar.position.y = bar.originalY; // Keep at center - scaling handles the growth
+                     bar.material.opacity = 0.3;
+                 });
+            }
             
             orbitalRenderer.render(orbitalScene, orbitalCamera);
             
