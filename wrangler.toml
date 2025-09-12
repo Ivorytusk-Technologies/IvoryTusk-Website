@@ -1,0 +1,23 @@
+name = "ivorytusk-analytics"
+main = "worker.js"
+compatibility_date = "2024-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+# R2 bucket binding for analytics storage
+[[r2_buckets]]
+binding = "ANALYTICS_BUCKET"
+bucket_name = "ivorytusk-analytics"
+
+# Routes for the worker
+[[routes]]
+pattern = "www.ivorytusk.co.in/qr"
+zone_id = "your-zone-id-here"
+
+[[routes]]
+pattern = "www.ivorytusk.co.in/api/*"
+zone_id = "your-zone-id-here"
+
+# Environment variables (optional)
+[vars]
+ENVIRONMENT = "production"
+
