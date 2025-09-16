@@ -4,10 +4,17 @@
 const solutionsData = [
     {
         id: 'voice-agents',
-        title: 'Voice Agents',
+        title: 'AI Voice Agents',
         description: 'Never miss a customer call again. Our AI voice agents handle inquiries 24/7, book appointments, and qualify leads while you focus on growing your business.',
         gradient: 'from-blue-400 to-blue-600',
         icon: 'M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z'
+    },
+    {
+        id: 'whatsapp-agents',
+        title: 'WhatsApp AI Agents',
+        description: 'Transform WhatsApp into your smartest sales & support channel. Our AI agents handle customer queries, book appointments, process orders, and qualify leads instantly - like having your best employee available 24/7.',
+        gradient: 'from-green-400 to-green-600',
+        icon: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488'
     },
     {
         id: 'expenseiq',
@@ -29,13 +36,6 @@ const solutionsData = [
         description: 'Record client meetings and get instant transcripts, action items, and follow-up reminders. Never forget important details again.',
         gradient: 'from-orange-400 to-orange-600',
         icon: 'M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z'
-    },
-    {
-        id: 'conciergeiq',
-        title: 'ConciergeIQ',
-        description: 'Turn WhatsApp into your smartest sales & support assistant. ConciergeIQ reads customer messages and replies instantly with the right information.',
-        gradient: 'from-pink-400 to-pink-600',
-        icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z'
     },
     {
         id: 'procumatic',
@@ -79,6 +79,99 @@ const voiceCapabilitiesData = [
         iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
     },
 ];
+
+// WhatsApp Capabilities Data
+const whatsappCapabilitiesData = [
+    {
+        title: 'Instant Response',
+        description: 'Reply to customer messages in under 3 seconds, 24/7. Never lose a lead because you were busy or unavailable.',
+        iconPath: "M12 2C13.1 2 14 2.9 14 4V8C14 9.1 13.1 10 12 10S10 9.1 10 8V4C10 2.9 10.9 2 12 2ZM21 9V7C21 6.45 20.55 6 20 6S19 6.45 19 7V9C19 13.97 15.84 18.24 11.35 19.73C11.75 20.91 12.81 21.75 14.04 21.75H16V23.25H8V21.75H9.96C11.19 21.75 12.25 20.91 12.65 19.73C8.16 18.24 5 13.97 5 9V7C5 6.45 4.55 6 4 6S3 6.45 3 7V9C3 14.5 6.82 19.24 12 20.92C17.18 19.24 21 14.5 21 9Z"
+    },
+    {
+        title: 'Sales Automation',
+        description: 'Qualify leads, share product catalogs, calculate quotes, and process orders directly through WhatsApp. Turn conversations into conversions.',
+        iconPath: "M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7ZM9 8V17H11V8H9ZM13 8V17H15V8H13Z"
+    },
+    {
+        title: 'Appointment Booking',
+        description: 'Let customers book appointments, reschedule, and get reminders directly through WhatsApp. Seamless calendar integration with your existing systems.',
+        iconPath: "M19 3H18V1H16V3H8V1H6V3H5C3.89 3 3.01 3.9 3.01 5L3 19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V8H19V19ZM7 10H12V15H7V10Z"
+    },
+    {
+        title: 'Smart Escalation',
+        description: 'AI knows when to handle queries independently and when to seamlessly transfer to human agents with full conversation context.',
+        iconPath: "M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"
+    },
+    {
+        title: 'Multi-language Support',
+        description: 'Communicate fluently in Hindi, English, and regional languages. Break language barriers and serve all your customers naturally.',
+        iconPath: "M12.87 15.07L10.33 12.56L10.36 12.53C12.1 10.59 13.34 8.36 14.07 6H17V4H10V2H8V4H1V6H12.17C11.5 7.92 10.44 9.75 9 11.35C8.07 10.32 7.3 9.19 6.69 8H4.69C5.42 9.63 6.42 11.17 7.67 12.56L2.58 17.58L4 19L9 14L12.11 17.11L12.87 15.07ZM18.5 10H16.5L12 22H14L15.12 19H19.87L21 22H23L18.5 10ZM15.88 17L17.5 12.67L19.12 17H15.88Z"
+    },
+    {
+        title: 'Rich Media Support',
+        description: 'Send images, documents, location pins, and interactive buttons. Create engaging experiences that drive action and sales.',
+        iconPath: "M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"
+    }
+];
+
+// Channel Switching Functionality
+function initChannelSwitching() {
+    const voiceTab = document.getElementById('voice-tab');
+    const whatsappTab = document.getElementById('whatsapp-tab');
+    const voiceDemo = document.getElementById('voice-demo');
+    const whatsappDemo = document.getElementById('whatsapp-demo');
+    const capabilitiesContainer = document.getElementById('voice-capabilities-container');
+
+    function switchToVoice() {
+        // Update tab styles
+        voiceTab.className = 'channel-tab px-6 py-3 rounded-full font-semibold transition-all duration-300 bg-orange-500 text-white';
+        whatsappTab.className = 'channel-tab px-6 py-3 rounded-full font-semibold transition-all duration-300 text-slate-600 dark:text-slate-300 hover:text-orange-600';
+
+        // Show/hide demos
+        voiceDemo.classList.remove('hidden');
+        whatsappDemo.classList.add('hidden');
+
+        // Update capabilities
+        renderCapabilities(voiceCapabilitiesData);
+    }
+
+    function switchToWhatsApp() {
+        // Update tab styles
+        whatsappTab.className = 'channel-tab px-6 py-3 rounded-full font-semibold transition-all duration-300 bg-green-500 text-white';
+        voiceTab.className = 'channel-tab px-6 py-3 rounded-full font-semibold transition-all duration-300 text-slate-600 dark:text-slate-300 hover:text-orange-600';
+
+        // Show/hide demos
+        voiceDemo.classList.add('hidden');
+        whatsappDemo.classList.remove('hidden');
+
+        // Update capabilities
+        renderCapabilities(whatsappCapabilitiesData);
+    }
+
+    function renderCapabilities(capabilitiesData) {
+        capabilitiesContainer.innerHTML = capabilitiesData.map(capability => `
+            <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl
+                transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/30 dark:hover:bg-slate-800/60">
+                <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                    <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="${capability.iconPath}"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3 text-center">${capability.title}</h3>
+                <p class="text-slate-600 dark:text-slate-300 text-center leading-relaxed">${capability.description}</p>
+            </div>
+        `).join('');
+    }
+
+    // Add event listeners
+    if (voiceTab && whatsappTab) {
+        voiceTab.addEventListener('click', switchToVoice);
+        whatsappTab.addEventListener('click', switchToWhatsApp);
+
+        // Initialize with voice capabilities
+        renderCapabilities(voiceCapabilitiesData);
+    }
+}
 
 // Industries Content Data
 const industriesContentData = {
@@ -152,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Functions ---
     const renderSolutions = () => {
         solutionsContainer.innerHTML = solutionsData.map(solution => `
-            <a href="${solution.id === 'voice-agents' ? '#ai-voice-agents' : '#'}"
+            <a href="${(solution.id === 'voice-agents' || solution.id === 'whatsapp-agents') ? '#ai-agents' : '#'}"
                 class="group backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 hover:bg-white/30 dark:hover:bg-slate-800/60
                 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-r ${solution.gradient} flex items-center justify-center mb-6
@@ -1131,6 +1224,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial rendering of dynamic content
     renderSolutions();
     renderVoiceCapabilities();
+    initChannelSwitching();
     updateTabs(); // Render initial industry content and update styles
     
     // Setup media controls
