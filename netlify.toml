@@ -1,0 +1,20 @@
+[build]
+  publish = "."
+
+[form]
+  name = "contact"
+
+[[form.notification]]
+  type = "email"
+  event = "submitted"
+  to = "contact@ivorytusk.co.in"
+  subject = "New Contact Form Submission from IvoryTusk Website"
+  body = "You have received a new contact form submission from your website. Please check your Netlify dashboard for details."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

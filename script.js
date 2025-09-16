@@ -399,14 +399,107 @@ document.addEventListener('DOMContentLoaded', function() {
         modalFormContainer.innerHTML = '';
     };
 
-    const handleFormSubmit = (event) => {
+    const handleFormSubmit = async (event) => {
         event.preventDefault();
-        closeModal();
-        successMessage.classList.remove('hidden');
-        clearTimeout(successTimeout);
-        successTimeout = setTimeout(() => {
-            successMessage.classList.add('hidden');
-        }, 5000);
+
+        const form = event.target;
+        const formData = new FormData(form);
+        const formType = form.id;
+
+        // Show loading state
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+
+        try {
+            // Prepare data for submission
+            const data = new FormData();
+
+            // Add form fields to FormData
+            for (let [key, value] of formData.entries()) {
+                // Normalize field names for Netlify form
+                if (formType === 'contact-form') {
+                    switch(key) {
+                        case 'contact-name':
+                            data.append('name', value);
+                            break;
+                        case 'contact-email':
+                            data.append('email', value);
+                            break;
+                        case 'contact-phone':
+                            data.append('phone', value);
+                            break;
+                        case 'contact-usecase':
+                            data.append('usecase', value);
+                            break;
+                        default:
+                            data.append(key, value);
+                    }
+                } else {
+                    data.append(key, value);
+                }
+            }
+
+            // Add form type and timestamp
+            data.append('formType', formType === 'demo-form' ? 'Demo Request' : 'Contact Form');
+            data.append('form-name', 'contact');
+
+            // Submit to Netlify form
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams(data).toString()
+            });
+
+            if (response.ok) {
+                closeModal();
+                successMessage.classList.remove('hidden');
+                clearTimeout(successTimeout);
+                successTimeout = setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                }, 5000);
+            } else {
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+
+            // Fallback: try to send via mailto as last resort
+            try {
+                const formDataObj = Object.fromEntries(formData);
+                const subject = encodeURIComponent(`New ${formType === 'demo-form' ? 'Demo Request' : 'Contact Form'} from Website`);
+                const body = encodeURIComponent(`
+New ${formType === 'demo-form' ? 'Demo Request' : 'Contact Form'} received:
+
+${formType === 'demo-form' ? `
+Name: ${formDataObj.name || 'N/A'}
+Company: ${formDataObj.company || 'N/A'}
+Email: ${formDataObj.email || 'N/A'}
+Phone: ${formDataObj.phone || 'N/A'}
+Use Case: ${formDataObj.usecase || 'N/A'}
+` : `
+Name: ${formDataObj['contact-name'] || 'N/A'}
+Email: ${formDataObj['contact-email'] || 'N/A'}
+Phone: ${formDataObj['contact-phone'] || 'N/A'}
+Interested Product: ${formDataObj['contact-usecase'] || 'N/A'}
+`}
+
+Timestamp: ${new Date().toISOString()}
+                `);
+
+                window.location.href = `mailto:contact@ivorytusk.co.in?subject=${subject}&body=${body}`;
+                closeModal();
+            } catch (mailtoError) {
+                alert('There was an error submitting your form. Please contact us directly at contact@ivorytusk.co.in');
+            }
+        } finally {
+            // Reset button state
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        }
     };
 
     // Dark mode functionality

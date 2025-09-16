@@ -36,6 +36,16 @@
     <!-- Main Container with subtle background gradient -->
     <div class="bg-gradient-to-br from-stone-50 via-orange-50 to-stone-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 min-h-screen">
 
+        <!-- Hidden Netlify Form for Contact Submissions -->
+        <form name="contact" netlify hidden>
+            <input type="text" name="name" />
+            <input type="email" name="email" />
+            <input type="tel" name="phone" />
+            <input type="text" name="usecase" />
+            <input type="text" name="company" />
+            <input type="text" name="formType" />
+        </form>
+
         <!-- Navigation Bar (Glassmorphism Effect) -->
         <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -150,97 +160,14 @@
             </div>
         </section>
 
-        <!-- Lead Bleeding Problem Section -->
-        <section class="py-24 relative">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-red-50/30 to-transparent dark:via-red-900/10"></div>
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                <div class="text-center mb-16">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100 dark:bg-red-900/30 rounded-full mb-6">
-                        <svg class="w-10 h-10 text-red-600 dark:text-red-400" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
-                    </div>
-                    
-                    <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
-                        <span class="text-red-600 dark:text-red-400">Is Your Business</span><br>
-                        <span class="bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">Bleeding Leads?</span>
-                    </h2>
-                    
-                    <p class="text-2xl md:text-3xl text-slate-700 dark:text-slate-200 font-semibold mb-4">
-                        Don't Let Opportunities Slip Away.
-                    </p>
-                    
-                    <p class="text-lg text-slate-600 dark:text-slate-300 max-w-3xl mx-auto mb-12">
-                        Businesses lose up to <strong class="text-red-600 dark:text-red-400">40% of their new leads</strong> due to unanswered calls and leads getting cold. Let's change that.
-                    </p>
-                    
-                    <!-- Automated Workflow Section -->
-                    <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
-                        <h3 class="text-3xl md:text-4xl font-bold text-orange-600 mb-8">
-                            Automated Workflow in Action
-                        </h3>
-                        
-                        <div class="grid md:grid-cols-3 gap-8 items-center">
-                            <!-- Step 1 -->
-                            <div class="text-center">
-                                <div class="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg class="w-10 h-10 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                                    </svg>
-                                </div>
-                                <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Proactive Call by AI Agent</h4>
-                                <p class="text-slate-600 dark:text-slate-300">Our AI reaches out to leads immediately</p>
-                            </div>
-                            
-                            <!-- Arrow 1 -->
-                            <div class="hidden md:flex justify-center">
-                                <svg class="w-8 h-8 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                                </svg>
-                            </div>
-                            
-                            <!-- Step 2 -->
-                            <div class="text-center">
-                                <div class="w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg class="w-10 h-10 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                    </svg>
-                                </div>
-                                <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">AI Agent Qualifies Lead</h4>
-                                <p class="text-slate-600 dark:text-slate-300">Smart qualification and interest assessment</p>
-                            </div>
-                            
-                            <!-- Arrow 2 -->
-                            <div class="hidden md:flex justify-center">
-                                <svg class="w-8 h-8 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                                </svg>
-                            </div>
-                            
-                            <!-- Step 3 -->
-                            <div class="text-center">
-                                <div class="w-20 h-20 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <svg class="w-10 h-10 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 3h-4v4h4V6z"/>
-                                    </svg>
-                                </div>
-                                <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Appointment Instantly Booked!</h4>
-                                <p class="text-slate-600 dark:text-slate-300">Seamless scheduling without human intervention</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Video Background Section -->
         <section class="relative h-screen w-full overflow-hidden group">
             <video id="product-video" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
-                <source src="https://assets.ivorytusk.co.in/video.mp4" type="video/mp4">
+                <source src="assets/video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             <div class="absolute inset-0 bg-black/30"></div>
-            
+
             <!-- Video Controls (Show on Hover) -->
             <div class="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <button id="video-mute-btn" class="bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-200">
@@ -252,11 +179,111 @@
                     </svg>
                 </button>
             </div>
-            
+
             <div class="relative z-10 flex items-center justify-center h-full">
                 <div class="text-center text-white px-4">
                     <h2 class="text-4xl md:text-6xl font-bold mb-4">See Our AI in Action</h2>
                     <p class="text-xl md:text-2xl opacity-90">Experience the future of customer service</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Problem & Solution Section -->
+        <section class="py-24 relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/20 to-transparent dark:via-orange-900/10"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="text-center mb-16">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full mb-6">
+                        <svg class="w-10 h-10 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zM15.5 11c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                        </svg>
+                    </div>
+
+                    <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">Stop Losing Leads</span><br>
+                        <span class="text-slate-700 dark:text-slate-200">Start Converting Them</span>
+                    </h2>
+
+                    <p class="text-xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto mb-12 leading-relaxed">
+                        Studies show businesses lose up to <strong class="text-orange-600">40% of potential customers</strong> due to missed calls, delayed responses, and poor follow-up. Our AI agents ensure every lead gets immediate, professional attention.
+                    </p>
+
+                    <!-- How It Works Section -->
+                    <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
+                        <h3 class="text-3xl md:text-4xl font-bold text-orange-600 mb-12">
+                            How Our AI Agents Work
+                        </h3>
+
+                        <div class="grid md:grid-cols-3 gap-8 items-start">
+                            <!-- Step 1 -->
+                            <div class="text-center group">
+                                <div class="relative mb-6">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 bg-orange-600 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">1</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">Instant Response</h4>
+                                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">AI agent answers calls within seconds, ensuring no lead goes unanswered regardless of time or day</p>
+                            </div>
+
+                            <!-- Arrow 1 -->
+                            <div class="hidden md:flex justify-center items-center">
+                                <svg class="w-8 h-8 text-orange-500 opacity-60" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="text-center group">
+                                <div class="relative mb-6">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 bg-blue-600 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">2</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">Smart Qualification</h4>
+                                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Intelligently assesses lead quality, gathers essential information, and determines next best action</p>
+                            </div>
+
+                            <!-- Arrow 2 -->
+                            <div class="hidden md:flex justify-center items-center">
+                                <svg class="w-8 h-8 text-orange-500 opacity-60" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                                </svg>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="text-center group">
+                                <div class="relative mb-6">
+                                    <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 3h-4v4h4V6z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute -top-2 -right-2 bg-green-600 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">3</div>
+                                </div>
+                                <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">Seamless Booking</h4>
+                                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Automatically schedules appointments, sends confirmations, and integrates with your existing calendar system</p>
+                            </div>
+                        </div>
+
+                        <!-- Results Bar -->
+                        <div class="mt-12 pt-8 border-t border-orange-200/50 dark:border-orange-800/30">
+                            <div class="text-center">
+                                <p class="text-lg font-semibold text-slate-700 dark:text-slate-200 mb-4">
+                                    Result: <span class="text-orange-600">Zero Missed Opportunities</span>
+                                </p>
+                                <p class="text-slate-600 dark:text-slate-300">
+                                    Every lead is captured, qualified, and converted into a scheduled meeting - automatically.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -489,101 +516,6 @@
             </div>
         </section>
 
-        <!-- Product Suite Section -->
-        <section class="py-24 relative">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/30 to-transparent dark:via-slate-800/20"></div>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-                <div class="text-center mb-16">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-slate-100 dark:bg-slate-800/50 rounded-full mb-6">
-                        <svg class="w-10 h-10 text-slate-600 dark:text-slate-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                        </svg>
-                    </div>
-                    
-                    <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
-                        One more thing, <br>
-                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">more than one</span>
-                    </h2>
-                    
-                    <p class="text-2xl md:text-3xl text-slate-700 dark:text-slate-200 font-semibold mb-12">
-                        We've Got More in Store.
-                    </p>
-                    
-                    <!-- Product Grid -->
-                    <div class="grid md:grid-cols-3 gap-8 mb-12">
-                        <!-- Row 1 -->
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-                            <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">ExpenseIQ</h3>
-                            <p class="text-slate-600 dark:text-slate-300 text-sm">AI for Expense Management.</p>
-                        </div>
-                        
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-                            <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">OrraHome</h3>
-                            <p class="text-slate-600 dark:text-slate-300 text-sm">AI for Home Automation</p>
-                        </div>
-                        
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-                            <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Memora</h3>
-                            <p class="text-slate-600 dark:text-slate-300 text-sm">AI for Smart Data Recall</p>
-                        </div>
-                        
-                        <!-- Row 2 -->
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-                            <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 3h-4v4h4V6z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">ConciergeIQ</h3>
-                            <p class="text-slate-600 dark:text-slate-300 text-sm">AI for Planning and Booking</p>
-                        </div>
-                        
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-                            <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2.5-9H19V1h-2v1H7V1H5v1H4.5C3.11 2 2 3.11 2 4.5v15C2 20.89 3.11 22 4.5 22h15c1.39 0 2.5-1.11 2.5-2.5v-15C22 3.11 20.89 2 19.5 2z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Procumatic</h3>
-                            <p class="text-slate-600 dark:text-slate-300 text-sm">AI for Procurement and Supply Chain</p>
-                        </div>
-                        
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300">
-                            <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-2">Custom</h3>
-                            <p class="text-slate-600 dark:text-slate-300 text-sm">You say it, We build it !</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Description -->
-                    <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
-                        <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                            We offer customized AI Solutions too help you save time and boost productivity in your business. 
-                            <strong>You say it, we build it !</strong>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- CTA Section (Glassmorphism) -->
         <section class="py-24 relative">
