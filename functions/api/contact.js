@@ -61,138 +61,64 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
     debugInfo.push(`Gmail user: ${env.GMAIL_USER ? 'SET' : 'NOT SET'}`);
     debugInfo.push(`Gmail pass: ${env.GMAIL_PASS ? 'SET' : 'NOT SET'}`);
     
-    // Direct Gmail SMTP using EmailJS (free service that supports Gmail)
-    if (env.GMAIL_USER && env.GMAIL_PASS) {
+    // n8n Webhook Solution - Clean and Reliable
+    if (env.CONTACT_FORM_WEBHOOK) {
       try {
-        // Method 1: EmailJS with Gmail SMTP (free and supports Gmail)
-        const emailResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        // Prepare comprehensive form data for n8n
+        const webhookPayload = {
+          // Contact Information
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          company: formData.company || null,
+          usecase: formData.usecase || formData['use-case'] || null,
+          message: formData.message || null,
+          formType: formData.formType || 'Contact Form',
+          
+          // Metadata
+          timestamp: new Date().toISOString(),
+          clientIP: clientIP,
+          userAgent: request.headers.get('User-Agent') || 'Unknown',
+          referer: request.headers.get('Referer') || 'Direct',
+          
+          // Email Configuration (for n8n to use)
+          emailConfig: {
+            to: 'contact@ivorytusk.co.in',
+            subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+            replyTo: formData.email
+          }
+        };
+
+        debugInfo.push(`Webhook URL configured: ${env.CONTACT_FORM_WEBHOOK ? 'YES' : 'NO'}`);
+        
+        // Send to n8n webhook
+        const webhookResponse = await fetch(env.CONTACT_FORM_WEBHOOK, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'User-Agent': 'IvoryTusk-Website-Contact-Form/1.0'
           },
-          body: JSON.stringify({
-            service_id: 'gmail',
-            template_id: 'template_contact',
-            user_id: 'public_key_placeholder',
-            template_params: {
-              to_email: 'contact@ivorytusk.co.in',
-              from_name: formData.name,
-              from_email: formData.email,
-              subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-              message: `
-                Name: ${formData.name}
-                Email: ${formData.email}
-                Phone: ${formData.phone || 'Not provided'}
-                Company: ${formData.company || 'Not provided'}
-                Use Case: ${formData.usecase || formData['use-case'] || 'Not provided'}
-                Form Type: ${formData.formType || 'Contact Form'}
-                
-                Message:
-                ${formData.message || 'No additional message'}
-                
-                ---
-                Submitted at: ${new Date().toISOString()}
-                IP Address: ${clientIP}
-              `
-            },
-            smtp: {
-              host: 'smtp.gmail.com',
-              port: 587,
-              secure: false,
-              auth: {
-                user: env.GMAIL_USER,
-                pass: env.GMAIL_PASS
-              }
-            }
-          }),
+          body: JSON.stringify(webhookPayload)
         });
 
-        if (emailResponse.ok) {
-          console.log('Email sent successfully via EmailJS with Gmail SMTP');
-          debugInfo.push('✅ EmailJS Gmail SMTP: SUCCESS');
+        if (webhookResponse.ok) {
+          const responseData = await webhookResponse.text();
+          console.log('Form submitted successfully to n8n webhook');
+          debugInfo.push('✅ n8n Webhook: SUCCESS');
+          debugInfo.push(`Webhook Response: ${responseData.substring(0, 100)}`);
           emailSent = true;
         } else {
-          const errorText = await emailResponse.text();
-          debugInfo.push(`❌ EmailJS: Failed with status ${emailResponse.status} - ${errorText.substring(0, 100)}`);
+          const errorText = await webhookResponse.text();
+          debugInfo.push(`❌ n8n Webhook: Failed with status ${webhookResponse.status}`);
+          debugInfo.push(`Webhook Error: ${errorText.substring(0, 200)}`);
         }
+
       } catch (error) {
-        console.error('EmailJS failed:', error);
-        debugInfo.push(`❌ EmailJS: Error - ${error.message}`);
-      }
-
-      // Method 2: FormSubmit.co with custom sender (free, no signup needed)
-      if (!emailSent) {
-        try {
-          const formData_encoded = new URLSearchParams({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone || 'Not provided',
-            company: formData.company || 'Not provided',
-            usecase: formData.usecase || formData['use-case'] || 'Not provided',
-            message: formData.message || 'No additional message',
-            _subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-            _next: 'https://ivorytusk.co.in/thank-you',
-            _captcha: 'false',
-            _template: 'table'
-          });
-
-          const emailResponse = await fetch('https://formsubmit.co/contact@ivorytusk.co.in', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: formData_encoded,
-          });
-
-          if (emailResponse.ok) {
-            console.log('Email sent successfully via FormSubmit');
-            debugInfo.push('✅ FormSubmit: SUCCESS');
-            emailSent = true;
-          } else {
-            debugInfo.push(`❌ FormSubmit: Failed with status ${emailResponse.status}`);
-          }
-        } catch (error) {
-          console.error('FormSubmit failed:', error);
-          debugInfo.push(`❌ FormSubmit: Error - ${error.message}`);
-        }
-      }
-
-      // Method 3: Netlify Forms compatible endpoint (works with static hosting)
-      if (!emailSent) {
-        try {
-          const netlifyResponse = await fetch('https://submit-form.com/your-form-id', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              name: formData.name,
-              email: formData.email,
-              phone: formData.phone || 'Not provided',
-              company: formData.company || 'Not provided',
-              usecase: formData.usecase || formData['use-case'] || 'Not provided',
-              message: formData.message || 'No additional message',
-              _subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-              _to: 'contact@ivorytusk.co.in',
-              _from: env.GMAIL_USER,
-              _replyto: formData.email
-            }),
-          });
-
-          if (netlifyResponse.ok) {
-            console.log('Email sent successfully via Submit-Form');
-            debugInfo.push('✅ Submit-Form: SUCCESS');
-            emailSent = true;
-          } else {
-            debugInfo.push(`❌ Submit-Form: Failed with status ${netlifyResponse.status}`);
-          }
-        } catch (error) {
-          console.error('Submit-Form failed:', error);
-          debugInfo.push(`❌ Submit-Form: Error - ${error.message}`);
-        }
+        console.error('n8n webhook failed:', error);
+        debugInfo.push(`❌ n8n Webhook: Error - ${error.message}`);
       }
     } else {
-      debugInfo.push('❌ No Gmail credentials provided');
+      debugInfo.push('❌ No webhook URL configured (CONTACT_FORM_WEBHOOK missing)');
     }
 
     // If Gmail methods fail, return error instead of fallback
