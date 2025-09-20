@@ -332,11 +332,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         <select id="usecase" name="usecase" required
                             class="w-full p-3 rounded-lg bg-white/50 dark:bg-slate-700/50 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
                             <option value="" disabled selected>Select an option</option>
-                            <option value="Home Builders">Home Builders</option>
-                            <option value="Furniture">Furniture</option>
-                            <option value="Architects">Architects</option>
-                            <option value="Home Automation">Home Automation</option>
-                            <option value="Other">Other</option>
+                            <option value="AI Voice Agents">AI Voice Agents</option>
+                            <option value="AI WhatsApp Agents">AI WhatsApp Agents</option>
+                            <option value="Workflow Automation">Workflow Automation</option>
+                            <option value="Custom Solution">Custom Solution</option>
                         </select>
                     </div>
                     <button type="submit" class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-3 rounded-full mt-4
@@ -369,11 +368,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         <select id="contact-usecase" name="contact-usecase" required
                             class="w-full p-3 rounded-lg bg-white/50 dark:bg-slate-700/50 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
                             <option value="" disabled selected>Select an option</option>
-                            <option value="Home Builders">Home Builders</option>
-                            <option value="Furniture">Furniture</option>
-                            <option value="Architects">Architects</option>
-                            <option value="Home Automation">Home Automation</option>
-                            <option value="Other">Other</option>
+                            <option value="AI Voice Agents">AI Voice Agents</option>
+                            <option value="AI WhatsApp Agents">AI WhatsApp Agents</option>
+                            <option value="Workflow Automation">Workflow Automation</option>
+                            <option value="Custom Solution">Custom Solution</option>
                         </select>
                     </div>
                     <div>
