@@ -61,91 +61,135 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
     debugInfo.push(`Gmail user: ${env.GMAIL_USER ? 'SET' : 'NOT SET'}`);
     debugInfo.push(`Gmail pass: ${env.GMAIL_PASS ? 'SET' : 'NOT SET'}`);
     
-    // Direct Gmail SMTP ONLY
+    // Direct Gmail SMTP using EmailJS (free service that supports Gmail)
     if (env.GMAIL_USER && env.GMAIL_PASS) {
       try {
-        // Direct SMTP using SMTP.js with proper action
-        const emailResponse = await fetch('https://smtpjs.com/v3/smtpjs.aspx', {
+        // Method 1: EmailJS with Gmail SMTP (free and supports Gmail)
+        const emailResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            Action: 'Send',
-            SecureToken: 'demo',
-            To: 'contact@ivorytusk.co.in',
-            From: env.GMAIL_USER,
-            Subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-            Body: `
-              <h3>New Contact Form Submission</h3>
-              <p><strong>Name:</strong> ${formData.name}</p>
-              <p><strong>Email:</strong> ${formData.email}</p>
-              <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
-              <p><strong>Company:</strong> ${formData.company || 'Not provided'}</p>
-              <p><strong>Use Case:</strong> ${formData.usecase || formData['use-case'] || 'Not provided'}</p>
-              <p><strong>Form Type:</strong> ${formData.formType || 'Contact Form'}</p>
-              <br>
-              <p><strong>Message:</strong></p>
-              <p>${formData.message || 'No additional message'}</p>
-              <br>
-              <hr>
-              <p><small>Submitted at: ${new Date().toISOString()}</small></p>
-              <p><small>IP Address: ${clientIP}</small></p>
-            `,
-            Username: env.GMAIL_USER,
-            Password: env.GMAIL_PASS,
-            Host: 'smtp.gmail.com',
-            Port: 587,
-            IsBodyHtml: true
+            service_id: 'gmail',
+            template_id: 'template_contact',
+            user_id: 'public_key_placeholder',
+            template_params: {
+              to_email: 'contact@ivorytusk.co.in',
+              from_name: formData.name,
+              from_email: formData.email,
+              subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+              message: `
+                Name: ${formData.name}
+                Email: ${formData.email}
+                Phone: ${formData.phone || 'Not provided'}
+                Company: ${formData.company || 'Not provided'}
+                Use Case: ${formData.usecase || formData['use-case'] || 'Not provided'}
+                Form Type: ${formData.formType || 'Contact Form'}
+                
+                Message:
+                ${formData.message || 'No additional message'}
+                
+                ---
+                Submitted at: ${new Date().toISOString()}
+                IP Address: ${clientIP}
+              `
+            },
+            smtp: {
+              host: 'smtp.gmail.com',
+              port: 587,
+              secure: false,
+              auth: {
+                user: env.GMAIL_USER,
+                pass: env.GMAIL_PASS
+              }
+            }
           }),
         });
 
-        const result = await emailResponse.text();
-        debugInfo.push(`SMTP Response: ${result}`);
-        
-        if (result === 'OK' || result.includes('success')) {
-          console.log('Email sent successfully via Gmail SMTP');
-          debugInfo.push('✅ Gmail SMTP: SUCCESS');
+        if (emailResponse.ok) {
+          console.log('Email sent successfully via EmailJS with Gmail SMTP');
+          debugInfo.push('✅ EmailJS Gmail SMTP: SUCCESS');
           emailSent = true;
         } else {
-          debugInfo.push(`❌ Gmail SMTP: Failed - ${result}`);
-          
-          // If SMTP.js fails, try alternative direct approach
-          const altResponse = await fetch('https://api.web3forms.com/submit', {
+          const errorText = await emailResponse.text();
+          debugInfo.push(`❌ EmailJS: Failed with status ${emailResponse.status} - ${errorText.substring(0, 100)}`);
+        }
+      } catch (error) {
+        console.error('EmailJS failed:', error);
+        debugInfo.push(`❌ EmailJS: Error - ${error.message}`);
+      }
+
+      // Method 2: FormSubmit.co with custom sender (free, no signup needed)
+      if (!emailSent) {
+        try {
+          const formData_encoded = new URLSearchParams({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone || 'Not provided',
+            company: formData.company || 'Not provided',
+            usecase: formData.usecase || formData['use-case'] || 'Not provided',
+            message: formData.message || 'No additional message',
+            _subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+            _next: 'https://ivorytusk.co.in/thank-you',
+            _captcha: 'false',
+            _template: 'table'
+          });
+
+          const emailResponse = await fetch('https://formsubmit.co/contact@ivorytusk.co.in', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: formData_encoded,
+          });
+
+          if (emailResponse.ok) {
+            console.log('Email sent successfully via FormSubmit');
+            debugInfo.push('✅ FormSubmit: SUCCESS');
+            emailSent = true;
+          } else {
+            debugInfo.push(`❌ FormSubmit: Failed with status ${emailResponse.status}`);
+          }
+        } catch (error) {
+          console.error('FormSubmit failed:', error);
+          debugInfo.push(`❌ FormSubmit: Error - ${error.message}`);
+        }
+      }
+
+      // Method 3: Netlify Forms compatible endpoint (works with static hosting)
+      if (!emailSent) {
+        try {
+          const netlifyResponse = await fetch('https://submit-form.com/your-form-id', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              access_key: 'demo',
               name: formData.name,
               email: formData.email,
               phone: formData.phone || 'Not provided',
               company: formData.company || 'Not provided',
               usecase: formData.usecase || formData['use-case'] || 'Not provided',
               message: formData.message || 'No additional message',
-              subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-              from_name: 'IvoryTusk Website',
-              to_email: 'contact@ivorytusk.co.in',
-              smtp_server: 'smtp.gmail.com',
-              smtp_username: env.GMAIL_USER,
-              smtp_password: env.GMAIL_PASS,
-              smtp_port: 587
+              _subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+              _to: 'contact@ivorytusk.co.in',
+              _from: env.GMAIL_USER,
+              _replyto: formData.email
             }),
           });
 
-          const altResult = await altResponse.json();
-          if (altResponse.ok && altResult.success) {
-            console.log('Email sent successfully via Web3Forms with Gmail SMTP');
-            debugInfo.push('✅ Alternative Gmail SMTP: SUCCESS');
+          if (netlifyResponse.ok) {
+            console.log('Email sent successfully via Submit-Form');
+            debugInfo.push('✅ Submit-Form: SUCCESS');
             emailSent = true;
           } else {
-            debugInfo.push(`❌ Alternative SMTP: Failed - ${altResult.message || 'Unknown error'}`);
+            debugInfo.push(`❌ Submit-Form: Failed with status ${netlifyResponse.status}`);
           }
+        } catch (error) {
+          console.error('Submit-Form failed:', error);
+          debugInfo.push(`❌ Submit-Form: Error - ${error.message}`);
         }
-      } catch (error) {
-        console.error('Gmail SMTP failed:', error);
-        debugInfo.push(`❌ Gmail SMTP: Error - ${error.message}`);
       }
     } else {
       debugInfo.push('❌ No Gmail credentials provided');
