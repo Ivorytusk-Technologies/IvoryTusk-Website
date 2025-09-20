@@ -54,6 +54,12 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
 
     // Send email using Gmail SMTP via EmailJS service
     let emailSent = false;
+    let debugInfo = [];
+    
+    // Debug: Check if credentials are available
+    debugInfo.push(`Gmail credentials available: ${!!(env.GMAIL_USER && env.GMAIL_PASS)}`);
+    debugInfo.push(`Gmail user: ${env.GMAIL_USER ? 'SET' : 'NOT SET'}`);
+    debugInfo.push(`Gmail pass: ${env.GMAIL_PASS ? 'SET' : 'NOT SET'}`);
     
     // Method 1: Try EmailJS with Gmail SMTP (if credentials are available)
     if (env.GMAIL_USER && env.GMAIL_PASS) {
@@ -92,11 +98,17 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
 
         if (emailResponse.ok) {
           console.log('Email sent successfully from Gmail account');
+          debugInfo.push('✅ Gmail SMTP: SUCCESS');
           emailSent = true;
+        } else {
+          debugInfo.push(`❌ Gmail SMTP: Failed with status ${emailResponse.status}`);
         }
       } catch (error) {
         console.error('Gmail SMTP failed:', error);
+        debugInfo.push(`❌ Gmail SMTP: Error - ${error.message}`);
       }
+    } else {
+      debugInfo.push('⚠️ Gmail SMTP: Skipped (no credentials)');
     }
 
     // Method 2: Fallback to SMTP2GO with Gmail credentials
@@ -125,11 +137,17 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
 
         if (emailResponse.ok) {
           console.log('Email sent successfully via SMTP2GO with Gmail');
+          debugInfo.push('✅ SMTP2GO: SUCCESS');
           emailSent = true;
+        } else {
+          debugInfo.push(`❌ SMTP2GO: Failed with status ${emailResponse.status}`);
         }
       } catch (error) {
         console.error('SMTP2GO failed:', error);
+        debugInfo.push(`❌ SMTP2GO: Error - ${error.message}`);
       }
+    } else {
+      debugInfo.push('⚠️ SMTP2GO: Skipped (no Gmail credentials or already sent)');
     }
 
     // Method 3: Ultimate fallback - FormSubmit (but clearly labeled)
@@ -157,15 +175,24 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
 
         if (emailResponse.ok) {
           console.log('Email sent via FormSubmit fallback');
+          debugInfo.push('✅ FormSubmit: SUCCESS (fallback)');
+          emailSent = true;
+        } else {
+          debugInfo.push(`❌ FormSubmit: Failed with status ${emailResponse.status}`);
         }
       } catch (emailError) {
         console.error('All email methods failed:', emailError);
+        debugInfo.push(`❌ FormSubmit: Error - ${emailError.message}`);
       }
+    } else {
+      debugInfo.push('⚠️ FormSubmit: Skipped (email already sent)');
     }
 
     return new Response(JSON.stringify({ 
       success: true, 
-      message: 'Thank you for your message! Our team will contact you within 24 hours.' 
+      message: 'Thank you for your message! Our team will contact you within 24 hours.',
+      debug: debugInfo, // Remove this in production
+      emailSent: emailSent
     }), {
       headers: corsHeaders
     });
