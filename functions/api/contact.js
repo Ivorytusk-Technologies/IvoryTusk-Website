@@ -15,7 +15,9 @@ export async function onRequestPost(context) {
   };
 
   try {
+    console.log('Contact form request received');
     const formData = await request.json();
+    console.log('Form data parsed:', JSON.stringify(formData, null, 2));
     const clientIP = request.headers.get('CF-Connecting-IP') || 'unknown';
     
     // Validate required fields
@@ -90,6 +92,8 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
         };
 
         debugInfo.push(`Webhook URL configured: ${env.CONTACT_FORM_WEBHOOK ? 'YES' : 'NO'}`);
+        console.log('Sending to webhook:', env.CONTACT_FORM_WEBHOOK);
+        console.log('Webhook payload:', JSON.stringify(webhookPayload, null, 2));
         
         // Send to n8n webhook
         const webhookResponse = await fetch(env.CONTACT_FORM_WEBHOOK, {
@@ -146,7 +150,8 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
   } catch (error) {
     console.error('Contact form error:', error);
     return new Response(JSON.stringify({ 
-      error: 'Sorry, there was an error sending your message. Please try again or contact us directly at contact@ivorytusk.co.in' 
+      error: 'Sorry, there was an error sending your message. Please try again or contact us directly at contact@ivorytusk.co.in',
+      debug: [`General Error: ${error.message}`, `Stack: ${error.stack?.substring(0, 200) || 'No stack trace'}`]
     }), {
       status: 500,
       headers: corsHeaders
