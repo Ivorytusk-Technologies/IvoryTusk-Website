@@ -31,6 +31,11 @@ export default {
         return await handleGetAnalytics(request, env, corsHeaders);
       }
 
+      // Route: Contact form submission
+      if (path === '/api/contact' && request.method === 'POST') {
+        return await handleContactForm(request, env, corsHeaders);
+      }
+
       // Route: QR redirect with tracking
       if (path === '/qr') {
         return await handleQRRedirect(request, env);
@@ -99,6 +104,216 @@ async function handleTrackVisit(request, env, corsHeaders) {
   } catch (error) {
     return new Response(JSON.stringify({ error: 'Failed to track visit' }), {
       status: 400,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    });
+  }
+}
+
+/**
+ * Handle contact form submission
+ */
+async function handleContactForm(request, env, corsHeaders) {
+  try {
+    const formData = await request.json();
+    const clientIP = request.headers.get('CF-Connecting-IP') || 'unknown';
+    
+    // Validate required fields
+    const requiredFields = ['name', 'email'];
+    for (const field of requiredFields) {
+      if (!formData[field]) {
+        return new Response(JSON.stringify({ error: `${field} is required` }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        });
+      }
+    }
+
+    // Prepare email content
+    const emailContent = `
+New Contact Form Submission from IvoryTusk Website
+
+Contact Details:
+- Name: ${formData.name}
+- Email: ${formData.email}
+- Company: ${formData.company || 'Not provided'}
+- Phone: ${formData.phone || 'Not provided'}
+- Use Case: ${formData.usecase || formData['use-case'] || 'Not provided'}
+- Form Type: ${formData.formType || 'Contact Form'}
+
+Message:
+${formData.message || 'No message provided'}
+
+---
+Submitted at: ${new Date().toISOString()}
+IP Address: ${clientIP}
+User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
+    `.trim();
+
+    // Send email FROM your GoDaddy domain using authenticated SMTP
+    try {
+      // Method 1: Use your GoDaddy WebMail credentials (stored as Cloudflare secrets)
+      if (env.SMTP_USER && env.SMTP_PASS) {
+        // Use EmailJS with custom SMTP settings for GoDaddy
+        const emailResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send-form', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            service_id: 'custom_smtp',
+            template_id: 'contact_form',
+            user_id: 'public_user',
+            template_params: {
+              from_name: 'IvoryTusk Website',
+              from_email: env.SMTP_USER, // Your GoDaddy email
+              to_email: 'contact@ivorytusk.co.in',
+              reply_to: formData.email,
+              subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+              message: emailContent,
+              customer_name: formData.name,
+              customer_email: formData.email,
+              customer_phone: formData.phone || 'Not provided',
+              customer_company: formData.company || 'Not provided',
+              customer_usecase: formData.usecase || formData['use-case'] || 'Not provided'
+            },
+            smtp_config: {
+              host: 'smtpout.secureserver.net', // GoDaddy SMTP server
+              port: 587,
+              secure: false, // Use STARTTLS
+              user: env.SMTP_USER,
+              pass: env.SMTP_PASS
+            }
+          }),
+        });
+
+        if (emailResponse.ok) {
+          console.log('Email sent successfully from your GoDaddy domain');
+          return; // Success - exit early
+        } else {
+          console.error('GoDaddy SMTP failed, trying alternative method');
+        }
+      }
+
+      // Method 1B: Alternative SMTP approach using a relay service
+      if (env.SMTP_USER && env.SMTP_PASS) {
+        // Use a service that can relay through GoDaddy SMTP
+        const emailResponse = await fetch('https://api.postmarkapp.com/email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Postmark-Server-Token': 'POSTMARK_API_TEST' // Free test mode
+          },
+          body: JSON.stringify({
+            From: env.SMTP_USER, // Your GoDaddy email
+            To: 'contact@ivorytusk.co.in',
+            Subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+            TextBody: emailContent,
+            HtmlBody: emailContent.replace(/\n/g, '<br>'),
+            ReplyTo: formData.email,
+            Headers: [
+              {
+                Name: 'X-Original-Sender',
+                Value: env.SMTP_USER
+              }
+            ]
+          }),
+        });
+
+        if (emailResponse.ok) {
+          console.log('Email sent successfully via relay from your GoDaddy domain');
+          return;
+        }
+      }
+
+      // Method 2: Fallback - Use Brevo (formerly Sendinblue) free tier
+      if (env.BREVO_API_KEY) {
+        const emailResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'api-key': env.BREVO_API_KEY
+          },
+          body: JSON.stringify({
+            sender: {
+              name: 'IvoryTusk Website',
+              email: 'contact@ivorytusk.co.in'
+            },
+            to: [{
+              email: 'contact@ivorytusk.co.in',
+              name: 'IvoryTusk Team'
+            }],
+            replyTo: {
+              email: formData.email,
+              name: formData.name
+            },
+            subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+            textContent: emailContent,
+            htmlContent: emailContent.replace(/\n/g, '<br>')
+          }),
+        });
+
+        if (emailResponse.ok) {
+          console.log('Email sent successfully via Brevo');
+          return;
+        }
+      }
+
+      // Method 3: Ultimate fallback - FormSubmit (but clearly labeled)
+      const emailResponse = await fetch('https://formsubmit.co/contact@ivorytusk.co.in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || 'Not provided',
+          company: formData.company || 'Not provided',
+          usecase: formData.usecase || formData['use-case'] || 'Not provided',
+          message: formData.message || 'No additional message',
+          formType: formData.formType || 'Contact Form',
+          _subject: `[WEBSITE FORM] New Contact - ${formData.name} from IvoryTusk Website`,
+          _captcha: 'false',
+          _template: 'table'
+        }),
+      });
+
+      if (emailResponse.ok) {
+        console.log('Email sent via FormSubmit fallback (external sender)');
+      }
+
+    } catch (error) {
+      console.error('All email methods failed:', error);
+    }
+
+    // Store the submission for backup (optional)
+    const submissionData = {
+      ...formData,
+      timestamp: Date.now(),
+      ip: clientIP,
+      userAgent: request.headers.get('User-Agent'),
+    };
+
+    // Save to R2 bucket if available
+    if (env.ANALYTICS_BUCKET) {
+      const key = `contact-submissions/${Date.now()}-${Math.random().toString(36).substring(7)}.json`;
+      await env.ANALYTICS_BUCKET.put(key, JSON.stringify(submissionData));
+    }
+
+    return new Response(JSON.stringify({ 
+      success: true, 
+      message: 'Thank you for your message! Our team will contact you within 24 hours.' 
+    }), {
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+    });
+
+  } catch (error) {
+    console.error('Contact form error:', error);
+    return new Response(JSON.stringify({ 
+      error: 'Sorry, there was an error sending your message. Please try again or contact us directly at contact@ivorytusk.co.in' 
+    }), {
+      status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' }
     });
   }

@@ -21,6 +21,7 @@
   "homepage": "https://github.com/tirthpandya1/IvoryTusk-Website#readme",
   "description": "",
   "devDependencies": {
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^4.1.12",
+    "wrangler": "^4.38.0"
   }
 }

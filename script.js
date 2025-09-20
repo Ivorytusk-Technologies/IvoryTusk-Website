@@ -445,16 +445,19 @@ document.addEventListener('DOMContentLoaded', function() {
             data.append('formType', formType === 'demo-form' ? 'Demo Request' : 'Contact Form');
             data.append('form-name', 'contact');
 
-            // Submit to Netlify form
-            const response = await fetch('/', {
+            // Submit to Cloudflare Pages Function
+            const apiUrl = '/api/contact'; // Pages Functions are available at /api/* paths
+            
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 },
-                body: new URLSearchParams(data).toString()
+                body: JSON.stringify(Object.fromEntries(data))
             });
 
             if (response.ok) {
+                const result = await response.json();
                 closeModal();
                 successMessage.classList.remove('hidden');
                 clearTimeout(successTimeout);
@@ -462,39 +465,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     successMessage.classList.add('hidden');
                 }, 5000);
             } else {
-                throw new Error('Form submission failed');
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Form submission failed');
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-
-            // Fallback: try to send via mailto as last resort
-            try {
-                const formDataObj = Object.fromEntries(formData);
-                const subject = encodeURIComponent(`New ${formType === 'demo-form' ? 'Demo Request' : 'Contact Form'} from Website`);
-                const body = encodeURIComponent(`
-New ${formType === 'demo-form' ? 'Demo Request' : 'Contact Form'} received:
-
-${formType === 'demo-form' ? `
-Name: ${formDataObj.name || 'N/A'}
-Company: ${formDataObj.company || 'N/A'}
-Email: ${formDataObj.email || 'N/A'}
-Phone: ${formDataObj.phone || 'N/A'}
-Use Case: ${formDataObj.usecase || 'N/A'}
-` : `
-Name: ${formDataObj['contact-name'] || 'N/A'}
-Email: ${formDataObj['contact-email'] || 'N/A'}
-Phone: ${formDataObj['contact-phone'] || 'N/A'}
-Interested Product: ${formDataObj['contact-usecase'] || 'N/A'}
-`}
-
-Timestamp: ${new Date().toISOString()}
-                `);
-
-                window.location.href = `mailto:contact@ivorytusk.co.in?subject=${subject}&body=${body}`;
-                closeModal();
-            } catch (mailtoError) {
-                alert('There was an error submitting your form. Please contact us directly at contact@ivorytusk.co.in');
-            }
+            
+            // Show user-friendly error message
+            alert('There was an error submitting your form. Please try again or contact us directly at contact@ivorytusk.co.in or +91 9909507799');
+            closeModal();
         } finally {
             // Reset button state
             submitButton.textContent = originalText;
