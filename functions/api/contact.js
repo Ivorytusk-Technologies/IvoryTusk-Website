@@ -61,54 +61,45 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
     debugInfo.push(`Gmail user: ${env.GMAIL_USER ? 'SET' : 'NOT SET'}`);
     debugInfo.push(`Gmail pass: ${env.GMAIL_PASS ? 'SET' : 'NOT SET'}`);
     
-    // Method 1: Try EmailJS with Gmail SMTP (if credentials are available)
+    // Method 1: Try direct Gmail API approach using EmailJS properly
     if (env.GMAIL_USER && env.GMAIL_PASS) {
       try {
-        const emailResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        // Use a working Gmail SMTP relay service
+        const emailResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send-form', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            service_id: 'gmail',
-            template_id: 'contact_form',
-            user_id: 'public',
+            service_id: 'service_gmail',
+            template_id: 'template_contact',
+            user_id: 'public_user',
             template_params: {
-              from_name: 'IvoryTusk Website',
-              from_email: env.GMAIL_USER, // contact.ivorytusktechnologies@gmail.com
+              to_name: 'IvoryTusk Team',
+              from_name: formData.name,
+              from_email: formData.email,
               to_email: 'contact@ivorytusk.co.in',
-              reply_to: formData.email,
-              subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
               message: emailContent,
-              customer_name: formData.name,
-              customer_email: formData.email,
-              customer_phone: formData.phone || 'Not provided',
-              customer_company: formData.company || 'Not provided',
-              customer_usecase: formData.usecase || formData['use-case'] || 'Not provided'
+              subject: `New Contact Form - ${formData.name} from IvoryTusk Website`
             },
-            smtp_config: {
-              host: 'smtp.gmail.com',
-              port: 587,
-              secure: false, // Use STARTTLS
-              user: env.GMAIL_USER,
-              pass: env.GMAIL_PASS
-            }
+            accessToken: 'public'
           }),
         });
 
         if (emailResponse.ok) {
-          console.log('Email sent successfully from Gmail account');
-          debugInfo.push('✅ Gmail SMTP: SUCCESS');
+          console.log('Email sent successfully via EmailJS');
+          debugInfo.push('✅ EmailJS Gmail: SUCCESS');
           emailSent = true;
         } else {
-          debugInfo.push(`❌ Gmail SMTP: Failed with status ${emailResponse.status}`);
+          const errorText = await emailResponse.text();
+          debugInfo.push(`❌ EmailJS: Failed with status ${emailResponse.status} - ${errorText}`);
         }
       } catch (error) {
-        console.error('Gmail SMTP failed:', error);
-        debugInfo.push(`❌ Gmail SMTP: Error - ${error.message}`);
+        console.error('EmailJS failed:', error);
+        debugInfo.push(`❌ EmailJS: Error - ${error.message}`);
       }
     } else {
-      debugInfo.push('⚠️ Gmail SMTP: Skipped (no credentials)');
+      debugInfo.push('⚠️ EmailJS: Skipped (no credentials)');
     }
 
     // Method 2: Fallback to SMTP2GO with Gmail credentials
@@ -150,7 +141,7 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
       debugInfo.push('⚠️ SMTP2GO: Skipped (no Gmail credentials or already sent)');
     }
 
-    // Method 3: Ultimate fallback - FormSubmit (but clearly labeled)
+    // Method 3: Enhanced FormSubmit with better formatting
     if (!emailSent) {
       try {
         const emailResponse = await fetch('https://formsubmit.co/contact@ivorytusk.co.in', {
@@ -167,9 +158,11 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
             usecase: formData.usecase || formData['use-case'] || 'Not provided',
             message: formData.message || 'No additional message',
             formType: formData.formType || 'Contact Form',
-            _subject: `[WEBSITE FALLBACK] New Contact - ${formData.name} from IvoryTusk Website`,
+            _subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
             _captcha: 'false',
-            _template: 'table'
+            _template: 'table',
+            _replyto: formData.email, // This makes replies go to the customer
+            _cc: env.GMAIL_USER || 'contact.ivorytusktechnologies@gmail.com' // CC to your Gmail
           }),
         });
 
