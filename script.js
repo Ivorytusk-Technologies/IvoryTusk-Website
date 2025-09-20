@@ -466,6 +466,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 5000);
             } else {
                 const errorData = await response.json();
+                console.error('API Error Response:', errorData);
+                if (errorData.debug) {
+                    console.log('Debug Info:', errorData.debug);
+                }
                 throw new Error(errorData.error || 'Form submission failed');
             }
         } catch (error) {
