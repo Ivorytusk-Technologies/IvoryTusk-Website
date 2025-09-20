@@ -61,112 +61,91 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
     debugInfo.push(`Gmail user: ${env.GMAIL_USER ? 'SET' : 'NOT SET'}`);
     debugInfo.push(`Gmail pass: ${env.GMAIL_PASS ? 'SET' : 'NOT SET'}`);
     
-    // Gmail ONLY - Using Nodemailer-compatible API service
+    // Direct Gmail SMTP ONLY
     if (env.GMAIL_USER && env.GMAIL_PASS) {
       try {
-        // Method 1: Use Mailgun API (free tier) with Gmail credentials
-        const emailResponse = await fetch('https://api.mailgun.net/v3/sandbox-123.mailgun.org/messages', {
+        // Direct SMTP using SMTP.js with proper action
+        const emailResponse = await fetch('https://smtpjs.com/v3/smtpjs.aspx', {
           method: 'POST',
           headers: {
-            'Authorization': 'Basic ' + btoa('api:key-demo'),
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
           },
-          body: new URLSearchParams({
-            from: `IvoryTusk Website <${env.GMAIL_USER}>`,
-            to: 'contact@ivorytusk.co.in',
-            subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-            text: emailContent,
-            html: emailContent.replace(/\n/g, '<br>'),
-            'h:Reply-To': formData.email
+          body: JSON.stringify({
+            Action: 'Send',
+            SecureToken: 'demo',
+            To: 'contact@ivorytusk.co.in',
+            From: env.GMAIL_USER,
+            Subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+            Body: `
+              <h3>New Contact Form Submission</h3>
+              <p><strong>Name:</strong> ${formData.name}</p>
+              <p><strong>Email:</strong> ${formData.email}</p>
+              <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
+              <p><strong>Company:</strong> ${formData.company || 'Not provided'}</p>
+              <p><strong>Use Case:</strong> ${formData.usecase || formData['use-case'] || 'Not provided'}</p>
+              <p><strong>Form Type:</strong> ${formData.formType || 'Contact Form'}</p>
+              <br>
+              <p><strong>Message:</strong></p>
+              <p>${formData.message || 'No additional message'}</p>
+              <br>
+              <hr>
+              <p><small>Submitted at: ${new Date().toISOString()}</small></p>
+              <p><small>IP Address: ${clientIP}</small></p>
+            `,
+            Username: env.GMAIL_USER,
+            Password: env.GMAIL_PASS,
+            Host: 'smtp.gmail.com',
+            Port: 587,
+            IsBodyHtml: true
           }),
         });
 
-        if (emailResponse.ok) {
-          console.log('Email sent successfully via Mailgun with Gmail');
-          debugInfo.push('✅ Mailgun Gmail: SUCCESS');
+        const result = await emailResponse.text();
+        debugInfo.push(`SMTP Response: ${result}`);
+        
+        if (result === 'OK' || result.includes('success')) {
+          console.log('Email sent successfully via Gmail SMTP');
+          debugInfo.push('✅ Gmail SMTP: SUCCESS');
           emailSent = true;
         } else {
-          const errorText = await emailResponse.text();
-          debugInfo.push(`❌ Mailgun: Failed with status ${emailResponse.status} - ${errorText.substring(0, 100)}`);
+          debugInfo.push(`❌ Gmail SMTP: Failed - ${result}`);
+          
+          // If SMTP.js fails, try alternative direct approach
+          const altResponse = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              access_key: 'demo',
+              name: formData.name,
+              email: formData.email,
+              phone: formData.phone || 'Not provided',
+              company: formData.company || 'Not provided',
+              usecase: formData.usecase || formData['use-case'] || 'Not provided',
+              message: formData.message || 'No additional message',
+              subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+              from_name: 'IvoryTusk Website',
+              to_email: 'contact@ivorytusk.co.in',
+              smtp_server: 'smtp.gmail.com',
+              smtp_username: env.GMAIL_USER,
+              smtp_password: env.GMAIL_PASS,
+              smtp_port: 587
+            }),
+          });
+
+          const altResult = await altResponse.json();
+          if (altResponse.ok && altResult.success) {
+            console.log('Email sent successfully via Web3Forms with Gmail SMTP');
+            debugInfo.push('✅ Alternative Gmail SMTP: SUCCESS');
+            emailSent = true;
+          } else {
+            debugInfo.push(`❌ Alternative SMTP: Failed - ${altResult.message || 'Unknown error'}`);
+          }
         }
       } catch (error) {
-        console.error('Mailgun failed:', error);
-        debugInfo.push(`❌ Mailgun: Error - ${error.message}`);
-      }
-
-      // Method 2: Try Postmark API (free tier) with Gmail
-      if (!emailSent) {
-        try {
-          const emailResponse = await fetch('https://api.postmarkapp.com/email', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'X-Postmark-Server-Token': 'POSTMARK_API_TEST',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-              From: env.GMAIL_USER,
-              To: 'contact@ivorytusk.co.in',
-              Subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-              TextBody: emailContent,
-              HtmlBody: emailContent.replace(/\n/g, '<br>'),
-              ReplyTo: formData.email,
-              Headers: [
-                {
-                  Name: 'X-Sender-Gmail',
-                  Value: env.GMAIL_USER
-                }
-              ]
-            }),
-          });
-
-          if (emailResponse.ok) {
-            console.log('Email sent successfully via Postmark with Gmail');
-            debugInfo.push('✅ Postmark Gmail: SUCCESS');
-            emailSent = true;
-          } else {
-            const errorData = await emailResponse.json();
-            debugInfo.push(`❌ Postmark: Failed with status ${emailResponse.status} - ${errorData.Message || 'Unknown error'}`);
-          }
-        } catch (error) {
-          console.error('Postmark failed:', error);
-          debugInfo.push(`❌ Postmark: Error - ${error.message}`);
-        }
-      }
-
-      // Method 3: Direct SMTP using a working relay
-      if (!emailSent) {
-        try {
-          const emailResponse = await fetch('https://smtpjs.com/v3/smtpjs.aspx', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              SecureToken: 'demo',
-              To: 'contact@ivorytusk.co.in',
-              From: env.GMAIL_USER,
-              Subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-              Body: emailContent.replace(/\n/g, '<br>'),
-              Username: env.GMAIL_USER,
-              Password: env.GMAIL_PASS,
-              Host: 'smtp.gmail.com',
-              Port: 587
-            }),
-          });
-
-          const result = await emailResponse.text();
-          if (result === 'OK') {
-            console.log('Email sent successfully via SMTP.js with Gmail');
-            debugInfo.push('✅ SMTP.js Gmail: SUCCESS');
-            emailSent = true;
-          } else {
-            debugInfo.push(`❌ SMTP.js: Failed - ${result}`);
-          }
-        } catch (error) {
-          console.error('SMTP.js failed:', error);
-          debugInfo.push(`❌ SMTP.js: Error - ${error.message}`);
-        }
+        console.error('Gmail SMTP failed:', error);
+        debugInfo.push(`❌ Gmail SMTP: Error - ${error.message}`);
       }
     } else {
       debugInfo.push('❌ No Gmail credentials provided');
