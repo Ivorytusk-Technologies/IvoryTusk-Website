@@ -58,7 +58,8 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
     let emailSent = false;
     let debugInfo = [];
     
-    // Debug: Check if credentials are available
+    // Debug: Check environment variables
+    debugInfo.push(`Webhook URL: ${env.CONTACT_FORM_WEBHOOK ? 'SET' : 'NOT SET'}`);
     debugInfo.push(`Gmail credentials available: ${!!(env.GMAIL_USER && env.GMAIL_PASS)}`);
     debugInfo.push(`Gmail user: ${env.GMAIL_USER ? 'SET' : 'NOT SET'}`);
     debugInfo.push(`Gmail pass: ${env.GMAIL_PASS ? 'SET' : 'NOT SET'}`);
@@ -125,12 +126,12 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
       debugInfo.push('❌ No webhook URL configured (CONTACT_FORM_WEBHOOK missing)');
     }
 
-    // If Gmail methods fail, return error instead of fallback
+    // Check if email was sent successfully
     if (!emailSent) {
-      debugInfo.push('❌ All Gmail methods failed - no fallback used');
+      debugInfo.push('❌ Email sending failed - no method succeeded');
       return new Response(JSON.stringify({ 
         success: false, 
-        error: 'Gmail email sending failed. Please check your credentials and try again.',
+        error: 'Email sending failed. Please check the configuration and try again.',
         debug: debugInfo
       }), {
         status: 500,
