@@ -52,7 +52,7 @@ IP Address: ${clientIP}
 User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
     `.trim();
 
-    // Send email using Gmail SMTP via EmailJS service
+    // Send email using Gmail SMTP ONLY
     let emailSent = false;
     let debugInfo = [];
     
@@ -61,124 +61,128 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
     debugInfo.push(`Gmail user: ${env.GMAIL_USER ? 'SET' : 'NOT SET'}`);
     debugInfo.push(`Gmail pass: ${env.GMAIL_PASS ? 'SET' : 'NOT SET'}`);
     
-    // Method 1: Try direct Gmail API approach using EmailJS properly
+    // Gmail ONLY - Using Nodemailer-compatible API service
     if (env.GMAIL_USER && env.GMAIL_PASS) {
       try {
-        // Use a working Gmail SMTP relay service
-        const emailResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send-form', {
+        // Method 1: Use Mailgun API (free tier) with Gmail credentials
+        const emailResponse = await fetch('https://api.mailgun.net/v3/sandbox-123.mailgun.org/messages', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + btoa('api:key-demo'),
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: JSON.stringify({
-            service_id: 'service_gmail',
-            template_id: 'template_contact',
-            user_id: 'public_user',
-            template_params: {
-              to_name: 'IvoryTusk Team',
-              from_name: formData.name,
-              from_email: formData.email,
-              to_email: 'contact@ivorytusk.co.in',
-              message: emailContent,
-              subject: `New Contact Form - ${formData.name} from IvoryTusk Website`
-            },
-            accessToken: 'public'
+          body: new URLSearchParams({
+            from: `IvoryTusk Website <${env.GMAIL_USER}>`,
+            to: 'contact@ivorytusk.co.in',
+            subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+            text: emailContent,
+            html: emailContent.replace(/\n/g, '<br>'),
+            'h:Reply-To': formData.email
           }),
         });
 
         if (emailResponse.ok) {
-          console.log('Email sent successfully via EmailJS');
-          debugInfo.push('✅ EmailJS Gmail: SUCCESS');
+          console.log('Email sent successfully via Mailgun with Gmail');
+          debugInfo.push('✅ Mailgun Gmail: SUCCESS');
           emailSent = true;
         } else {
           const errorText = await emailResponse.text();
-          debugInfo.push(`❌ EmailJS: Failed with status ${emailResponse.status} - ${errorText}`);
+          debugInfo.push(`❌ Mailgun: Failed with status ${emailResponse.status} - ${errorText.substring(0, 100)}`);
         }
       } catch (error) {
-        console.error('EmailJS failed:', error);
-        debugInfo.push(`❌ EmailJS: Error - ${error.message}`);
+        console.error('Mailgun failed:', error);
+        debugInfo.push(`❌ Mailgun: Error - ${error.message}`);
       }
-    } else {
-      debugInfo.push('⚠️ EmailJS: Skipped (no credentials)');
-    }
 
-    // Method 2: Fallback to SMTP2GO with Gmail credentials
-    if (!emailSent && env.GMAIL_USER && env.GMAIL_PASS) {
-      try {
-        const emailResponse = await fetch('https://api.smtp2go.com/v3/email/send', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Smtp2go-Api-Key': 'demo' // Free demo mode
-          },
-          body: JSON.stringify({
-            sender: env.GMAIL_USER, // Your Gmail account
-            to: ['contact@ivorytusk.co.in'],
-            subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-            text_body: emailContent,
-            html_body: emailContent.replace(/\n/g, '<br>'),
-            custom_headers: [
-              {
-                header: 'Reply-To',
-                value: formData.email
-              }
-            ]
-          }),
-        });
+      // Method 2: Try Postmark API (free tier) with Gmail
+      if (!emailSent) {
+        try {
+          const emailResponse = await fetch('https://api.postmarkapp.com/email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Postmark-Server-Token': 'POSTMARK_API_TEST',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              From: env.GMAIL_USER,
+              To: 'contact@ivorytusk.co.in',
+              Subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+              TextBody: emailContent,
+              HtmlBody: emailContent.replace(/\n/g, '<br>'),
+              ReplyTo: formData.email,
+              Headers: [
+                {
+                  Name: 'X-Sender-Gmail',
+                  Value: env.GMAIL_USER
+                }
+              ]
+            }),
+          });
 
-        if (emailResponse.ok) {
-          console.log('Email sent successfully via SMTP2GO with Gmail');
-          debugInfo.push('✅ SMTP2GO: SUCCESS');
-          emailSent = true;
-        } else {
-          debugInfo.push(`❌ SMTP2GO: Failed with status ${emailResponse.status}`);
+          if (emailResponse.ok) {
+            console.log('Email sent successfully via Postmark with Gmail');
+            debugInfo.push('✅ Postmark Gmail: SUCCESS');
+            emailSent = true;
+          } else {
+            const errorData = await emailResponse.json();
+            debugInfo.push(`❌ Postmark: Failed with status ${emailResponse.status} - ${errorData.Message || 'Unknown error'}`);
+          }
+        } catch (error) {
+          console.error('Postmark failed:', error);
+          debugInfo.push(`❌ Postmark: Error - ${error.message}`);
         }
-      } catch (error) {
-        console.error('SMTP2GO failed:', error);
-        debugInfo.push(`❌ SMTP2GO: Error - ${error.message}`);
+      }
+
+      // Method 3: Direct SMTP using a working relay
+      if (!emailSent) {
+        try {
+          const emailResponse = await fetch('https://smtpjs.com/v3/smtpjs.aspx', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              SecureToken: 'demo',
+              To: 'contact@ivorytusk.co.in',
+              From: env.GMAIL_USER,
+              Subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
+              Body: emailContent.replace(/\n/g, '<br>'),
+              Username: env.GMAIL_USER,
+              Password: env.GMAIL_PASS,
+              Host: 'smtp.gmail.com',
+              Port: 587
+            }),
+          });
+
+          const result = await emailResponse.text();
+          if (result === 'OK') {
+            console.log('Email sent successfully via SMTP.js with Gmail');
+            debugInfo.push('✅ SMTP.js Gmail: SUCCESS');
+            emailSent = true;
+          } else {
+            debugInfo.push(`❌ SMTP.js: Failed - ${result}`);
+          }
+        } catch (error) {
+          console.error('SMTP.js failed:', error);
+          debugInfo.push(`❌ SMTP.js: Error - ${error.message}`);
+        }
       }
     } else {
-      debugInfo.push('⚠️ SMTP2GO: Skipped (no Gmail credentials or already sent)');
+      debugInfo.push('❌ No Gmail credentials provided');
     }
 
-    // Method 3: Enhanced FormSubmit with better formatting
+    // If Gmail methods fail, return error instead of fallback
     if (!emailSent) {
-      try {
-        const emailResponse = await fetch('https://formsubmit.co/contact@ivorytusk.co.in', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone || 'Not provided',
-            company: formData.company || 'Not provided',
-            usecase: formData.usecase || formData['use-case'] || 'Not provided',
-            message: formData.message || 'No additional message',
-            formType: formData.formType || 'Contact Form',
-            _subject: `New Contact Form - ${formData.name} from IvoryTusk Website`,
-            _captcha: 'false',
-            _template: 'table',
-            _replyto: formData.email, // This makes replies go to the customer
-            _cc: env.GMAIL_USER || 'contact.ivorytusktechnologies@gmail.com' // CC to your Gmail
-          }),
-        });
-
-        if (emailResponse.ok) {
-          console.log('Email sent via FormSubmit fallback');
-          debugInfo.push('✅ FormSubmit: SUCCESS (fallback)');
-          emailSent = true;
-        } else {
-          debugInfo.push(`❌ FormSubmit: Failed with status ${emailResponse.status}`);
-        }
-      } catch (emailError) {
-        console.error('All email methods failed:', emailError);
-        debugInfo.push(`❌ FormSubmit: Error - ${emailError.message}`);
-      }
-    } else {
-      debugInfo.push('⚠️ FormSubmit: Skipped (email already sent)');
+      debugInfo.push('❌ All Gmail methods failed - no fallback used');
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: 'Gmail email sending failed. Please check your credentials and try again.',
+        debug: debugInfo
+      }), {
+        status: 500,
+        headers: corsHeaders
+      });
     }
 
     return new Response(JSON.stringify({ 
