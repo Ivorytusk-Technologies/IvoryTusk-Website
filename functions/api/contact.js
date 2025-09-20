@@ -1,6 +1,7 @@
 /**
  * Cloudflare Pages Function for Contact Form
- * Handles form submissions and sends emails via GoDaddy SMTP
+ * Handles form submissions and sends emails via n8n webhook
+ * Updated: 2024-01-01
  */
 
 export async function onRequestPost(context) {
