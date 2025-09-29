@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans - IvoryTusk AI Solutions</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    animation: {
+                        'voice-wave': 'voice-wave 1.5s ease-in-out infinite'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen text-slate-800 dark:text-slate-100 dark:bg-slate-900 antialiased overflow-x-hidden">
+
+    <!-- Main Container with subtle background gradient -->
+    <div class="bg-gradient-to-br from-stone-50 via-orange-50 to-stone-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 min-h-screen">
+
+        <!-- Navigation Bar (Simplified) -->
+        <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 bg-transparent">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-center items-center py-6">
+                    <!-- Logo Component (Enlarged) -->
+                    <div class="flex items-center space-x-3 transition-transform duration-300 transform group-hover:scale-105">
+                        <a href="index.html">
+                            <img id="logo-light" src="assets/IvoryTusk.svg" alt="IvoryTusk" class="h-32 w-auto">
+                            <img id="logo-dark" src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk" class="h-32 w-auto hidden">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="relative text-center pt-40 pb-6 overflow-hidden">
+            <!-- Subtle Background Elements -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute -top-10 -left-20 w-80 h-80 bg-orange-300/5 rounded-full blur-[100px]"></div>
+                <div class="absolute top-1/2 right-0 w-96 h-96 bg-orange-200/10 rounded-full blur-[120px]"></div>
+                <div class="absolute -bottom-20 left-1/4 w-72 h-72 bg-orange-100/15 rounded-full blur-[150px]"></div>
+            </div>
+            <div class="relative z-10 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+                <div class="space-y-4">
+                    <!-- Main Headline with text gradient -->
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight">
+                        <span class="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-white dark:to-slate-100 bg-clip-text text-transparent">
+                            Unlock Your Potential
+                        </span>
+                        <br>
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+                            with IvoryTusk AI
+                        </span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto leading-relaxed">
+                        Choose the perfect AI Voice Agents plan designed to scale with your business, from foundational AI integration to comprehensive enterprise solutions.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Plans Section -->
+        <section class="py-8 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Pricing Cards -->
+                <div class="grid lg:grid-cols-3 gap-8 mb-16">
+
+                    <!-- Standard Plan -->
+                    <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 shadow-2xl transform transition-all duration-300 hover:scale-105">
+                        <div class="text-center mb-8">
+                            <h3 class="text-2xl font-bold text-orange-600 mb-2">Standard Plan</h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">Ideal for businesses starting their AI journey, offering essential features and reliable support.</p>
+                        </div>
+
+                        <!-- Core Costs -->
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Core Costs:</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">One-Time Setup & Training:</span>
+                                    <span class="font-bold text-orange-600">₹65,000</span>
+                                </div>
+                                <div class="text-xs text-slate-500 dark:text-slate-400 -mt-1">
+                                    (Includes Setup, Agent Creation, AI Training, Fine Tuning, Refinement Demos)
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Monthly Agent Server Hosting:</span>
+                                    <span class="font-bold text-orange-600">₹1,999</span>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Agent Cost Per Minute:</span>
+                                    <span class="font-bold text-orange-600">₹8.75</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Commitment & Support -->
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Commitment & Support:</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Minimum Committed Minutes:</span>
+                                    <span class="font-bold">10,000/month</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Annual Maintenance Contract:</span>
+                                    <span class="font-bold">₹12,500/year</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Optional Add-ons -->
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Optional Add-ons (One-Time):</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Dashboard Integration*:</span>
+                                    <span>₹9,999</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Mail Integration:</span>
+                                    <span>₹7,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Custom Integration**:</span>
+                                    <span>₹22,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Excel Integration:</span>
+                                    <span class="text-green-600 font-semibold">Free</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-full font-semibold shadow-lg transform hover:scale-105 transition-all duration-300">
+                            Get Started
+                        </button>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border-2 border-orange-400 dark:border-orange-500 rounded-3xl p-8 shadow-2xl transform transition-all duration-300 hover:scale-105 relative">
+                        <!-- Popular Badge -->
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                            <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+                                Most Popular
+                            </span>
+                        </div>
+
+                        <div class="text-center mb-8 mt-4">
+                            <h3 class="text-2xl font-bold text-orange-600 mb-2">Premium Plan</h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">Enhanced features and discounted rates for growing businesses seeking more comprehensive AI solutions.</p>
+                        </div>
+
+                        <!-- Core Costs -->
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Core Costs:</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">One-Time Setup & Training:</span>
+                                    <span class="font-bold text-orange-600">₹62,000</span>
+                                </div>
+                                <div class="text-xs text-slate-500 dark:text-slate-400 -mt-1">
+                                    (Includes Setup, Agent Creation, AI Training, Fine Tuning, Refinement Demos)
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Monthly Agent Server Hosting:</span>
+                                    <span class="font-bold text-orange-600">₹1,999</span>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Agent Cost Per Minute:</span>
+                                    <span class="font-bold text-orange-600">₹8.50</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Commitment & Support -->
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Commitment & Support:</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Minimum Committed Minutes:</span>
+                                    <span class="font-bold">20,000/month</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Annual Maintenance Contract:</span>
+                                    <span class="font-bold">₹12,500/year</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Optional Add-ons -->
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Optional Add-ons (One-Time):</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Dashboard Integration*:</span>
+                                    <span>₹12,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Mail Integration:</span>
+                                    <span>₹5,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Custom Integration**:</span>
+                                    <span>₹22,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Excel Integration:</span>
+                                    <span class="text-green-600 font-semibold">Free</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-full font-semibold shadow-lg transform hover:scale-105 transition-all duration-300">
+                            Choose Premium
+                        </button>
+                    </div>
+
+                    <!-- Ultra Plan -->
+                    <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 shadow-2xl transform transition-all duration-300 hover:scale-105">
+                        <div class="text-center mb-8">
+                            <h3 class="text-2xl font-bold text-orange-600 mb-2">Ultra Plan</h3>
+                            <p class="text-slate-600 dark:text-slate-300 text-sm">Our most comprehensive offering, designed for large-scale operations requiring maximum performance and flexibility.</p>
+                        </div>
+
+                        <!-- Core Costs -->
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Core Costs:</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">One-Time Setup & Training:</span>
+                                    <span class="font-bold text-orange-600">₹59,000</span>
+                                </div>
+                                <div class="text-xs text-slate-500 dark:text-slate-400 -mt-1">
+                                    (Includes Setup, Agent Creation, AI Training, Fine Tuning, Refinement Demos)
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Monthly Agent Server Hosting:</span>
+                                    <span class="font-bold text-orange-600">₹1,999</span>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Agent Cost Per Minute:</span>
+                                    <span class="font-bold text-orange-600">₹7.99</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Commitment & Support -->
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Commitment & Support:</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Minimum Committed Minutes:</span>
+                                    <span class="font-bold">30,000/month</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-600 dark:text-slate-300">Annual Maintenance Contract:</span>
+                                    <span class="font-bold">₹12,500/year</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Optional Add-ons -->
+                        <div class="mb-8">
+                            <h4 class="text-lg font-semibold text-slate-800 dark:text-slate-100 mb-4">Optional Add-ons (One-Time):</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Dashboard Integration*:</span>
+                                    <span>₹9,999</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Mail Integration:</span>
+                                    <span>₹3,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Custom Integration**:</span>
+                                    <span>₹22,000</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-600 dark:text-slate-300">Excel Integration:</span>
+                                    <span class="text-green-600 font-semibold">Free</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-full font-semibold shadow-lg transform hover:scale-105 transition-all duration-300">
+                            Choose Ultra
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Important Considerations -->
+                <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 shadow-2xl">
+                    <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-6">Important Considerations:</h3>
+                    <div class="space-y-4 text-slate-600 dark:text-slate-300">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <p><strong>All Rates are Excluding GST.</strong></p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <p><strong>3 Fine-Tuning Revisions</strong> will be provided before the deployment of the agent to ensure seamless integration and usage.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <p><strong>Billing Cycle</strong> will be generated between the 1st to 5th of every Month.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <p><strong>**Custom Integration:</strong> We offer flexible custom integration solutions tailored to your specific requirements. We will expose APIs to facilitate data exchange.</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-2 h-2 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
+                            <p><strong>Choosing Your Integration:</strong> Opt for Dashboard Integration if you need a visual interface with telephony. Choose Custom Integration when you require direct API access for bespoke data exchange with your existing systems.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 relative">
+            <div class="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-orange-600/20 to-orange-500/10"></div>
+            <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative">
+                <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-12 shadow-2xl">
+                    <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
+                        Ready to Start Your AI Transformation?
+                    </h2>
+                    <p class="text-xl text-slate-600 dark:text-slate-300 mb-8">
+                        Choose the plan that fits your business needs and start automating your customer interactions today.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="group relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-semibold
+                            shadow-lg shadow-orange-200/50 transform hover:scale-105 transition-all duration-300
+                            after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20">
+                            <span class="relative z-10">Contact Sales</span>
+                        </button>
+                        <a href="index.html" class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 text-slate-700 dark:text-slate-200 px-8 py-4 rounded-full font-semibold
+                            hover:bg-white/30 dark:hover:bg-slate-800/60 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>Back to Home</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gradient-to-b from-slate-800 to-slate-900 text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div>
+                        <div class="flex items-center justify-center space-x-3">
+                            <img src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk" class="h-16 w-auto">
+                        </div>
+                        <p class="text-slate-400 mt-4 leading-relaxed">
+                            Transforming business communications with intelligent AI voice agents.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-4 text-orange-400">Solutions</h3>
+                        <div class="space-y-2">
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Voice Agents</a>
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">ExpenseIQ</a>
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">OrraHome</a>
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Memora</a>
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">ConciergeIQ</a>
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Procumatic</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-4 text-orange-400">Industries</h3>
+                        <div class="space-y-2">
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Home Builders</a>
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Furniture</a>
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Architects</a>
+                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Automation</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-4 text-orange-400">Contact</h3>
+                        <div class="space-y-2 text-slate-400">
+                            <p>contact@ivorytusk.co.in</p>
+                            <p>+91 9909507799</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-slate-700 mt-12 pt-8 text-center text-slate-400">
+                    <p>&copy; 2025 IvoryTusk AI Solutions. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Dark mode toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const logoLight = document.getElementById('logo-light');
+        const logoDark = document.getElementById('logo-dark');
+
+        // Check for saved theme preference or default to 'light'
+        const currentTheme = localStorage.getItem('theme') || 'light';
+
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+            logoLight.classList.add('hidden');
+            logoDark.classList.remove('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                logoLight.classList.add('hidden');
+                logoDark.classList.remove('hidden');
+            } else {
+                localStorage.setItem('theme', 'light');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                logoLight.classList.remove('hidden');
+                logoDark.classList.add('hidden');
+            }
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('backdrop-blur-lg', 'bg-white/80', 'dark:bg-slate-900/80', 'border-b', 'border-white/20', 'dark:border-slate-700/50');
+            } else {
+                navbar.classList.remove('backdrop-blur-lg', 'bg-white/80', 'dark:bg-slate-900/80', 'border-b', 'border-white/20', 'dark:border-slate-700/50');
+            }
+        });
+    </script>
+</body>
+</html>
