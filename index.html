@@ -659,5 +659,186 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- Voice Agent Widget Container -->
+    <div id="voice-agent-widget-container"></div>
+
+    <!-- Agent ID Input Modal -->
+    <div id="agent-id-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] flex items-center justify-center hidden">
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">Connect to Voice Agent</h3>
+            <p class="text-slate-600 dark:text-slate-300 mb-6">Enter your Agent ID to start the voice chat</p>
+
+            <div class="space-y-4">
+                <div>
+                    <label for="agent-id-input" class="block text-slate-700 dark:text-slate-300 font-medium mb-2">Agent ID</label>
+                    <input
+                        type="text"
+                        id="agent-id-input"
+                        placeholder="e.g., a16e923d-798f-4c4a-a855-2008a231f1dd"
+                        class="w-full p-3 rounded-lg bg-white/50 dark:bg-slate-700/50 border border-slate-300 dark:border-slate-600
+                               text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                    />
+                </div>
+
+                <div class="flex gap-3">
+                    <button
+                        id="connect-agent-btn"
+                        class="flex-1 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-3 rounded-full
+                               shadow-lg shadow-orange-200/50 hover:scale-105 transition-transform duration-300"
+                    >
+                        Connect
+                    </button>
+                    <button
+                        id="cancel-agent-btn"
+                        class="flex-1 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 font-bold py-3 rounded-full
+                               hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors duration-300"
+                    >
+                        Cancel
+                    </button>
+                </div>
+
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-4">
+                    Don't have an Agent ID? <a href="#" id="agent-contact-link" class="text-orange-500 hover:text-orange-600 underline">Contact us</a> to get one.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Voice Widget Trigger Button -->
+    <button
+        id="voice-widget-trigger"
+        class="fixed bottom-6 right-6 z-[150] bg-gradient-to-r from-orange-500 to-orange-600 text-white
+               p-4 rounded-full shadow-lg hover:scale-110 transition-transform duration-300 group"
+        title="Start Voice Chat"
+    >
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 1v4h2v-4h-2zm6-6c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-5.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+        </svg>
+        <span class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+    </button>
+
+    <script>
+      // Voice Agent Widget Initialization Script
+      (function() {
+        const widgetContainer = document.getElementById('voice-agent-widget-container');
+        const agentIdModal = document.getElementById('agent-id-modal');
+        const agentIdInput = document.getElementById('agent-id-input');
+        const connectBtn = document.getElementById('connect-agent-btn');
+        const cancelBtn = document.getElementById('cancel-agent-btn');
+        const triggerBtn = document.getElementById('voice-widget-trigger');
+        const agentContactLink = document.getElementById('agent-contact-link');
+
+        let widgetInitialized = false;
+        let currentAgentId = null;
+
+        // Show modal when trigger button is clicked
+        triggerBtn.addEventListener('click', () => {
+          if (!widgetInitialized) {
+            agentIdModal.classList.remove('hidden');
+            agentIdInput.focus();
+          } else {
+            // Widget already initialized, just show it
+            const existingWidget = document.getElementById(`voice-agent-widget-${currentAgentId}`);
+            if (existingWidget) {
+              existingWidget.style.display = 'block';
+            }
+          }
+        });
+
+        // Contact us link - close agent modal and open contact form
+        agentContactLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          agentIdModal.classList.add('hidden');
+          agentIdInput.value = '';
+
+          // Trigger the contact modal from the main page
+          const contactNavBtn = document.getElementById('contact-nav-btn');
+          if (contactNavBtn) {
+            contactNavBtn.click();
+          }
+        });
+
+        // Cancel button
+        cancelBtn.addEventListener('click', () => {
+          agentIdModal.classList.add('hidden');
+          agentIdInput.value = '';
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !agentIdModal.classList.contains('hidden')) {
+            agentIdModal.classList.add('hidden');
+            agentIdInput.value = '';
+          }
+        });
+
+        // Close modal on backdrop click
+        agentIdModal.addEventListener('click', (e) => {
+          if (e.target === agentIdModal) {
+            agentIdModal.classList.add('hidden');
+            agentIdInput.value = '';
+          }
+        });
+
+        // Connect button
+        connectBtn.addEventListener('click', initializeWidget);
+
+        // Enter key to connect
+        agentIdInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            initializeWidget();
+          }
+        });
+
+        function initializeWidget() {
+          const agentId = agentIdInput.value.trim();
+
+          if (!agentId) {
+            alert('Please enter a valid Agent ID');
+            return;
+          }
+
+          // Validate Agent ID format (basic UUID validation)
+          const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+          if (!uuidRegex.test(agentId)) {
+            alert('Please enter a valid Agent ID format (UUID)');
+            return;
+          }
+
+          currentAgentId = agentId;
+
+          // Create widget container
+          const widgetDiv = document.createElement('div');
+          widgetDiv.id = `voice-agent-widget-${agentId}`;
+          widgetContainer.appendChild(widgetDiv);
+
+          // Configure widget
+          window.VoiceAgentConfig = {
+            agentId: agentId,
+            apiUrl: 'https://api.ivorytusk.co.in',
+            theme: 'light',
+            position: 'bottom-right'
+          };
+
+          // Load widget script
+          const script = document.createElement('script');
+          script.src = 'https://api.ivorytusk.co.in/api/v1/widget/widget.js';
+          script.onload = () => {
+            console.log('Voice agent widget loaded successfully');
+            widgetInitialized = true;
+            agentIdModal.classList.add('hidden');
+            agentIdInput.value = '';
+            triggerBtn.style.display = 'none'; // Hide trigger button after widget loads
+          };
+          script.onerror = () => {
+            alert('Failed to load voice widget. Please check your Agent ID and try again.');
+            widgetDiv.remove();
+          };
+
+          document.body.appendChild(script);
+        }
+      })();
+    </script>
 </body>
 </html>
