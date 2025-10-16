@@ -660,22 +660,231 @@
 
     <script src="script.js"></script>
 
-    <!-- Chatwoot Chat Widget -->
+    <!-- Chatwoot Chat Widget with Enhanced Features -->
+    <style>
+      /* Custom Chatwoot Widget Styles */
+
+      /* Hide "Powered by Chatwoot" branding */
+      .branding--text,
+      .branding,
+      [class*="branding"],
+      [class*="powered-by"] {
+        display: none !important;
+      }
+
+      /* Custom launcher icon styling */
+      .woot-widget-bubble {
+        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4) !important;
+      }
+
+      .woot-widget-bubble:hover {
+        transform: scale(1.1) !important;
+        box-shadow: 0 12px 32px rgba(249, 115, 22, 0.5) !important;
+      }
+
+      /* Custom widget header */
+      .header--wrap {
+        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+      }
+
+      /* Hide close button on widget when needed */
+      .woot--close {
+        opacity: 0.8 !important;
+      }
+
+      /* Custom scrollbar for chat */
+      .conversation-wrap::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .conversation-wrap::-webkit-scrollbar-thumb {
+        background-color: #f97316;
+        border-radius: 3px;
+      }
+    </style>
+
     <script>
-        (function(d,t) {
-          var BASE_URL="https://chat.ivorytusk.co.in";
-          var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-          g.src=BASE_URL+"/packs/js/sdk.js";
-          g.async = true;
-          s.parentNode.insertBefore(g,s);
-          g.onload=function(){
-            window.chatwootSDK.run({
-              websiteToken: 'sp36EzVcdh7afYYpT3y3Qk4c',
-              baseUrl: BASE_URL
-            })
+      // User Identifier Generation System
+      function generateUserIdentifier() {
+        // Try to get existing identifier from localStorage
+        let identifier = localStorage.getItem('chatwoot_user_id');
+
+        if (!identifier) {
+          // Generate a unique identifier based on browser fingerprint
+          const fingerprint = {
+            screen: `${screen.width}x${screen.height}x${screen.colorDepth}`,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            language: navigator.language,
+            platform: navigator.platform,
+            userAgent: navigator.userAgent.substring(0, 100), // First 100 chars
+            timestamp: Date.now()
+          };
+
+          // Create a hash-like identifier
+          identifier = btoa(JSON.stringify(fingerprint))
+            .replace(/[^a-zA-Z0-9]/g, '')
+            .substring(0, 32);
+
+          // Store it for future visits
+          localStorage.setItem('chatwoot_user_id', identifier);
+        }
+
+        return identifier;
+      }
+
+      // Get user's IP and additional info (optional enhancement)
+      async function getUserInfo() {
+        try {
+          // You can use a service like ipapi.co for more info
+          const response = await fetch('https://ipapi.co/json/');
+          const data = await response.json();
+          return {
+            ip: data.ip,
+            city: data.city,
+            country: data.country_name,
+            timezone: data.timezone
+          };
+        } catch (error) {
+          console.log('Could not fetch IP info:', error);
+          return {};
+        }
+      }
+
+      // HMAC Generation Function
+      async function getIdentifierHash(identifier) {
+        try {
+          const response = await fetch('/api/chatwoot-hmac', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ identifier })
+          });
+
+          const data = await response.json();
+          return data.identifierHash;
+        } catch (error) {
+          console.error('Failed to generate HMAC:', error);
+          return null;
+        }
+      }
+
+      // Chatwoot Settings Configuration
+      window.chatwootSettings = {
+        // Position
+        position: 'right', // or 'left'
+
+        // Language & Localization
+        useBrowserLanguage: true, // Auto-detect browser language
+        locale: 'en', // Fallback language
+
+        // Dark Mode - Auto detect from system
+        darkMode: 'auto', // 'light', 'dark', or 'auto'
+
+        // Widget Type
+        type: 'expanded_bubble', // or 'standard'
+        launcherTitle: 'Chat with us',
+
+        // Popout Window
+        showPopoutButton: true,
+
+        // Optional UI Features
+        hideMessageBubble: false,
+        showUnreadMessagesDialog: true,
+
+        // Enable various features
+        enableFileUpload: true,
+        enableEmojiPicker: true,
+        enableEndConversation: true,
+
+        // Custom welcome messages
+        welcomeTitle: 'Welcome to IvoryTusk!',
+        welcomeDescription: 'Ask us anything or start a conversation',
+        availableMessage: "We're online and ready to help!",
+        unavailableMessage: "We're away but will respond soon!"
+      };
+
+      // Fetch Chatwoot Configuration from Server
+      async function getChatwootConfig() {
+        try {
+          const response = await fetch('/api/chatwoot-config');
+          const config = await response.json();
+
+          if (!config.websiteToken || !config.baseUrl) {
+            throw new Error('Invalid configuration received');
           }
-        })(document,"script");
-      </script>            
+
+          return config;
+        } catch (error) {
+          console.error('Failed to fetch Chatwoot config:', error);
+          return null;
+        }
+      }
+
+      // Initialize Chatwoot with Identity Validation
+      (async function(d,t) {
+        // Fetch configuration from server
+        const config = await getChatwootConfig();
+
+        if (!config) {
+          console.error('Chatwoot: Configuration not available');
+          return;
+        }
+
+        console.log('Chatwoot: Configuration loaded from server');
+
+        // Generate user identifier
+        const userIdentifier = generateUserIdentifier();
+        console.log('User Identifier:', userIdentifier);
+
+        // Get HMAC hash for identity validation
+        const identifierHash = await getIdentifierHash(userIdentifier);
+
+        // Get additional user info (optional)
+        const userInfo = await getUserInfo();
+
+        // Load Chatwoot SDK
+        var BASE_URL = config.baseUrl;
+        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        g.src = BASE_URL + "/packs/js/sdk.js";
+        g.async = true;
+        s.parentNode.insertBefore(g,s);
+
+        g.onload = function(){
+          window.chatwootSDK.run({
+            websiteToken: config.websiteToken,
+            baseUrl: BASE_URL
+          });
+
+          // Set user information with identity validation
+          if (identifierHash) {
+            window.$chatwoot.setUser(userIdentifier, {
+              identifier_hash: identifierHash,
+              name: 'Website Visitor',
+              email: '', // Will be collected during conversation
+              phone_number: '', // Will be collected during conversation
+              ...userInfo // Include IP, city, country if available
+            });
+
+            console.log('Chatwoot initialized with identity validation');
+          } else {
+            console.warn('Chatwoot initialized without identity validation (HMAC failed)');
+          }
+
+          // Set custom attributes
+          window.$chatwoot.setCustomAttributes({
+            source: 'website',
+            page: window.location.pathname,
+            referrer: document.referrer || 'direct',
+            userAgent: navigator.userAgent.substring(0, 100),
+            screenResolution: `${screen.width}x${screen.height}`,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            language: navigator.language
+          });
+        };
+      })(document,"script");
+    </script>                  
 
     <!-- Voice Agent Widget - DISABLED -->
     <!--
