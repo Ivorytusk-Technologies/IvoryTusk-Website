@@ -660,10 +660,27 @@
 
     <script src="script.js"></script>
 
-    <!-- Voice Agent Widget Container -->
+    <!-- Chatwoot Chat Widget -->
+    <script>
+        (function(d,t) {
+          var BASE_URL="https://chat.ivorytusk.co.in";
+          var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+          g.src=BASE_URL+"/packs/js/sdk.js";
+          g.async = true;
+          s.parentNode.insertBefore(g,s);
+          g.onload=function(){
+            window.chatwootSDK.run({
+              websiteToken: 'sp36EzVcdh7afYYpT3y3Qk4c',
+              baseUrl: BASE_URL
+            })
+          }
+        })(document,"script");
+      </script>            
+
+    <!-- Voice Agent Widget - DISABLED -->
+    <!--
     <div id="voice-agent-widget-container"></div>
 
-    <!-- Agent ID Input Modal -->
     <div id="agent-id-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] flex items-center justify-center hidden">
         <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
             <h3 class="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-4">Connect to Voice Agent</h3>
@@ -705,7 +722,6 @@
         </div>
     </div>
 
-    <!-- Voice Widget Trigger Button -->
     <button
         id="voice-widget-trigger"
         class="fixed bottom-6 right-6 z-[150] bg-gradient-to-r from-orange-500 to-orange-600 text-white
@@ -840,5 +856,6 @@
         }
       })();
     </script>
+    -->
 </body>
 </html>
