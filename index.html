@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IvoryTusk AI Solutions</title>
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
@@ -26,15 +28,18 @@
     </script>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body class="min-h-screen text-slate-800 dark:text-slate-100 dark:bg-slate-900 antialiased overflow-x-hidden">
 
     <!-- Success Message (Toast Notification) -->
-    <div id="success-message" class="fixed bottom-6 left-0 right-0 mx-auto w-fit z-[110] backdrop-blur-lg bg-orange-600/80 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-500 animate-fade-in-up hidden">
+    <div id="success-message"
+        class="fixed bottom-6 left-0 right-0 mx-auto w-fit z-[110] backdrop-blur-lg bg-orange-600/80 text-white px-6 py-3 rounded-full shadow-lg transition-all duration-500 animate-fade-in-up hidden">
         Success! Your request has been sent.
     </div>
 
     <!-- Main Container with subtle background gradient -->
-    <div class="bg-gradient-to-br from-stone-50 via-orange-50 to-stone-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 min-h-screen">
+    <div
+        class="bg-gradient-to-br from-stone-50 via-orange-50 to-stone-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 min-h-screen">
 
         <!-- Hidden Netlify Form for Contact Submissions -->
         <form name="contact" netlify hidden>
@@ -51,42 +56,63 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center py-4">
                     <!-- Logo Component (Extra Large Size) -->
-                    <div class="flex items-center space-x-3 transition-transform duration-300 transform group-hover:scale-105">
+                    <div
+                        class="flex items-center space-x-3 transition-transform duration-300 transform group-hover:scale-105">
                         <img id="logo-light" src="assets/IvoryTusk.svg" alt="IvoryTusk" class="h-16 w-auto">
                         <img id="logo-dark" src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk" class="h-16 w-auto hidden">
                     </div>
                     <!-- Desktop Navigation Links -->
                     <div class="hidden md:flex space-x-8">
-                        <a href="#solutions" class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-medium relative group">
+                        <a href="https://liveloop.ivorytusk.co.in" target="_blank"
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-bold relative group">
+                            LiveLoop
+                            <span
+                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                        </a>
+                        <a href="#solutions"
+                            class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-medium relative group">
                             Solutions
-                            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
+                            <span
+                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
                         </a>
-                        <a href="#industries" class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-medium relative group">
+                        <a href="#industries"
+                            class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-medium relative group">
                             Industries
-                            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
+                            <span
+                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
                         </a>
-                        <a href="#ai-agents" class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-medium relative group">
+                        <a href="#ai-agents"
+                            class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-medium relative group">
                             AI Agents
-                            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
+                            <span
+                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
                         </a>
-                        <button id="contact-nav-btn" class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-medium relative group">
+                        <button id="contact-nav-btn"
+                            class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-medium relative group">
                             Contact
-                            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
+                            <span
+                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
                         </button>
                     </div>
                     <!-- Dark Mode Toggle and CTA Button -->
                     <div class="flex items-center gap-4">
                         <!-- Dark Mode Toggle -->
-                        <button id="theme-toggle" class="p-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-700/50 transition-colors duration-300">
-                            <svg id="sun-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+                        <button id="theme-toggle"
+                            class="p-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-700/50 transition-colors duration-300">
+                            <svg id="sun-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
                             </svg>
-                            <svg id="moon-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400 hidden" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
+                            <svg id="moon-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400 hidden"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" />
                             </svg>
                         </button>
                         <!-- CTA Button -->
-                        <button id="demo-nav-btn" class="relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full font-semibold
+                        <button id="demo-nav-btn"
+                            class="relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full font-semibold
                             shadow-lg shadow-orange-200/50 transform hover:scale-105 transition-all duration-300
                             after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20">
                             <span>Book Demo</span>
@@ -108,7 +134,8 @@
                 <div class="space-y-8">
                     <!-- Main Headline with text gradient -->
                     <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight">
-                        <span class="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-white dark:to-slate-100 bg-clip-text text-transparent">
+                        <span
+                            class="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-white dark:to-slate-100 bg-clip-text text-transparent">
                             Transforming Businesses
                         </span>
                         <br>
@@ -116,42 +143,48 @@
                             with Effective AI
                         </span>
                     </h1>
-                    
+
                     <!-- Subtitle -->
                     <p class="text-xl md:text-2xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed">
-                        Deploy AI agents across Voice & WhatsApp to automate sales, support, and appointment booking 24/7.
+                        Deploy AI agents across Voice & WhatsApp to automate sales, support, and appointment booking
+                        24/7.
                     </p>
-                    
+
                     <!-- Stats Cards (Glassmorphism) -->
                     <div class="grid md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto">
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl
+                        <div
+                            class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl
                             transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/30 dark:hover:bg-slate-800/60">
                             <div class="text-3xl lg:text-4xl font-bold text-orange-600">80%</div>
                             <div class="text-slate-600 dark:text-slate-300 mt-1">Productivity Boost</div>
                         </div>
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl
+                        <div
+                            class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl
                             transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/30 dark:hover:bg-slate-800/60">
                             <div class="text-3xl lg:text-4xl font-bold text-orange-600">60%</div>
                             <div class="text-slate-600 dark:text-slate-300 mt-1">Cost Reduction</div>
                         </div>
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl
+                        <div
+                            class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-6 shadow-xl
                             transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-white/30 dark:hover:bg-slate-800/60">
                             <div class="text-3xl lg:text-4xl font-bold text-orange-600">30%</div>
                             <div class="text-slate-600 dark:text-slate-300 mt-1">Improved Conversions</div>
                         </div>
                     </div>
-                    
+
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-                        <button id="live-demo-hero-btn" class="group relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-orange-200/50
+                        <button id="live-demo-hero-btn"
+                            class="group relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-semibold shadow-lg shadow-orange-200/50
                             transform hover:scale-105 transition-all duration-300
                             after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20">
                             <span class="relative z-10">Try Live Demo</span>
                         </button>
-                        <button id="watch-video-btn" class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 text-slate-700 dark:text-slate-200 px-8 py-4 rounded-full font-semibold
+                        <button id="watch-video-btn"
+                            class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 text-slate-700 dark:text-slate-200 px-8 py-4 rounded-full font-semibold
                             hover:bg-white/30 dark:hover:bg-slate-800/60 transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M8 5v14l11-7z"/>
+                                <path d="M8 5v14l11-7z" />
                             </svg>
                             <span>Watch Video</span>
                         </button>
@@ -162,7 +195,8 @@
 
         <!-- Video Background Section -->
         <section class="relative h-screen w-full overflow-hidden group">
-            <video id="product-video" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline preload="metadata">
+            <video id="product-video" class="absolute inset-0 w-full h-full object-cover" autoplay muted loop
+                playsinline preload="metadata">
                 <source src="https://assets.ivorytusk.co.in/video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -170,12 +204,15 @@
 
             <!-- Video Controls (Show on Hover) -->
             <div class="absolute top-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <button id="video-mute-btn" class="bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-200">
+                <button id="video-mute-btn"
+                    class="bg-black/50 hover:bg-black/70 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-200">
                     <svg id="volume-on-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                        <path
+                            d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
                     </svg>
                     <svg id="volume-off-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                        <path
+                            d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
                     </svg>
                 </button>
             </div>
@@ -188,28 +225,145 @@
             </div>
         </section>
 
+        <!-- Introducing LiveLoop Section -->
+        <section id="liveloop-intro" class="py-24 relative overflow-hidden bg-[#0a0a0a] text-white">
+            <!-- Dynamic Background -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-purple-900/20 via-black to-blue-900/20"></div>
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-purple-500/10 rounded-full blur-[100px]"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px]"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-12">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-purple-400 text-xs font-bold uppercase mb-6 tracking-wide backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
+                        New Product Launch
+                    </div>
+
+                    <h2 class="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
+                        Introducing <span
+                            class="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">LiveLoop</span>
+                    </h2>
+
+                    <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-8">
+                        The Omni-channel AI CRM that unifies your customer conversations.
+                        <br class="hidden md:block" />
+                        <span class="text-slate-400 text-lg mt-2 block">WhatsApp • Instagram • Facebook • Email •
+                            Telegram</span>
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="https://liveloop.ivorytusk.co.in" target="_blank" class="group relative overflow-hidden bg-white text-black px-8 py-4 rounded-full font-bold shadow-lg shadow-white/10
+                            transform hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                            <span>Launch LiveLoop</span>
+                            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Dashboard Preview -->
+                <div class="relative mt-16 group perspective-1000">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-20 pointer-events-none h-40 bottom-0 top-auto w-full">
+                    </div>
+                    <div
+                        class="transform transition-transform duration-700 group-hover:scale-[1.02] group-hover:-translate-y-2">
+                        <div
+                            class="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-slate-900/50 backdrop-blur-xl">
+                            <!-- Mac Window Controls -->
+                            <div class="h-8 bg-slate-900/80 border-b border-white/5 flex items-center px-4 gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                            </div>
+                            <!-- Image -->
+                            <img src="assets/liveloop/dashboard.png" alt="LiveLoop Dashboard"
+                                class="w-full h-auto object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500 shadow-[0_0_50px_-12px_rgba(124,58,237,0.3)]">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Highlights -->
+                <div class="grid md:grid-cols-3 gap-6 mt-16">
+                    <div
+                        class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-lg hover:bg-white/10 transition-colors duration-300">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Unified Inbox</h3>
+                        <p class="text-slate-400">Manage all customer conversations from WhatsApp, IG, FB, and Email in
+                            one single view.</p>
+                    </div>
+                    <div
+                        class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-lg hover:bg-white/10 transition-colors duration-300">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">AI Agents</h3>
+                        <p class="text-slate-400">Deploy intelligent agents to handle support queries and qualify leads
+                            automatically 24/7.</p>
+                    </div>
+                    <div
+                        class="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-lg hover:bg-white/10 transition-colors duration-300">
+                        <div
+                            class="w-12 h-12 rounded-lg bg-pink-500/20 text-pink-400 flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Campaign Analytics</h3>
+                        <p class="text-slate-400">Launch marketing campaigns and track real-time performance to optimize
+                            ROI.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- The Problem & Solution Section -->
         <section class="py-24 relative">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/20 to-transparent dark:via-orange-900/10"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/20 to-transparent dark:via-orange-900/10">
+            </div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                 <div class="text-center mb-16">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full mb-6">
+                    <div
+                        class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full mb-6">
                         <svg class="w-10 h-10 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zM15.5 11c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                            <path
+                                d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zM15.5 11c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
                         </svg>
                     </div>
 
                     <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
-                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">Stop Losing Leads</span><br>
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">Stop
+                            Losing Leads</span><br>
                         <span class="text-slate-700 dark:text-slate-200">Start Converting Them</span>
                     </h2>
 
                     <p class="text-xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto mb-12 leading-relaxed">
-                        Studies show businesses lose up to <strong class="text-orange-600">40% of potential customers</strong> due to missed calls, delayed responses, and poor follow-up. Our AI agents ensure every lead gets immediate, professional attention.
+                        Studies show businesses lose up to <strong class="text-orange-600">40% of potential
+                            customers</strong> due to missed calls, delayed responses, and poor follow-up. Our AI agents
+                        ensure every lead gets immediate, professional attention.
                     </p>
 
                     <!-- How It Works Section -->
-                    <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
+                    <div
+                        class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
                         <h3 class="text-3xl md:text-4xl font-bold text-orange-600 mb-12">
                             How Our AI Agents Work
                         </h3>
@@ -220,43 +374,61 @@
                                 <!-- Step 1 -->
                                 <div class="text-center group relative">
                                     <div class="relative mb-6">
-                                        <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <div
+                                            class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
                                             <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                                <path
+                                                    d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
                                             </svg>
                                         </div>
-                                        <div class="absolute -top-2 -right-2 bg-orange-600 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">1</div>
+                                        <div
+                                            class="absolute -top-2 -right-2 bg-orange-600 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">
+                                            1</div>
                                     </div>
-                                    <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">Instant Response</h4>
-                                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">AI agent answers calls within seconds, ensuring no lead goes unanswered regardless of time or day</p>
+                                    <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">Instant
+                                        Response</h4>
+                                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">AI agent answers calls
+                                        within seconds, ensuring no lead goes unanswered regardless of time or day</p>
                                 </div>
 
                                 <!-- Step 2 -->
                                 <div class="text-center group relative">
                                     <div class="relative mb-6">
-                                        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <div
+                                            class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
                                             <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                         </div>
-                                        <div class="absolute -top-2 -right-2 bg-blue-600 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">2</div>
+                                        <div
+                                            class="absolute -top-2 -right-2 bg-blue-600 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">
+                                            2</div>
                                     </div>
-                                    <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">Smart Qualification</h4>
-                                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Intelligently assesses lead quality, gathers essential information, and determines next best action</p>
+                                    <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">Smart
+                                        Qualification</h4>
+                                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Intelligently assesses
+                                        lead quality, gathers essential information, and determines next best action</p>
                                 </div>
 
                                 <!-- Step 3 -->
                                 <div class="text-center group relative">
                                     <div class="relative mb-6">
-                                        <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <div
+                                            class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto shadow-lg group-hover:scale-110 transition-transform duration-300">
                                             <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 3h-4v4h4V6z"/>
+                                                <path
+                                                    d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 3h-4v4h4V6z" />
                                             </svg>
                                         </div>
-                                        <div class="absolute -top-2 -right-2 bg-green-600 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">3</div>
+                                        <div
+                                            class="absolute -top-2 -right-2 bg-green-600 text-white text-sm font-bold w-8 h-8 rounded-full flex items-center justify-center">
+                                            3</div>
                                     </div>
-                                    <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">Seamless Booking</h4>
-                                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Automatically schedules appointments, sends confirmations, and integrates with your existing calendar system</p>
+                                    <h4 class="text-xl font-bold text-slate-800 dark:text-slate-100 mb-3">Seamless
+                                        Booking</h4>
+                                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Automatically
+                                        schedules appointments, sends confirmations, and integrates with your existing
+                                        calendar system</p>
                                 </div>
                             </div>
 
@@ -266,49 +438,67 @@
                                 <div class="absolute left-1/3 top-12 transform -translate-x-1/2">
                                     <div class="relative">
                                         <!-- Glassmorphism arrow container -->
-                                        <div class="backdrop-blur-sm bg-white/10 dark:bg-slate-800/20 border border-white/20 dark:border-slate-700/30 rounded-full px-4 py-2 shadow-lg">
+                                        <div
+                                            class="backdrop-blur-sm bg-white/10 dark:bg-slate-800/20 border border-white/20 dark:border-slate-700/30 rounded-full px-4 py-2 shadow-lg">
                                             <svg width="80" height="24" viewBox="0 0 80 24" class="opacity-80">
                                                 <defs>
                                                     <linearGradient id="glassArrow1" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                        <stop offset="0%" style="stop-color:rgb(251 146 60);stop-opacity:0.8" />
-                                                        <stop offset="100%" style="stop-color:rgb(249 115 22);stop-opacity:1" />
+                                                        <stop offset="0%"
+                                                            style="stop-color:rgb(251 146 60);stop-opacity:0.8" />
+                                                        <stop offset="100%"
+                                                            style="stop-color:rgb(249 115 22);stop-opacity:1" />
                                                     </linearGradient>
                                                 </defs>
                                                 <!-- Smooth arrow line -->
-                                                <path d="M8 12 L60 12" stroke="url(#glassArrow1)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                                <path d="M8 12 L60 12" stroke="url(#glassArrow1)" stroke-width="2"
+                                                    fill="none" stroke-linecap="round" />
                                                 <!-- Arrow head -->
-                                                <path d="M52 8 L60 12 L52 16" stroke="url(#glassArrow1)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M52 8 L60 12 L52 16" stroke="url(#glassArrow1)"
+                                                    stroke-width="2" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                                 <!-- Subtle glow effect -->
-                                                <path d="M8 12 L60 12" stroke="rgb(251 146 60)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.2"/>
+                                                <path d="M8 12 L60 12" stroke="rgb(251 146 60)" stroke-width="4"
+                                                    fill="none" stroke-linecap="round" opacity="0.2" />
                                             </svg>
                                         </div>
                                         <!-- Floating indicator -->
-                                        <div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                                        <div
+                                            class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-orange-400 rounded-full animate-pulse">
+                                        </div>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Arrow 2: From Step 2 to Step 3 -->
                                 <div class="absolute left-2/3 top-12 transform -translate-x-1/2">
                                     <div class="relative">
                                         <!-- Glassmorphism arrow container -->
-                                        <div class="backdrop-blur-sm bg-white/10 dark:bg-slate-800/20 border border-white/20 dark:border-slate-700/30 rounded-full px-4 py-2 shadow-lg">
+                                        <div
+                                            class="backdrop-blur-sm bg-white/10 dark:bg-slate-800/20 border border-white/20 dark:border-slate-700/30 rounded-full px-4 py-2 shadow-lg">
                                             <svg width="80" height="24" viewBox="0 0 80 24" class="opacity-80">
                                                 <defs>
                                                     <linearGradient id="glassArrow2" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                        <stop offset="0%" style="stop-color:rgb(251 146 60);stop-opacity:0.8" />
-                                                        <stop offset="100%" style="stop-color:rgb(249 115 22);stop-opacity:1" />
+                                                        <stop offset="0%"
+                                                            style="stop-color:rgb(251 146 60);stop-opacity:0.8" />
+                                                        <stop offset="100%"
+                                                            style="stop-color:rgb(249 115 22);stop-opacity:1" />
                                                     </linearGradient>
                                                 </defs>
                                                 <!-- Smooth arrow line -->
-                                                <path d="M8 12 L60 12" stroke="url(#glassArrow2)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                                <path d="M8 12 L60 12" stroke="url(#glassArrow2)" stroke-width="2"
+                                                    fill="none" stroke-linecap="round" />
                                                 <!-- Arrow head -->
-                                                <path d="M52 8 L60 12 L52 16" stroke="url(#glassArrow2)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M52 8 L60 12 L52 16" stroke="url(#glassArrow2)"
+                                                    stroke-width="2" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                                 <!-- Subtle glow effect -->
-                                                <path d="M8 12 L60 12" stroke="rgb(251 146 60)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.2"/>
+                                                <path d="M8 12 L60 12" stroke="rgb(251 146 60)" stroke-width="4"
+                                                    fill="none" stroke-linecap="round" opacity="0.2" />
                                             </svg>
                                         </div>
                                         <!-- Floating indicator -->
-                                        <div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
+                                        <div
+                                            class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-orange-400 rounded-full animate-pulse">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -330,7 +520,8 @@
                                     Result: <span class="text-orange-600">Zero Missed Opportunities</span>
                                 </p>
                                 <p class="text-slate-600 dark:text-slate-300">
-                                    Every lead is captured, qualified, and converted into a scheduled meeting - automatically.
+                                    Every lead is captured, qualified, and converted into a scheduled meeting -
+                                    automatically.
                                 </p>
                             </div>
                         </div>
@@ -366,34 +557,42 @@
                     </h2>
                     <p class="text-xl text-slate-600 dark:text-slate-300 max-w-4xl mx-auto mb-8">
                         <strong class="text-2xl md:text-3xl block mb-4">All Channels Open. Always Live.</strong>
-                        Deploy AI agents across voice calls and WhatsApp to handle sales, customer support, and appointment booking 24/7. Our intelligent agents proactively qualify leads, answer customer queries, and book appointments - whether through phone calls or WhatsApp messages.
+                        Deploy AI agents across voice calls and WhatsApp to handle sales, customer support, and
+                        appointment booking 24/7. Our intelligent agents proactively qualify leads, answer customer
+                        queries, and book appointments - whether through phone calls or WhatsApp messages.
                     </p>
 
                     <!-- Channel Toggle -->
-                    <div class="backdrop-blur-lg bg-white/30 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 rounded-full p-2 mb-12 max-w-md mx-auto">
+                    <div
+                        class="backdrop-blur-lg bg-white/30 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 rounded-full p-2 mb-12 max-w-md mx-auto">
                         <div class="grid grid-cols-2 gap-2">
-                            <button id="voice-tab" class="channel-tab px-6 py-3 rounded-full font-semibold transition-all duration-300 bg-orange-500 text-white">
+                            <button id="voice-tab"
+                                class="channel-tab px-6 py-3 rounded-full font-semibold transition-all duration-300 bg-orange-500 text-white">
                                 <span class="flex items-center justify-center gap-2">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                        <path
+                                            d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
                                     </svg>
                                     Voice Agents
                                 </span>
                             </button>
-                            <button id="whatsapp-tab" class="channel-tab px-6 py-3 rounded-full font-semibold transition-all duration-300 text-slate-600 dark:text-slate-300 hover:text-orange-600">
+                            <button id="whatsapp-tab"
+                                class="channel-tab px-6 py-3 rounded-full font-semibold transition-all duration-300 text-slate-600 dark:text-slate-300 hover:text-orange-600">
                                 <span class="flex items-center justify-center gap-2">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                                        <path
+                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                                     </svg>
                                     WhatsApp Agents
                                 </span>
                             </button>
                         </div>
                     </div>
-                    
+
                     <!-- Voice Channel Demo -->
                     <div id="voice-demo" class="channel-content flex justify-center mb-12">
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 shadow-xl max-w-2xl">
+                        <div
+                            class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 shadow-xl max-w-2xl">
                             <div class="flex justify-center mb-4 relative">
                                 <div class="w-96 h-80 rounded-xl overflow-hidden bg-black/10 dark:bg-black/30">
                                     <canvas id="orbitalCanvas" class="w-full h-full"></canvas>
@@ -403,12 +602,14 @@
                                 "Hello! I'm your AI voice assistant. How can I help you today?"
                             </p>
                             <div class="flex justify-center">
-                                <button id="play-voice-agents-audio" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors duration-200 flex items-center gap-2">
+                                <button id="play-voice-agents-audio"
+                                    class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-medium transition-colors duration-200 flex items-center gap-2">
                                     <svg id="voice-play-icon" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M8 5v14l11-7z"/>
+                                        <path d="M8 5v14l11-7z" />
                                     </svg>
-                                    <svg id="voice-pause-icon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                                    <svg id="voice-pause-icon" class="w-4 h-4 hidden" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z" />
                                     </svg>
                                     <span id="voice-play-text">Play Voice Demo</span>
                                 </button>
@@ -422,38 +623,54 @@
 
                     <!-- WhatsApp Channel Demo -->
                     <div id="whatsapp-demo" class="channel-content flex justify-center mb-12 hidden">
-                        <div class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 shadow-xl max-w-2xl">
-                            <div class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-6 mb-4">
+                        <div
+                            class="backdrop-blur-lg bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 shadow-xl max-w-2xl">
+                            <div
+                                class="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-6 mb-4">
                                 <div class="flex items-center gap-3 mb-4">
                                     <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
                                         <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                                            <path
+                                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                                         </svg>
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-slate-800 dark:text-slate-100">IvoryTusk AI Agent</h4>
-                                        <p class="text-sm text-green-600 dark:text-green-400">Online • Responds instantly</p>
+                                        <h4 class="font-semibold text-slate-800 dark:text-slate-100">IvoryTusk AI Agent
+                                        </h4>
+                                        <p class="text-sm text-green-600 dark:text-green-400">Online • Responds
+                                            instantly</p>
                                     </div>
                                 </div>
                                 <div class="space-y-3">
                                     <div class="flex justify-end">
-                                        <div class="bg-green-500 text-white px-4 py-2 rounded-l-2xl rounded-tr-2xl max-w-xs">
-                                            <p class="text-sm">Hi! I'm interested in booking an appointment for a consultation.</p>
+                                        <div
+                                            class="bg-green-500 text-white px-4 py-2 rounded-l-2xl rounded-tr-2xl max-w-xs">
+                                            <p class="text-sm">Hi! I'm interested in booking an appointment for a
+                                                consultation.</p>
                                         </div>
                                     </div>
                                     <div class="flex justify-start">
-                                        <div class="bg-white dark:bg-slate-700 px-4 py-2 rounded-r-2xl rounded-tl-2xl max-w-xs shadow-sm">
-                                            <p class="text-sm text-slate-800 dark:text-slate-100">Hello! I'd be happy to help you book an appointment. What type of consultation are you looking for and what's your preferred date and time?</p>
+                                        <div
+                                            class="bg-white dark:bg-slate-700 px-4 py-2 rounded-r-2xl rounded-tl-2xl max-w-xs shadow-sm">
+                                            <p class="text-sm text-slate-800 dark:text-slate-100">Hello! I'd be happy to
+                                                help you book an appointment. What type of consultation are you looking
+                                                for and what's your preferred date and time?</p>
                                         </div>
                                     </div>
                                     <div class="flex justify-end">
-                                        <div class="bg-green-500 text-white px-4 py-2 rounded-l-2xl rounded-tr-2xl max-w-xs">
-                                            <p class="text-sm">I need a business consultation. How about tomorrow at 2 PM?</p>
+                                        <div
+                                            class="bg-green-500 text-white px-4 py-2 rounded-l-2xl rounded-tr-2xl max-w-xs">
+                                            <p class="text-sm">I need a business consultation. How about tomorrow at 2
+                                                PM?</p>
                                         </div>
                                     </div>
                                     <div class="flex justify-start">
-                                        <div class="bg-white dark:bg-slate-700 px-4 py-2 rounded-r-2xl rounded-tl-2xl max-w-xs shadow-sm">
-                                            <p class="text-sm text-slate-800 dark:text-slate-100">Perfect! I've booked your business consultation for tomorrow at 2 PM. You'll receive a confirmation message shortly. Is there anything specific you'd like to discuss?</p>
+                                        <div
+                                            class="bg-white dark:bg-slate-700 px-4 py-2 rounded-r-2xl rounded-tl-2xl max-w-xs shadow-sm">
+                                            <p class="text-sm text-slate-800 dark:text-slate-100">Perfect! I've booked
+                                                your business consultation for tomorrow at 2 PM. You'll receive a
+                                                confirmation message shortly. Is there anything specific you'd like to
+                                                discuss?</p>
                                         </div>
                                     </div>
                                 </div>
@@ -462,9 +679,12 @@
                                 "Experience seamless booking through WhatsApp - just like texting a friend!"
                             </p>
                             <div class="flex justify-center">
-                                <a href="https://wa.me/919664501475?text=Hello!%20I%27m%20interested%20in%20learning%20more%20about%20AI%20Agents.%20Can%20you%20tell%20me%20more%3F" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-medium transition-colors duration-200 flex items-center gap-2">
+                                <a href="https://wa.me/919664501475?text=Hello!%20I%27m%20interested%20in%20learning%20more%20about%20AI%20Agents.%20Can%20you%20tell%20me%20more%3F"
+                                    target="_blank"
+                                    class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-medium transition-colors duration-200 flex items-center gap-2">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                                        <path
+                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                                     </svg>
                                     <span>Try WhatsApp Demo</span>
                                 </a>
@@ -472,7 +692,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div id="voice-capabilities-container" class="grid md:grid-cols-3 gap-8">
                     <!-- Voice capability cards will be dynamically inserted here by JavaScript -->
                 </div>
@@ -491,27 +711,34 @@
                     </p>
                 </div>
                 <!-- Industry Tabs (Glassmorphism) -->
-                <div class="backdrop-blur-lg bg-white/30 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 rounded-full p-2 mb-8 max-w-3xl mx-auto">
+                <div
+                    class="backdrop-blur-lg bg-white/30 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 rounded-full p-2 mb-8 max-w-3xl mx-auto">
                     <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
-                        <button id="tab-builders" data-tab="builders" class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
+                        <button id="tab-builders" data-tab="builders"
+                            class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
                             Home Builders
                         </button>
-                        <button id="tab-furniture" data-tab="furniture" class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
+                        <button id="tab-furniture" data-tab="furniture"
+                            class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
                             Furniture
                         </button>
-                        <button id="tab-architects" data-tab="architects" class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
+                        <button id="tab-architects" data-tab="architects"
+                            class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
                             Architects
                         </button>
-                        <button id="tab-healthcare" data-tab="healthcare" class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
+                        <button id="tab-healthcare" data-tab="healthcare"
+                            class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
                             Healthcare
                         </button>
-                        <button id="tab-automation" data-tab="automation" class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
+                        <button id="tab-automation" data-tab="automation"
+                            class="tab-btn px-3 py-2 rounded-full font-medium transition-all duration-300 text-sm text-slate-600 dark:text-slate-300 hover:text-orange-600 hover:bg-white/50 dark:hover:bg-slate-800/50">
                             Automation
                         </button>
                     </div>
                 </div>
                 <!-- Industry Content (Glassmorphism) -->
-                <div id="industries-content" class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
+                <div id="industries-content"
+                    class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
                     <!-- Tab content will be dynamically inserted here -->
                 </div>
             </div>
@@ -519,47 +746,57 @@
 
         <!-- The Numbers Will Speak Section -->
         <section class="py-24 relative">
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/20 to-transparent dark:via-orange-900/10"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/20 to-transparent dark:via-orange-900/10">
+            </div>
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                 <div class="text-center mb-16">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full mb-6">
+                    <div
+                        class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 dark:bg-orange-900/30 rounded-full mb-6">
                         <svg class="w-10 h-10 text-orange-600" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                            <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
                         </svg>
                     </div>
-                    
+
                     <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
-                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">The Numbers Will Speak</span>
+                        <span class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">The
+                            Numbers Will Speak</span>
                     </h2>
-                    
+
                     <p class="text-2xl md:text-3xl text-slate-700 dark:text-slate-200 font-semibold mb-12">
                         Real Results. Real Growth.
                     </p>
-                    
+
                     <!-- Statistics Grid -->
                     <div class="grid md:grid-cols-3 gap-8 mb-12">
                         <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 shadow-xl
                             transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div class="text-6xl md:text-7xl font-bold text-orange-600 mb-4">80%</div>
-                            <div class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-2">Productivity Boost</div>
+                            <div class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-2">Productivity
+                                Boost</div>
                         </div>
                         <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 shadow-xl
                             transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div class="text-6xl md:text-7xl font-bold text-orange-600 mb-4">60%</div>
-                            <div class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-2">Cost Reduction</div>
+                            <div class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-2">Cost Reduction
+                            </div>
                         </div>
                         <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 shadow-xl
                             transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                             <div class="text-6xl md:text-7xl font-bold text-orange-600 mb-4">30%</div>
-                            <div class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-2">Improved Conversions</div>
+                            <div class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-2">Improved
+                                Conversions</div>
                         </div>
                     </div>
-                    
+
                     <!-- Results Description -->
-                    <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
+                    <div
+                        class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
                         <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                            By automatically qualifying leads, our agents help your sales team focus on the best opportunities, 
-                            driving a higher conversion rate and ensuring no potential customer slips through the cracks.
+                            By automatically qualifying leads, our agents help your sales team focus on the best
+                            opportunities,
+                            driving a higher conversion rate and ensuring no potential customer slips through the
+                            cracks.
                         </p>
                     </div>
                 </div>
@@ -571,7 +808,8 @@
         <section class="py-24 relative">
             <div class="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-orange-600/20 to-orange-500/10"></div>
             <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative">
-                <div class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-12 shadow-2xl">
+                <div
+                    class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-12 shadow-2xl">
                     <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-6">
                         Ready to Start Your AI Transformation?
                     </h2>
@@ -579,7 +817,8 @@
                         Scan the QR code to get a live demo of our AI agents.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <button id="live-demo-cta-btn" class="group relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-semibold
+                        <button id="live-demo-cta-btn"
+                            class="group relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-8 py-4 rounded-full font-semibold
                             shadow-lg shadow-orange-200/50 transform hover:scale-105 transition-all duration-300
                             after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20">
                             <span class="relative z-10">Schedule Live Demo</span>
@@ -605,21 +844,33 @@
                     <div>
                         <h3 class="font-semibold mb-4 text-orange-400">Solutions</h3>
                         <div class="space-y-2">
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Voice Agents</a>
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">ExpenseIQ</a>
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">OrraHome</a>
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Memora</a>
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">ConciergeIQ</a>
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Procumatic</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">Voice
+                                Agents</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">ExpenseIQ</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">OrraHome</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">Memora</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">ConciergeIQ</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">Procumatic</a>
                         </div>
                     </div>
                     <div>
                         <h3 class="font-semibold mb-4 text-orange-400">Industries</h3>
                         <div class="space-y-2">
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Home Builders</a>
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Furniture</a>
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Architects</a>
-                            <a href="#" class="block text-slate-400 hover:text-white transition-colors duration-200">Automation</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">Home
+                                Builders</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">Furniture</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">Architects</a>
+                            <a href="#"
+                                class="block text-slate-400 hover:text-white transition-colors duration-200">Automation</a>
                         </div>
                     </div>
                     <div>
@@ -627,30 +878,38 @@
                         <div class="space-y-2 text-slate-400">
                             <p>contact@ivorytusk.co.in</p>
                             <p>+91 9909507799</p>
-                            
+
                         </div>
                     </div>
                 </div>
                 <div class="border-t border-slate-700 mt-12 pt-8 text-center text-slate-400">
                     <p>&copy; 2025 IvoryTusk AI Solutions. All rights reserved.</p>
                     <div class="mt-4 space-x-6">
-                        <a href="privacy-policy.html" class="hover:text-orange-400 transition-colors duration-200">Privacy Policy</a>
+                        <a href="privacy-policy.html"
+                            class="hover:text-orange-400 transition-colors duration-200">Privacy Policy</a>
                         <span>•</span>
-                        <a href="terms-of-service.html" class="hover:text-orange-400 transition-colors duration-200">Terms of Service</a>
+                        <a href="terms-of-service.html"
+                            class="hover:text-orange-400 transition-colors duration-200">Terms of Service</a>
                     </div>
                 </div>
             </div>
         </footer>
 
         <!-- Modal Component -->
-        <div id="modal-wrapper" class="modal fixed inset-0 blur-bg z-[100] flex justify-center items-center p-4 opacity-0 invisible">
-            <div id="modal-content-container" class="bg-gradient-to-br from-stone-50 via-orange-50 to-stone-100 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 backdrop-blur-xl border border-white/20 dark:border-slate-600/50 p-8 rounded-2xl w-full max-w-lg shadow-2xl relative">
-                <button id="close-modal-btn" class="absolute top-4 right-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <div id="modal-wrapper"
+            class="modal fixed inset-0 blur-bg z-[100] flex justify-center items-center p-4 opacity-0 invisible">
+            <div id="modal-content-container"
+                class="bg-gradient-to-br from-stone-50 via-orange-50 to-stone-100 dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 backdrop-blur-xl border border-white/20 dark:border-slate-600/50 p-8 rounded-2xl w-full max-w-lg shadow-2xl relative">
+                <button id="close-modal-btn"
+                    class="absolute top-4 right-4 text-slate-600 dark:text-slate-300 hover:text-slate-800 dark:hover:text-slate-100 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <h2 id="modal-title" class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6 text-center"></h2>
+                <h2 id="modal-title" class="text-3xl font-bold text-slate-800 dark:text-slate-100 mb-6 text-center">
+                </h2>
                 <div id="modal-form-container">
                     <!-- Forms will be dynamically inserted here -->
                 </div>
@@ -662,223 +921,223 @@
 
     <!-- Chatwoot Chat Widget with Enhanced Features -->
     <style>
-      /* Custom Chatwoot Widget Styles */
+        /* Custom Chatwoot Widget Styles */
 
-      /* Hide "Powered by Chatwoot" branding */
-      .branding--text,
-      .branding,
-      [class*="branding"],
-      [class*="powered-by"] {
-        display: none !important;
-      }
+        /* Hide "Powered by Chatwoot" branding */
+        .branding--text,
+        .branding,
+        [class*="branding"],
+        [class*="powered-by"] {
+            display: none !important;
+        }
 
-      /* Custom launcher icon styling */
-      .woot-widget-bubble {
-        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
-        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4) !important;
-      }
+        /* Custom launcher icon styling */
+        .woot-widget-bubble {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+            box-shadow: 0 8px 24px rgba(249, 115, 22, 0.4) !important;
+        }
 
-      .woot-widget-bubble:hover {
-        transform: scale(1.1) !important;
-        box-shadow: 0 12px 32px rgba(249, 115, 22, 0.5) !important;
-      }
+        .woot-widget-bubble:hover {
+            transform: scale(1.1) !important;
+            box-shadow: 0 12px 32px rgba(249, 115, 22, 0.5) !important;
+        }
 
-      /* Custom widget header */
-      .header--wrap {
-        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
-      }
+        /* Custom widget header */
+        .header--wrap {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%) !important;
+        }
 
-      /* Hide close button on widget when needed */
-      .woot--close {
-        opacity: 0.8 !important;
-      }
+        /* Hide close button on widget when needed */
+        .woot--close {
+            opacity: 0.8 !important;
+        }
 
-      /* Custom scrollbar for chat */
-      .conversation-wrap::-webkit-scrollbar {
-        width: 6px;
-      }
+        /* Custom scrollbar for chat */
+        .conversation-wrap::-webkit-scrollbar {
+            width: 6px;
+        }
 
-      .conversation-wrap::-webkit-scrollbar-thumb {
-        background-color: #f97316;
-        border-radius: 3px;
-      }
+        .conversation-wrap::-webkit-scrollbar-thumb {
+            background-color: #f97316;
+            border-radius: 3px;
+        }
     </style>
 
     <script>
-      // User Identifier Generation System
-      function generateUserIdentifier() {
-        // Try to get existing identifier from localStorage
-        let identifier = localStorage.getItem('chatwoot_user_id');
+        // User Identifier Generation System
+        function generateUserIdentifier() {
+            // Try to get existing identifier from localStorage
+            let identifier = localStorage.getItem('chatwoot_user_id');
 
-        if (!identifier) {
-          // Generate a unique identifier based on browser fingerprint
-          const fingerprint = {
-            screen: `${screen.width}x${screen.height}x${screen.colorDepth}`,
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            language: navigator.language,
-            platform: navigator.platform,
-            userAgent: navigator.userAgent.substring(0, 100), // First 100 chars
-            timestamp: Date.now()
-          };
+            if (!identifier) {
+                // Generate a unique identifier based on browser fingerprint
+                const fingerprint = {
+                    screen: `${screen.width}x${screen.height}x${screen.colorDepth}`,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    language: navigator.language,
+                    platform: navigator.platform,
+                    userAgent: navigator.userAgent.substring(0, 100), // First 100 chars
+                    timestamp: Date.now()
+                };
 
-          // Create a hash-like identifier
-          identifier = btoa(JSON.stringify(fingerprint))
-            .replace(/[^a-zA-Z0-9]/g, '')
-            .substring(0, 32);
+                // Create a hash-like identifier
+                identifier = btoa(JSON.stringify(fingerprint))
+                    .replace(/[^a-zA-Z0-9]/g, '')
+                    .substring(0, 32);
 
-          // Store it for future visits
-          localStorage.setItem('chatwoot_user_id', identifier);
+                // Store it for future visits
+                localStorage.setItem('chatwoot_user_id', identifier);
+            }
+
+            return identifier;
         }
 
-        return identifier;
-      }
-
-      // Get user's IP and additional info (optional enhancement)
-      async function getUserInfo() {
-        try {
-          // You can use a service like ipapi.co for more info
-          const response = await fetch('https://ipapi.co/json/');
-          const data = await response.json();
-          return {
-            ip: data.ip,
-            city: data.city,
-            country: data.country_name,
-            timezone: data.timezone
-          };
-        } catch (error) {
-          console.log('Could not fetch IP info:', error);
-          return {};
-        }
-      }
-
-      // HMAC Generation Function
-      async function getIdentifierHash(identifier) {
-        try {
-          const response = await fetch('/api/chatwoot-hmac', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ identifier })
-          });
-
-          const data = await response.json();
-          return data.identifierHash;
-        } catch (error) {
-          console.error('Failed to generate HMAC:', error);
-          return null;
-        }
-      }
-
-      // Chatwoot Settings Configuration
-      window.chatwootSettings = {
-        // Position
-        position: 'right', // or 'left'
-
-        // Language & Localization
-        useBrowserLanguage: true, // Auto-detect browser language
-        locale: 'en', // Fallback language
-
-        // Dark Mode - Auto detect from system
-        darkMode: 'auto', // 'light', 'dark', or 'auto'
-
-        // Widget Type
-        type: 'expanded_bubble', // or 'standard'
-        launcherTitle: 'Chat with us',
-
-        // Popout Window
-        showPopoutButton: true,
-
-        // Optional UI Features
-        hideMessageBubble: false,
-        showUnreadMessagesDialog: true,
-
-        // Enable various features
-        enableFileUpload: true,
-        enableEmojiPicker: true,
-        enableEndConversation: true,
-      };
-
-      // Fetch Chatwoot Configuration from Server
-      async function getChatwootConfig() {
-        try {
-          const response = await fetch('/api/chatwoot-config');
-          const config = await response.json();
-
-          if (!config.websiteToken || !config.baseUrl) {
-            throw new Error('Invalid configuration received');
-          }
-
-          return config;
-        } catch (error) {
-          console.error('Failed to fetch Chatwoot config:', error);
-          return null;
-        }
-      }
-
-      // Initialize Chatwoot with Identity Validation
-      (async function(d,t) {
-        // Fetch configuration from server
-        const config = await getChatwootConfig();
-
-        if (!config) {
-          console.error('Chatwoot: Configuration not available');
-          return;
+        // Get user's IP and additional info (optional enhancement)
+        async function getUserInfo() {
+            try {
+                // You can use a service like ipapi.co for more info
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                return {
+                    ip: data.ip,
+                    city: data.city,
+                    country: data.country_name,
+                    timezone: data.timezone
+                };
+            } catch (error) {
+                console.log('Could not fetch IP info:', error);
+                return {};
+            }
         }
 
-        console.log('Chatwoot: Configuration loaded from server');
+        // HMAC Generation Function
+        async function getIdentifierHash(identifier) {
+            try {
+                const response = await fetch('/api/chatwoot-hmac', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ identifier })
+                });
 
-        // Generate user identifier
-        const userIdentifier = generateUserIdentifier();
-        console.log('User Identifier:', userIdentifier);
+                const data = await response.json();
+                return data.identifierHash;
+            } catch (error) {
+                console.error('Failed to generate HMAC:', error);
+                return null;
+            }
+        }
 
-        // Get HMAC hash for identity validation
-        const identifierHash = await getIdentifierHash(userIdentifier);
+        // Chatwoot Settings Configuration
+        window.chatwootSettings = {
+            // Position
+            position: 'right', // or 'left'
 
-        // Get additional user info (optional)
-        const userInfo = await getUserInfo();
+            // Language & Localization
+            useBrowserLanguage: true, // Auto-detect browser language
+            locale: 'en', // Fallback language
 
-        // Load Chatwoot SDK
-        var BASE_URL = config.baseUrl;
-        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
-        g.src = BASE_URL + "/packs/js/sdk.js";
-        g.async = true;
-        s.parentNode.insertBefore(g,s);
+            // Dark Mode - Auto detect from system
+            darkMode: 'auto', // 'light', 'dark', or 'auto'
 
-        g.onload = function(){
-          window.chatwootSDK.run({
-            websiteToken: config.websiteToken,
-            baseUrl: BASE_URL
-          });
+            // Widget Type
+            type: 'expanded_bubble', // or 'standard'
+            launcherTitle: 'Chat with us',
 
-          // Set user information with identity validation
-          if (identifierHash) {
-            window.$chatwoot.setUser(userIdentifier, {
-              identifier_hash: identifierHash,
-              name: 'Website Visitor',
-              email: '', // Will be collected during conversation
-              phone_number: '', // Will be collected during conversation
-              ...userInfo // Include IP, city, country if available
-            });
+            // Popout Window
+            showPopoutButton: true,
 
-            console.log('Chatwoot initialized with identity validation');
-          } else {
-            console.warn('Chatwoot initialized without identity validation (HMAC failed)');
-          }
+            // Optional UI Features
+            hideMessageBubble: false,
+            showUnreadMessagesDialog: true,
 
-          // Set custom attributes
-          window.$chatwoot.setCustomAttributes({
-            source: 'website',
-            page: window.location.pathname,
-            referrer: document.referrer || 'direct',
-            userAgent: navigator.userAgent.substring(0, 100),
-            screenResolution: `${screen.width}x${screen.height}`,
-            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-            language: navigator.language
-          });
+            // Enable various features
+            enableFileUpload: true,
+            enableEmojiPicker: true,
+            enableEndConversation: true,
         };
-      })(document,"script");
-    </script>                  
+
+        // Fetch Chatwoot Configuration from Server
+        async function getChatwootConfig() {
+            try {
+                const response = await fetch('/api/chatwoot-config');
+                const config = await response.json();
+
+                if (!config.websiteToken || !config.baseUrl) {
+                    throw new Error('Invalid configuration received');
+                }
+
+                return config;
+            } catch (error) {
+                console.error('Failed to fetch Chatwoot config:', error);
+                return null;
+            }
+        }
+
+        // Initialize Chatwoot with Identity Validation
+        (async function (d, t) {
+            // Fetch configuration from server
+            const config = await getChatwootConfig();
+
+            if (!config) {
+                console.error('Chatwoot: Configuration not available');
+                return;
+            }
+
+            console.log('Chatwoot: Configuration loaded from server');
+
+            // Generate user identifier
+            const userIdentifier = generateUserIdentifier();
+            console.log('User Identifier:', userIdentifier);
+
+            // Get HMAC hash for identity validation
+            const identifierHash = await getIdentifierHash(userIdentifier);
+
+            // Get additional user info (optional)
+            const userInfo = await getUserInfo();
+
+            // Load Chatwoot SDK
+            var BASE_URL = config.baseUrl;
+            var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            g.src = BASE_URL + "/packs/js/sdk.js";
+            g.async = true;
+            s.parentNode.insertBefore(g, s);
+
+            g.onload = function () {
+                window.chatwootSDK.run({
+                    websiteToken: config.websiteToken,
+                    baseUrl: BASE_URL
+                });
+
+                // Set user information with identity validation
+                if (identifierHash) {
+                    window.$chatwoot.setUser(userIdentifier, {
+                        identifier_hash: identifierHash,
+                        name: 'Website Visitor',
+                        email: '', // Will be collected during conversation
+                        phone_number: '', // Will be collected during conversation
+                        ...userInfo // Include IP, city, country if available
+                    });
+
+                    console.log('Chatwoot initialized with identity validation');
+                } else {
+                    console.warn('Chatwoot initialized without identity validation (HMAC failed)');
+                }
+
+                // Set custom attributes
+                window.$chatwoot.setCustomAttributes({
+                    source: 'website',
+                    page: window.location.pathname,
+                    referrer: document.referrer || 'direct',
+                    userAgent: navigator.userAgent.substring(0, 100),
+                    screenResolution: `${screen.width}x${screen.height}`,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    language: navigator.language
+                });
+            };
+        })(document, "script");
+    </script>
 
     <!-- Voice Agent Widget - DISABLED -->
     <!--
@@ -1061,4 +1320,5 @@
     </script>
     -->
 </body>
+
 </html>

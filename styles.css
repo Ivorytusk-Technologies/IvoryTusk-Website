@@ -52,3 +52,8 @@ body {
 .dark .shadow-orange-200\/50 {
     box-shadow: 0 10px 15px -3px rgba(251, 146, 60, 0.3), 0 4px 6px -2px rgba(251, 146, 60, 0.15);
 }
+
+/* 3D Perspective for LiveLoop Dashboard */
+.perspective-1000 {
+    perspective: 1000px;
+}
