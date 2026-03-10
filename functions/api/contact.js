@@ -6,7 +6,7 @@
 
 export async function onRequestPost(context) {
   const { request, env } = context;
-  
+
   // CORS headers
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -20,13 +20,13 @@ export async function onRequestPost(context) {
     const formData = await request.json();
     console.log('Form data parsed:', JSON.stringify(formData, null, 2));
     const clientIP = request.headers.get('CF-Connecting-IP') || 'unknown';
-    
+
     // Validate required fields
     const requiredFields = ['name', 'email'];
     for (const field of requiredFields) {
       if (!formData[field]) {
-        return new Response(JSON.stringify({ 
-          error: `${field} is required` 
+        return new Response(JSON.stringify({
+          error: `${field} is required`
         }), {
           status: 400,
           headers: corsHeaders
@@ -58,13 +58,13 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
     // Send email using Gmail SMTP ONLY
     let emailSent = false;
     let debugInfo = [];
-    
+
     // Debug: Check environment variables
     debugInfo.push(`Webhook URL: ${env.CONTACT_FORM_WEBHOOK ? 'SET' : 'NOT SET'}`);
     debugInfo.push(`Gmail credentials available: ${!!(env.GMAIL_USER && env.GMAIL_PASS)}`);
     debugInfo.push(`Gmail user: ${env.GMAIL_USER ? 'SET' : 'NOT SET'}`);
     debugInfo.push(`Gmail pass: ${env.GMAIL_PASS ? 'SET' : 'NOT SET'}`);
-    
+
     // n8n Webhook Solution - Clean and Reliable
     if (env.CONTACT_FORM_WEBHOOK) {
       try {
@@ -78,13 +78,13 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
           usecase: formData.usecase || formData['use-case'] || null,
           message: formData.message || null,
           formType: formData.formType || 'Contact Form',
-          
+
           // Metadata
           timestamp: new Date().toISOString(),
           clientIP: clientIP,
           userAgent: request.headers.get('User-Agent') || 'Unknown',
           referer: request.headers.get('Referer') || 'Direct',
-          
+
           // Email Configuration (for n8n to use)
           emailConfig: {
             to: 'contact@ivorytusk.co.in',
@@ -96,7 +96,7 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
         debugInfo.push(`Webhook URL configured: ${env.CONTACT_FORM_WEBHOOK ? 'YES' : 'NO'}`);
         console.log('Sending to webhook:', env.CONTACT_FORM_WEBHOOK);
         console.log('Webhook payload:', JSON.stringify(webhookPayload, null, 2));
-        
+
         // Send to n8n webhook
         const webhookResponse = await fetch(env.CONTACT_FORM_WEBHOOK, {
           method: 'POST',
@@ -127,11 +127,47 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
       debugInfo.push('❌ No webhook URL configured (CONTACT_FORM_WEBHOOK missing)');
     }
 
+    // Fallback to FormSubmit if n8n webhook wasn't set or failed
+    if (!emailSent) {
+      debugInfo.push('Attempting FormSubmit API as fallback...');
+      try {
+        const emailResponse = await fetch('https://formsubmit.co/ajax/contact@ivorytusk.co.in', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone || 'Not provided',
+            company: formData.company || 'Not provided',
+            usecase: formData.usecase || formData['use-case'] || 'Not provided',
+            message: formData.message || 'No additional message',
+            formType: formData.formType || 'Contact Form',
+            _subject: `[WEBSITE FORM] New Contact - ${formData.name} from IvoryTusk Website`,
+            _captcha: 'false',
+            _template: 'table'
+          }),
+        });
+
+        if (emailResponse.ok) {
+          console.log('Email sent via FormSubmit fallback');
+          debugInfo.push('✅ FormSubmit: SUCCESS');
+          emailSent = true;
+        } else {
+          debugInfo.push(`❌ FormSubmit: Failed with status ${emailResponse.status}`);
+        }
+      } catch (error) {
+        debugInfo.push(`❌ FormSubmit: Error - ${error.message}`);
+      }
+    }
+
     // Check if email was sent successfully
     if (!emailSent) {
       debugInfo.push('❌ Email sending failed - no method succeeded');
-      return new Response(JSON.stringify({ 
-        success: false, 
+      return new Response(JSON.stringify({
+        success: false,
         error: 'Email sending failed. Please check the configuration and try again.',
         debug: debugInfo
       }), {
@@ -140,8 +176,8 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
       });
     }
 
-    return new Response(JSON.stringify({ 
-      success: true, 
+    return new Response(JSON.stringify({
+      success: true,
       message: 'Thank you for your message! Our team will contact you within 24 hours.',
       debug: debugInfo, // Remove this in production
       emailSent: emailSent
@@ -151,7 +187,7 @@ User Agent: ${request.headers.get('User-Agent') || 'Unknown'}
 
   } catch (error) {
     console.error('Contact form error:', error);
-    return new Response(JSON.stringify({ 
+    return new Response(JSON.stringify({
       error: 'Sorry, there was an error sending your message. Please try again or contact us directly at contact@ivorytusk.co.in',
       debug: [`General Error: ${error.message}`, `Stack: ${error.stack?.substring(0, 200) || 'No stack trace'}`]
     }), {

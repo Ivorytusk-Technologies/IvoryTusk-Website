@@ -223,8 +223,8 @@ const industriesContentData = {
 };
 
 // DOM Ready Function
-document.addEventListener('DOMContentLoaded', function() {
-    
+document.addEventListener('DOMContentLoaded', function () {
+
     // --- DOM Element References ---
     const navbar = document.getElementById('navbar');
     const successMessage = document.getElementById('success-message');
@@ -332,6 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <select id="usecase" name="usecase" required
                             class="w-full p-3 rounded-lg bg-white/50 dark:bg-slate-700/50 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
                             <option value="" disabled selected>Select an option</option>
+                            <option value="LiveLoop">LiveLoop</option>
                             <option value="AI Voice Agents">AI Voice Agents</option>
                             <option value="AI WhatsApp Agents">AI WhatsApp Agents</option>
                             <option value="Workflow Automation">Workflow Automation</option>
@@ -368,6 +369,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <select id="contact-usecase" name="contact-usecase" required
                             class="w-full p-3 rounded-lg bg-white/50 dark:bg-slate-700/50 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
                             <option value="" disabled selected>Select an option</option>
+                            <option value="LiveLoop">LiveLoop</option>
                             <option value="AI Voice Agents">AI Voice Agents</option>
                             <option value="AI WhatsApp Agents">AI WhatsApp Agents</option>
                             <option value="Workflow Automation">Workflow Automation</option>
@@ -418,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let [key, value] of formData.entries()) {
                 // Normalize field names for Netlify form
                 if (formType === 'contact-form') {
-                    switch(key) {
+                    switch (key) {
                         case 'contact-name':
                             data.append('name', value);
                             break;
@@ -445,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Submit to Cloudflare Pages Function
             const apiUrl = '/api/contact'; // Pages Functions are available at /api/* paths
-            
+
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
@@ -472,7 +474,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-            
+
             // Show user-friendly error message
             alert('There was an error submitting your form. Please try again or contact us directly at contact@ivorytusk.co.in or +91 9909507799');
             closeModal();
@@ -492,10 +494,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check for saved theme preference or default to 'light' mode
     const currentTheme = localStorage.getItem('theme') || 'light';
-    
+
     const toggleTheme = () => {
         const isDark = document.documentElement.classList.contains('dark');
-        
+
         if (isDark) {
             document.documentElement.classList.remove('dark');
             localStorage.setItem('theme', 'light');
@@ -512,12 +514,12 @@ document.addEventListener('DOMContentLoaded', function() {
             logoDark.classList.remove('hidden');
         }
     };
-    
+
     // Set initial theme
     if (currentTheme === 'dark') {
         toggleTheme();
     }
-    
+
     themeToggle.addEventListener('click', toggleTheme);
 
     // Industries tab logic
@@ -534,7 +536,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         renderIndustryContent(activeTab);
     };
-    
+
     // Audio functionality
     const setupMediaControls = () => {
         // Hero section audio controls (if they exist)
@@ -544,7 +546,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const pauseIcon = document.getElementById('pause-icon');
         const playText = document.getElementById('play-text');
         const heroVisualizer = document.getElementById('hero-voice-visualizer');
-        
+
         // Voice agents section audio controls
         const voiceAgentsAudio = document.getElementById('voice-agents-audio');
         const playVoiceAgentsBtn = document.getElementById('play-voice-agents-audio');
@@ -552,9 +554,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const voicePauseIcon = document.getElementById('voice-pause-icon');
         const voicePlayText = document.getElementById('voice-play-text');
         const voiceAgentsVisualizer = document.getElementById('voice-agents-visualizer');
-        
+
         const watchVideoBtn = document.getElementById('watch-video-btn');
-        
+
         // Hero audio controls (if they exist)
         if (playDemoBtn && demoAudio) {
             playDemoBtn.addEventListener('click', () => {
@@ -572,7 +574,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (heroVisualizer) heroVisualizer.style.animationPlayState = 'paused';
                 }
             });
-            
+
             demoAudio.addEventListener('ended', () => {
                 playIcon.classList.remove('hidden');
                 pauseIcon.classList.add('hidden');
@@ -580,7 +582,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (heroVisualizer) heroVisualizer.style.animationPlayState = 'paused';
             });
         }
-        
+
         // 3D Orbital Audio Visualizer
         let orbitalScene, orbitalCamera, orbitalRenderer;
         let nucleus, waveforms = [], electrons = [];
@@ -590,11 +592,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let ringAnimationProgress = 0;
         let animationStartTime = 0;
         let lastAudioIntensity = 0;
-        
+
         // Bar waveform visualization
         let leftBars = [], rightBars = [];
         let barWaveformData = null;
-        
+
         // Orbital visualizer constants
         const NUM_WAVEFORM_ORBITS = 5;
         const WAVEFORM_POINTS = 256;
@@ -603,33 +605,33 @@ document.addEventListener('DOMContentLoaded', function() {
         const ELECTRON_ORBIT_RADIUS = 0.8; // Good balance - visible but not too far from nucleus
         const ANIMATION_DURATION = 500;
         const ORANGE_COLOR = '#37AFE1'; // Change this hex code to any color you want
-        
+
         // Bar waveform constants
         const NUM_BARS = 40; // Number of bars on each side for full width coverage
         const BAR_WIDTH = 0.10;
         const BAR_SPACING = 0.20;
         const MAX_BAR_HEIGHT = 50.0;
         const BAR_DISTANCE_FROM_CENTER = 9.0; // Extend further to edges 
-        
+
         // Initialize 3D Orbital Visualizer
         const initOrbitalVisualizer = () => {
             const canvas = document.getElementById('orbitalCanvas');
             if (!canvas) return false;
-            
+
             // Scene setup
             orbitalScene = new THREE.Scene();
             orbitalScene.background = new THREE.Color(0x000000);
-            
+
             orbitalCamera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
             orbitalCamera.position.z = 8; // Moved camera back for better view
-            
+
             orbitalRenderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
             orbitalRenderer.setPixelRatio(window.devicePixelRatio);
             orbitalRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
-            
+
             const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
             orbitalScene.add(ambientLight);
-            
+
             // Create central nucleus (wireframe sphere)
             const nucleusGeometry = new THREE.IcosahedronGeometry(1.0, 2); // Slightly larger nucleus
             const nucleusMaterial = new THREE.LineBasicMaterial({
@@ -642,26 +644,26 @@ document.addEventListener('DOMContentLoaded', function() {
             const edges = new THREE.EdgesGeometry(nucleusGeometry);
             nucleus = new THREE.LineSegments(edges, nucleusMaterial);
             orbitalScene.add(nucleus);
-            
+
             // Create waveform orbits
             createOrbitalWaveforms();
-            
+
             // Create electrons
             createOrbitalElectrons();
-            
+
             // Create bar waveform
             createBarWaveform();
-            
+
             // Try to initialize audio analysis
             initOrbitalAudioAnalysis();
-            
+
             // Initial render
             orbitalRenderer.render(orbitalScene, orbitalCamera);
-            
+
             console.log('3D Orbital visualizer initialized');
             return true;
         };
-        
+
         // Create bar waveform visualization
         const createBarWaveform = () => {
             const barGeometry = new THREE.BoxGeometry(BAR_WIDTH, 0.1, BAR_WIDTH);
@@ -671,46 +673,46 @@ document.addEventListener('DOMContentLoaded', function() {
                 opacity: 0.7,
                 blending: THREE.AdditiveBlending,
             });
-            
+
             // Create left side bars
             for (let i = 0; i < NUM_BARS; i++) {
                 const bar = new THREE.Mesh(barGeometry, barMaterial.clone());
-                
-                                 // Position bars on the left side
-                 bar.position.x = -BAR_DISTANCE_FROM_CENTER + (i * BAR_SPACING);
-                 bar.position.y = 0; // Center position - bars will grow up and down from here
-                 bar.position.z = -2; // Behind the orbital sphere
-                 
-                 // Store original Y position for animation (center point)
-                 bar.originalY = 0;
+
+                // Position bars on the left side
+                bar.position.x = -BAR_DISTANCE_FROM_CENTER + (i * BAR_SPACING);
+                bar.position.y = 0; // Center position - bars will grow up and down from here
+                bar.position.z = -2; // Behind the orbital sphere
+
+                // Store original Y position for animation (center point)
+                bar.originalY = 0;
                 bar.targetHeight = 0.1;
                 bar.currentHeight = 0.1;
-                
+
                 leftBars.push(bar);
                 orbitalScene.add(bar);
             }
-            
+
             // Create right side bars (mirrored)
             for (let i = 0; i < NUM_BARS; i++) {
                 const bar = new THREE.Mesh(barGeometry, barMaterial.clone());
-                
-                                 // Position bars on the right side
-                 bar.position.x = BAR_DISTANCE_FROM_CENTER - (i * BAR_SPACING);
-                 bar.position.y = 0; // Center position - bars will grow up and down from here
-                 bar.position.z = -2; // Behind the orbital sphere
-                 
-                 // Store original Y position for animation (center point)
-                 bar.originalY = 0;
+
+                // Position bars on the right side
+                bar.position.x = BAR_DISTANCE_FROM_CENTER - (i * BAR_SPACING);
+                bar.position.y = 0; // Center position - bars will grow up and down from here
+                bar.position.z = -2; // Behind the orbital sphere
+
+                // Store original Y position for animation (center point)
+                bar.originalY = 0;
                 bar.targetHeight = 0.1;
                 bar.currentHeight = 0.1;
-                
+
                 rightBars.push(bar);
                 orbitalScene.add(bar);
             }
-            
+
             console.log(`Created ${NUM_BARS * 2} waveform bars`);
         };
-        
+
         // Initialize audio analysis for the orbital visualizer (CORS-friendly)
         const initOrbitalAudioAnalysis = () => {
             // Skip Web Audio API initialization to avoid CORS issues
@@ -718,7 +720,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Using CORS-friendly audio visualization (fake animation)');
             return false; // Always use fake animation to avoid CORS issues
         };
-        
+
         // Create orbital waveforms
         const createOrbitalWaveforms = () => {
             const waveformMaterial = new THREE.LineBasicMaterial({
@@ -727,7 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 blending: THREE.AdditiveBlending,
                 linewidth: 2,
             });
-            
+
             for (let i = 0; i < NUM_WAVEFORM_ORBITS; i++) {
                 const geometry = new THREE.BufferGeometry();
                 const positions = new Float32Array(WAVEFORM_POINTS * 3);
@@ -736,7 +738,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 waveforms.push(waveform);
                 orbitalScene.add(waveform);
             }
-            
+
             // Set different initial rotations for all 5 orbits
             waveforms.forEach((waveform, index) => {
                 const rotationAngle = (index / NUM_WAVEFORM_ORBITS) * Math.PI * 2;
@@ -745,11 +747,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 waveform.rotation.z = rotationAngle * 0.3;
             });
         };
-        
+
         // Create orbital electrons with enhanced comet-like trails
         const createOrbitalElectrons = () => {
             const electronGeometry = new THREE.SphereGeometry(0.08, 12, 12); // Larger, higher quality electrons
-            
+
             for (let i = 0; i < NUM_ELECTRONS; i++) {
                 const electronMaterial = new THREE.MeshBasicMaterial({
                     color: new THREE.Color(ORANGE_COLOR),
@@ -757,24 +759,24 @@ document.addEventListener('DOMContentLoaded', function() {
                     transparent: true,
                     opacity: 1.0,
                 });
-                
+
                 const electron = new THREE.Mesh(electronGeometry, electronMaterial);
                 electron.trail = [];
                 electron.orbitOffset = (i / NUM_ELECTRONS) * Math.PI * 2; // Distribute electrons evenly
                 electron.orbitPlane = i; // Different orbital planes for variety
-                
+
                 // Create comet-like trail with varying sizes and opacity
                 for (let j = 0; j < TRAIL_LENGTH; j++) {
                     const trailSize = 0.08 * (1 - j / TRAIL_LENGTH); // Gradually smaller trail particles
                     const trailGeometry = new THREE.SphereGeometry(Math.max(0.01, trailSize), 8, 8);
-                    
+
                     const trailMaterial = new THREE.MeshBasicMaterial({
                         color: new THREE.Color(ORANGE_COLOR),
                         blending: THREE.AdditiveBlending,
                         transparent: true,
                         opacity: Math.pow(1 - j / TRAIL_LENGTH, 2) * 0.8, // Exponential fade for comet effect
                     });
-                    
+
                     const trailParticle = new THREE.Mesh(trailGeometry, trailMaterial);
                     electron.trail.push(trailParticle);
                     orbitalScene.add(trailParticle);
@@ -783,26 +785,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 orbitalScene.add(electron);
             }
         };
-        
+
         // Start orbital animation
         const startOrbitalVisualizer = () => {
             ringAnimationState = 'appearing';
             animationStartTime = performance.now();
         };
-        
+
         // Stop orbital animation
         const stopOrbitalVisualizer = () => {
             ringAnimationState = 'disappearing';
             animationStartTime = performance.now();
         };
-        
+
         // Orbital animation loop
         const animateOrbitalVisualizer = () => {
             if (!orbitalRenderer || !orbitalScene || !orbitalCamera) return;
-            
+
             const time = performance.now() * 0.008;
             const currentTime = performance.now();
-            
+
             // Handle ring appearance/disappearance animation
             if (ringAnimationState === 'appearing') {
                 let progress = (currentTime - animationStartTime) / ANIMATION_DURATION;
@@ -817,38 +819,38 @@ document.addEventListener('DOMContentLoaded', function() {
                     ringAnimationState = 'hidden';
                 }
             }
-            
+
             // Smart fake animation that responds to audio playback state
             let audioIntensity = 0.3; // Default intensity
             let frequencyData = null;
-            
+
             // Check if audio is actually playing
             const isAudioPlaying = voiceAgentsAudio && !voiceAgentsAudio.paused && voiceAgentsAudio.currentTime > 0;
-            
+
             if (isAudioPlaying) {
                 // Enhanced fake animation that simulates voice patterns
                 const voicePattern1 = Math.sin(time * 0.8 + Math.sin(time * 0.3)) * 0.4;
                 const voicePattern2 = Math.sin(time * 1.2 + Math.cos(time * 0.5)) * 0.3;
                 const voicePattern3 = Math.sin(time * 0.6 + Math.sin(time * 0.7)) * 0.2;
-                
+
                 // Add some randomness to simulate voice unpredictability
                 const randomness = (Math.random() - 0.5) * 0.1;
-                
+
                 const fakeAudioIntensity = 0.5 + voicePattern1 + voicePattern2 + voicePattern3 + randomness;
                 audioIntensity = Math.max(0.2, Math.min(1.0, fakeAudioIntensity)); // Clamp between 0.2 and 1.0
-                
+
                 // Smooth the intensity
                 audioIntensity = lastAudioIntensity * 0.8 + audioIntensity * 0.2;
-                
+
                 // Create fake frequency data for different rings
                 frequencyData = new Uint8Array(256);
                 barWaveformData = new Uint8Array(NUM_BARS);
-                
+
                 for (let i = 0; i < 256; i++) {
                     // Simulate different frequency ranges with varying intensities
                     const freq = i / 256;
                     let value = 0;
-                    
+
                     if (freq < 0.2) {
                         // Bass frequencies - more stable
                         value = (Math.sin(time * 0.5 + i * 0.1) + 1) * 80 + 40;
@@ -859,23 +861,23 @@ document.addEventListener('DOMContentLoaded', function() {
                         // High frequencies - most active
                         value = (Math.sin(time * 2.0 + i * 0.02) + 1) * 120 + 60;
                     }
-                    
+
                     frequencyData[i] = Math.max(0, Math.min(255, value + (Math.random() - 0.5) * 20));
                 }
-                
+
                 // Generate bar waveform data (simulate classic audio visualizer bars)
                 for (let i = 0; i < NUM_BARS; i++) {
                     const barFreq = i / NUM_BARS;
                     const baseValue = Math.sin(time * 1.5 + i * 0.3) * 0.5 + 0.5;
                     const voiceModulation = Math.sin(time * 0.8 + i * 0.1) * 0.3;
                     const randomVariation = (Math.random() - 0.5) * 0.2;
-                    
+
                     let barValue = (baseValue + voiceModulation + randomVariation) * 255;
-                    
+
                     // Make outer bars (edges) more prominent
                     const edgeBoost = Math.abs(i - NUM_BARS / 2) / (NUM_BARS / 2);
                     barValue *= (0.7 + edgeBoost * 0.6);
-                    
+
                     barWaveformData[i] = Math.max(10, Math.min(255, barValue));
                 }
             } else {
@@ -883,15 +885,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 const staticIntensity = 0.2 + Math.sin(time * 0.2) * 0.1;
                 audioIntensity = lastAudioIntensity * 0.95 + staticIntensity * 0.05;
             }
-            
+
             lastAudioIntensity = audioIntensity;
-            
+
             // Update waveforms with frequency data (like original visualizer)
             waveforms.forEach((waveform, index) => {
                 const positions = waveform.geometry.attributes.position.array;
                 const baseRadius = 1.0; // Minimum radius as requested
                 const radius = baseRadius + index * 0.4;
-                
+
                 // Separate frequency ranges for each ring (5 rings now)
                 let freqData = null;
                 if (frequencyData) {
@@ -904,10 +906,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     ];
                     freqData = freqRanges[index] || frequencyData.slice(0, 50); // Fallback for safety
                 }
-                
+
                 for (let i = 0; i < WAVEFORM_POINTS; i++) {
                     const angle = (i / WAVEFORM_POINTS) * Math.PI * 2;
-                    
+
                     let displacement;
                     if (freqData) {
                         // Use real frequency data
@@ -918,133 +920,133 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Fallback fake animation
                         displacement = audioIntensity * 0.8 * Math.sin(angle * 3 + time);
                     }
-                    
+
                     const x = radius * Math.sin(angle);
                     const y = radius * Math.cos(angle);
                     const z = displacement * Math.sin(angle * 2 + time * 0.5);
-                    
+
                     positions[i * 3] = x;
                     positions[i * 3 + 1] = y;
                     positions[i * 3 + 2] = z;
                 }
                 waveform.geometry.attributes.position.needsUpdate = true;
-                
+
                 // Animate scale based on animation progress
                 const currentScale = THREE.MathUtils.lerp(0, 1, ringAnimationProgress);
                 waveform.scale.set(currentScale, currentScale, currentScale);
-                
+
                 // Rotate waveforms
                 waveform.rotation.y += (index * 0.002) + 0.003;
                 waveform.rotation.x += (index % 2 === 0 ? 0.002 : -0.002);
             });
-            
+
             // Animate nucleus
             if (nucleus) {
                 nucleus.rotation.x += 0.002;
                 nucleus.rotation.y += 0.003;
             }
-            
+
             // Animate electrons with varied orbital patterns
             const baseElectronRadius = 1.0; // Base orbit radius
             const electronOrbitRadius = baseElectronRadius + (audioIntensity * 0.5); // Dynamic radius based on audio
-            
+
             electrons.forEach((electron, index) => {
                 // Update trail positions first (comet effect)
                 for (let j = TRAIL_LENGTH - 1; j > 0; j--) {
                     electron.trail[j].position.copy(electron.trail[j - 1].position);
-                    
+
                     // Gradually reduce trail particle opacity for smooth comet fade
                     const fadeRatio = Math.pow(1 - j / TRAIL_LENGTH, 2);
                     electron.trail[j].material.opacity = fadeRatio * 0.8;
                 }
                 electron.trail[0].position.copy(electron.position);
                 electron.trail[0].material.opacity = 0.8;
-                
+
                 // Create varied orbital patterns for each electron
                 const orbitSpeed = 0.3 + (index * 0.15); // Different speeds
                 const currentAngle = time * orbitSpeed + electron.orbitOffset;
-                
+
                 // Different orbital planes and shapes for variety
                 const planeOffset = electron.orbitPlane * Math.PI / NUM_ELECTRONS;
                 const radiusVariation = 0.8 + (index % 2) * 0.4; // Alternate between closer and farther orbits
                 const currentRadius = electronOrbitRadius * radiusVariation;
-                
+
                 // Create 3D orbital paths (elliptical and tilted)
                 electron.position.x = currentRadius * Math.cos(currentAngle) * Math.cos(planeOffset);
                 electron.position.y = currentRadius * Math.sin(currentAngle);
                 electron.position.z = currentRadius * Math.cos(currentAngle) * Math.sin(planeOffset) * 0.6;
-                
+
                 // Add slight wobble based on audio intensity
                 const wobble = audioIntensity * 0.1;
                 electron.position.x += Math.sin(time * 2 + index) * wobble;
                 electron.position.y += Math.cos(time * 1.8 + index) * wobble;
                 electron.position.z += Math.sin(time * 2.2 + index) * wobble;
             });
-            
+
             // Animate bar waveform
             if (barWaveformData) {
-                                 // Animate left bars
-                 leftBars.forEach((bar, index) => {
-                     const barValue = barWaveformData[index] / 255.0;
-                     bar.targetHeight = 0.1 + (barValue * MAX_BAR_HEIGHT);
-                     
-                     // Smooth height animation
-                     bar.currentHeight = bar.currentHeight * 0.8 + bar.targetHeight * 0.2;
-                     
-                     // Update bar scale (grows from center - both up and down)
-                     bar.scale.y = bar.currentHeight;
-                     bar.position.y = bar.originalY; // Keep at center - scaling handles the growth
-                     
-                     // Add slight opacity variation based on height
-                     bar.material.opacity = 0.4 + (barValue * 0.4);
-                 });
-                
-                                 // Animate right bars (mirrored pattern)
-                 rightBars.forEach((bar, index) => {
-                     const barValue = barWaveformData[NUM_BARS - 1 - index] / 255.0; // Mirror the pattern
-                     bar.targetHeight = 0.1 + (barValue * MAX_BAR_HEIGHT);
-                     
-                     // Smooth height animation
-                     bar.currentHeight = bar.currentHeight * 0.8 + bar.targetHeight * 0.2;
-                     
-                     // Update bar scale (grows from center - both up and down)
-                     bar.scale.y = bar.currentHeight;
-                     bar.position.y = bar.originalY; // Keep at center - scaling handles the growth
-                     
-                     // Add slight opacity variation based on height
-                     bar.material.opacity = 0.4 + (barValue * 0.4);
-                 });
+                // Animate left bars
+                leftBars.forEach((bar, index) => {
+                    const barValue = barWaveformData[index] / 255.0;
+                    bar.targetHeight = 0.1 + (barValue * MAX_BAR_HEIGHT);
+
+                    // Smooth height animation
+                    bar.currentHeight = bar.currentHeight * 0.8 + bar.targetHeight * 0.2;
+
+                    // Update bar scale (grows from center - both up and down)
+                    bar.scale.y = bar.currentHeight;
+                    bar.position.y = bar.originalY; // Keep at center - scaling handles the growth
+
+                    // Add slight opacity variation based on height
+                    bar.material.opacity = 0.4 + (barValue * 0.4);
+                });
+
+                // Animate right bars (mirrored pattern)
+                rightBars.forEach((bar, index) => {
+                    const barValue = barWaveformData[NUM_BARS - 1 - index] / 255.0; // Mirror the pattern
+                    bar.targetHeight = 0.1 + (barValue * MAX_BAR_HEIGHT);
+
+                    // Smooth height animation
+                    bar.currentHeight = bar.currentHeight * 0.8 + bar.targetHeight * 0.2;
+
+                    // Update bar scale (grows from center - both up and down)
+                    bar.scale.y = bar.currentHeight;
+                    bar.position.y = bar.originalY; // Keep at center - scaling handles the growth
+
+                    // Add slight opacity variation based on height
+                    bar.material.opacity = 0.4 + (barValue * 0.4);
+                });
             } else {
-                                 // Static bars when no audio data
-                 [...leftBars, ...rightBars].forEach(bar => {
-                     bar.targetHeight = 0.3 + Math.sin(time * 0.5 + bar.position.x * 0.1) * 0.2;
-                     bar.currentHeight = bar.currentHeight * 0.9 + bar.targetHeight * 0.1;
-                     bar.scale.y = bar.currentHeight;
-                     bar.position.y = bar.originalY; // Keep at center - scaling handles the growth
-                     bar.material.opacity = 0.3;
-                 });
+                // Static bars when no audio data
+                [...leftBars, ...rightBars].forEach(bar => {
+                    bar.targetHeight = 0.3 + Math.sin(time * 0.5 + bar.position.x * 0.1) * 0.2;
+                    bar.currentHeight = bar.currentHeight * 0.9 + bar.targetHeight * 0.1;
+                    bar.scale.y = bar.currentHeight;
+                    bar.position.y = bar.originalY; // Keep at center - scaling handles the growth
+                    bar.material.opacity = 0.3;
+                });
             }
-            
+
             orbitalRenderer.render(orbitalScene, orbitalCamera);
-            
+
             // Continue animation if playing
             if (voiceAgentsAudio && !voiceAgentsAudio.paused) {
                 orbitalAnimationId = requestAnimationFrame(animateOrbitalVisualizer);
             }
         };
-        
+
         // Voice agents audio controls with 3D orbital visualizer
         if (playVoiceAgentsBtn && voiceAgentsAudio) {
             console.log('Setting up voice agents audio controls with 3D visualizer');
-            
+
             // Initialize the 3D orbital visualizer
             initOrbitalVisualizer();
-            
+
             // Add error handling for audio loading
             voiceAgentsAudio.addEventListener('error', (e) => {
                 console.error('Audio loading error:', e);
                 console.error('Audio error details:', voiceAgentsAudio.error);
-                
+
                 // More user-friendly error handling
                 if (voiceAgentsAudio.error) {
                     switch (voiceAgentsAudio.error.code) {
@@ -1071,7 +1073,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (voicePlayText) voicePlayText.textContent = 'Play Demo'; // Reset on generic error
                 }
             });
-            
+
             voiceAgentsAudio.addEventListener('canplay', () => {
                 console.log('Audio can play');
                 // Reset button text if it was showing an error
@@ -1079,55 +1081,55 @@ document.addEventListener('DOMContentLoaded', function() {
                     voicePlayText.textContent = 'Play Demo';
                 }
             });
-            
+
             voiceAgentsAudio.addEventListener('loadstart', () => {
                 console.log('Audio loading started');
                 if (voicePlayText) voicePlayText.textContent = 'Loading...';
             });
-            
+
             voiceAgentsAudio.addEventListener('loadeddata', () => {
                 console.log('Audio data loaded');
                 if (voicePlayText && voicePlayText.textContent === 'Loading...') {
                     voicePlayText.textContent = 'Play Demo';
                 }
             });
-            
-            
+
+
             voiceAgentsAudio.addEventListener('loadeddata', () => {
                 console.log('Audio data loaded');
             });
-            
+
             // Add more debugging events
             voiceAgentsAudio.addEventListener('loadedmetadata', () => {
                 console.log('Audio metadata loaded, duration:', voiceAgentsAudio.duration);
             });
-            
+
             voiceAgentsAudio.addEventListener('canplaythrough', () => {
                 console.log('Audio can play through');
             });
-            
+
             voiceAgentsAudio.addEventListener('play', () => {
                 console.log('Audio PLAY event fired');
             });
-            
+
             voiceAgentsAudio.addEventListener('playing', () => {
                 console.log('Audio PLAYING event fired');
             });
-            
+
             voiceAgentsAudio.addEventListener('timeupdate', () => {
                 console.log('Audio time update:', voiceAgentsAudio.currentTime);
             }, { once: true }); // Only log first time update
-            
+
             voiceAgentsAudio.addEventListener('stalled', () => {
                 console.log('Audio STALLED');
             });
-            
+
             voiceAgentsAudio.addEventListener('waiting', () => {
                 console.log('Audio WAITING for data');
             });
-            
+
             // Add a simple test button functionality
-            window.testAudioSimple = function() {
+            window.testAudioSimple = function () {
                 console.log('=== SIMPLE AUDIO TEST ===');
                 const audio = document.getElementById('voice-agents-audio');
                 audio.currentTime = 0;
@@ -1137,30 +1139,30 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log('Simple audio test: FAILED', err);
                 });
             };
-            
+
             playVoiceAgentsBtn.addEventListener('click', async () => {
                 console.log('Voice agents play button clicked');
-                
+
                 try {
                     if (voiceAgentsAudio.paused) {
                         // Simple play - reset to beginning and play
                         voiceAgentsAudio.currentTime = 0;
                         voiceAgentsAudio.volume = 1.0;
                         voiceAgentsAudio.muted = false;
-                        
+
                         await voiceAgentsAudio.play();
                         console.log('Audio playing');
-                        
+
                         // Update UI
                         if (voicePlayIcon) voicePlayIcon.classList.add('hidden');
                         if (voicePauseIcon) voicePauseIcon.classList.remove('hidden');
                         if (voicePlayText) voicePlayText.textContent = 'Pause';
-                        
+
                         // Try to resume audio context and start animation
                         if (orbitalAudioContext && orbitalAudioContext.state === 'suspended') {
                             orbitalAudioContext.resume();
                         }
-                        
+
                         // Start 3D orbital animation
                         startOrbitalVisualizer();
                         animateOrbitalVisualizer();
@@ -1168,23 +1170,23 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Simple pause
                         voiceAgentsAudio.pause();
                         console.log('Audio paused');
-                        
+
                         // Update UI
                         if (voicePlayIcon) voicePlayIcon.classList.remove('hidden');
                         if (voicePauseIcon) voicePauseIcon.classList.add('hidden');
                         if (voicePlayText) voicePlayText.textContent = 'Play Demo';
-                        
+
                         // Stop 3D orbital animation
                         if (orbitalAnimationId) {
                             cancelAnimationFrame(orbitalAnimationId);
                             orbitalAnimationId = null;
                         }
-                        
+
                         stopOrbitalVisualizer();
                     }
                 } catch (error) {
                     console.error('Audio playback failed:', error);
-                    
+
                     // Check if it's an autoplay policy error
                     if (error.name === 'NotAllowedError') {
                         console.log('Autoplay was prevented by browser policy');
@@ -1193,20 +1195,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.error('Other audio error:', error.message);
                         if (voicePlayText) voicePlayText.textContent = 'Audio Error';
                     }
-                    
+
                     // Reset UI state on error
                     if (voicePlayIcon) voicePlayIcon.classList.remove('hidden');
                     if (voicePauseIcon) voicePauseIcon.classList.add('hidden');
                     drawStaticWaveform();
                 }
             });
-            
+
             voiceAgentsAudio.addEventListener('ended', () => {
                 console.log('Audio ended');
                 if (voicePlayIcon) voicePlayIcon.classList.remove('hidden');
                 if (voicePauseIcon) voicePauseIcon.classList.add('hidden');
                 if (voicePlayText) voicePlayText.textContent = 'Play Demo';
-                
+
                 // Stop 3D orbital animation
                 if (orbitalAnimationId) {
                     cancelAnimationFrame(orbitalAnimationId);
@@ -1219,13 +1221,13 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('playVoiceAgentsBtn:', playVoiceAgentsBtn);
             console.log('voiceAgentsAudio:', voiceAgentsAudio);
         }
-        
+
         // Video mute controls
         const videoMuteBtn = document.getElementById('video-mute-btn');
         const volumeOnIcon = document.getElementById('volume-on-icon');
         const volumeOffIcon = document.getElementById('volume-off-icon');
         const productVideo = document.getElementById('product-video');
-        
+
         if (videoMuteBtn && productVideo) {
             // Start with audio enabled, but mute after 3 seconds for better UX
             setTimeout(() => {
@@ -1235,7 +1237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (volumeOffIcon) volumeOffIcon.classList.remove('hidden');
                 }
             }, 3000);
-            
+
             videoMuteBtn.addEventListener('click', () => {
                 if (productVideo.muted) {
                     productVideo.muted = false;
@@ -1248,7 +1250,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-        
+
         // Watch video button - now scrolls to the video background section
         if (watchVideoBtn) {
             watchVideoBtn.addEventListener('click', () => {
@@ -1261,7 +1263,7 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // --- Event Listeners and Initial Setup ---
-    
+
     // Scroll effects for navbar
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -1300,9 +1302,9 @@ document.addEventListener('DOMContentLoaded', function() {
     renderVoiceCapabilities();
     initChannelSwitching();
     updateTabs(); // Render initial industry content and update styles
-    
+
     // Setup media controls
     setupMediaControls();
-    
+
     console.log('Website JavaScript loaded successfully');
 });
