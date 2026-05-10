@@ -307,6 +307,10 @@ document.addEventListener('DOMContentLoaded', function () {
             modalTitle.textContent = 'Book a Live Demo';
             modalFormContainer.innerHTML = `
                 <form id="demo-form" class="space-y-4">
+                    <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                        <label for="demo-website">Website (leave blank)</label>
+                        <input type="text" id="demo-website" name="website" tabindex="-1" autocomplete="off" />
+                    </div>
                     <div>
                         <label for="name" class="block text-slate-700 dark:text-slate-300 font-medium mb-1">Full Name</label>
                         <input type="text" id="name" name="name" required
@@ -349,6 +353,10 @@ document.addEventListener('DOMContentLoaded', function () {
             modalTitle.textContent = 'Contact Us';
             modalFormContainer.innerHTML = `
                 <form id="contact-form" class="space-y-4">
+                    <div style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+                        <label for="contact-website">Website (leave blank)</label>
+                        <input type="text" id="contact-website" name="website" tabindex="-1" autocomplete="off" />
+                    </div>
                     <div>
                         <label for="contact-name" class="block text-slate-700 dark:text-slate-300 font-medium mb-1">Name</label>
                         <input type="text" id="contact-name" name="contact-name" required
@@ -413,47 +421,30 @@ document.addEventListener('DOMContentLoaded', function () {
         submitButton.disabled = true;
 
         try {
-            // Prepare data for submission
-            const data = new FormData();
-
-            // Add form fields to FormData
-            for (let [key, value] of formData.entries()) {
-                // Normalize field names for Netlify form
+            // Normalize field names from both forms into a flat data object.
+            const data = {};
+            for (const [key, value] of formData.entries()) {
                 if (formType === 'contact-form') {
                     switch (key) {
-                        case 'contact-name':
-                            data.append('name', value);
-                            break;
-                        case 'contact-email':
-                            data.append('email', value);
-                            break;
-                        case 'contact-phone':
-                            data.append('phone', value);
-                            break;
-                        case 'contact-usecase':
-                            data.append('usecase', value);
-                            break;
-                        default:
-                            data.append(key, value);
+                        case 'contact-name':    data.name = value; break;
+                        case 'contact-email':   data.email = value; break;
+                        case 'contact-phone':   data.phone = value; break;
+                        case 'contact-usecase': data.usecase = value; break;
+                        default:                data[key] = value;
                     }
                 } else {
-                    data.append(key, value);
+                    data[key] = value;
                 }
             }
+            data.source = 'ivorytusk-website';
 
-            // Add form type and timestamp
-            data.append('formType', formType === 'demo-form' ? 'Demo Request' : 'Contact Form');
-            data.append('form-name', 'contact');
-
-            // Submit to Cloudflare Pages Function
-            const apiUrl = '/api/contact'; // Pages Functions are available at /api/* paths
-
-            const response = await fetch(apiUrl, {
+            const response = await fetch('/api/send-mail', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(Object.fromEntries(data))
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    formType: formType === 'demo-form' ? 'demo-request' : 'contact',
+                    data,
+                }),
             });
 
             if (response.ok) {

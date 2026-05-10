@@ -1,5 +1,5 @@
 name = "ivorytusk-website"
-main = "worker.js"
+pages_build_output_dir = "."
 compatibility_date = "2024-01-15"
 compatibility_flags = ["nodejs_compat"]
 
@@ -19,28 +19,20 @@ compatibility_flags = ["nodejs_compat"]
 # pattern = "ivorytusk.co.in/api/*"
 # zone_id = "your-actual-zone-id"
 
-# Environment variables (optional)
+# Environment variables
+# Pages Functions read these via `context.env`. The mailer at
+# functions/api/send-mail.js opens an SMTP/465 connection over
+# `cloudflare:sockets` — port 587/STARTTLS is NOT supported.
 [vars]
 ENVIRONMENT = "production"
+SMTP_HOST = "smtpout.secureserver.net"
+SMTP_PORT = "465"
+SMTP_USERNAME = "general@ivorytusk.co.in"
+SMTP_FROM = "IvoryTusk AI Solutions <support@ivorytusk.co.in>"
+NOTIFY_EMAILS = "contact@ivorytusk.co.in"
 
-# Email service configuration (authenticate once, store securely)
-# Using GoDaddy WebMail SMTP
-
-# Step 1: Get your GoDaddy WebMail credentials
-# - Email: contact@ivorytusk.co.in (your GoDaddy email)
-# - Password: Your GoDaddy WebMail password
-
-# Step 2: Store credentials securely in Cloudflare:
-# wrangler secret put SMTP_USER
-# (Enter: contact@ivorytusk.co.in)
-# wrangler secret put SMTP_PASS  
-# (Enter: your GoDaddy WebMail password)
-
-# Step 3: Deploy the worker:
-# wrangler deploy
-
-# GoDaddy SMTP Settings (automatically configured):
-# - Server: smtpout.secureserver.net
-# - Port: 587 (STARTTLS)
-# - Authentication: Required
+# Set the password as a secret (never in source):
+#   wrangler pages secret put SMTP_PASSWORD --project-name=ivorytusk-website
+# For a plain Worker deploy use:
+#   wrangler secret put SMTP_PASSWORD
 
