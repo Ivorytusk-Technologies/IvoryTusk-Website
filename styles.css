@@ -14,7 +14,30 @@
     font-display: swap;
 }
 
-body, button, input, select, textarea, a, p, span, h1, h2, h3, h4, h5, h6, li, dt, dd {
+@font-face {
+    font-family: 'Exalted Wide';
+    src: url('assets/Exalted Wide DEMO PERSONAL USE ONLY.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exalted Wide';
+    src: url('assets/Exalted Wide DEMO PERSONAL USE ONLY.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+body, button, input, select, textarea, a, p, span, li, dt, dd {
+    font-family: 'Exalted Wide', 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-transform: uppercase;
+}
+
+h1, h2, h3, h4, h5, h6, h1 span, h2 span, h3 span, h4 span, h5 span, h6 span, h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
     font-family: 'Grozen Medical', 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
