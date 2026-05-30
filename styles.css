@@ -1,7 +1,21 @@
-/* IvoryTusk Website Styles */
+@font-face {
+    font-family: 'Grozen Medical';
+    src: url('assets/GROZEN MEDICAL DEMO-Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Grozen Medical';
+    src: url('assets/GROZEN MEDICAL DEMO-Bold.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Grozen Medical', 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
