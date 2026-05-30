@@ -14,10 +14,11 @@
     font-display: swap;
 }
 
-body {
+body, button, input, select, textarea, a, p, span, h1, h2, h3, h4, h5, h6, li, dt, dd {
     font-family: 'Grozen Medical', 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-transform: uppercase;
 }
 
 /* Minimal meaningful animations only */
