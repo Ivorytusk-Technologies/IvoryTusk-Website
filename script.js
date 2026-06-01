@@ -14,14 +14,14 @@ const solutionsData = [
         title: 'WhatsApp AI Agents',
         description: 'Transform WhatsApp into your smartest sales & support channel. Our AI agents handle customer queries, book appointments, process orders, and qualify leads instantly - like having your best employee available 24/7.',
         gradient: 'from-green-400 to-green-600',
-        icon: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488'
+        icon: 'assets/Our solutions card symbols/Whatsapp AI AGents.png'
     },
     {
         id: 'expenseiq',
         title: 'ExpenseIQ',
         description: 'Take a photo of any bill or receipt, and ExpenseIQ reads it using OCR, extracts all details, and files it in your accounting system automatically.',
         gradient: 'from-green-400 to-green-600',
-        icon: 'M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H4.5m-1.25 0H3c-.621 0-1.125.504-1.125 1.125v.375m1.5 0v-.375c0-.621.504-1.125 1.125-1.125m0 0h.375c.621 0 1.125.504 1.125 1.125v.375m0 0v.75c0 .414.336.75.75.75H6m0 0v.75c0 .414.336.75.75.75H7.5m0 0v.75c0 .414.336.75.75.75H9'
+        icon: 'assets/Our solutions card symbols/ExpenseIQ.png'
     },
     {
         id: 'orrahome',
@@ -51,12 +51,12 @@ const voiceCapabilitiesData = [
     {
         title: 'Multilingual',
         description: 'Fluent in Hindi, English, and regional languages with perfect pronunciation. Gujarati and Tamil are coming soon.',
-        iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+        iconPath: "M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"
     },
     {
         title: 'RAG (Knowledge Retrieval)',
         description: "RAG allows the AI to look up information from your private documents and databases to provide accurate, up-to-date answers. It's like having a perfect memory for all your company's data.",
-        iconPath: "M12 17c3.31 0 6-2.69 6-6V5c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v6c0 3.31 2.69 6 6 6zm1-12c0-.55-.45-1-1-1s-1 .45-1 1v6c0 .55.45 1 1 1s1-.45 1-1V5z"
+        iconPath: "M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"
     },
     {
         title: 'Webhook Calls',
@@ -66,7 +66,7 @@ const voiceCapabilitiesData = [
     {
         title: 'Advanced Turn Detection',
         description: "The AI seamlessly knows when to talk and when to listen, making the conversation feel natural and human-like.",
-        iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+        iconPath: "M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
     },
     {
         title: 'BYOS (Bring Your Own SIP)',
@@ -76,7 +76,7 @@ const voiceCapabilitiesData = [
     {
         title: 'Sentiment Detection',
         description: "Our AI can understand the tone and emotion of the caller, allowing it to adapt its conversation to de-escalate or provide better support.",
-        iconPath: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+        iconPath: "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"
     },
 ];
 
@@ -85,12 +85,12 @@ const whatsappCapabilitiesData = [
     {
         title: 'Instant Response',
         description: 'Reply to customer messages in under 3 seconds, 24/7. Never lose a lead because you were busy or unavailable.',
-        iconPath: "M12 2C13.1 2 14 2.9 14 4V8C14 9.1 13.1 10 12 10S10 9.1 10 8V4C10 2.9 10.9 2 12 2ZM21 9V7C21 6.45 20.55 6 20 6S19 6.45 19 7V9C19 13.97 15.84 18.24 11.35 19.73C11.75 20.91 12.81 21.75 14.04 21.75H16V23.25H8V21.75H9.96C11.19 21.75 12.25 20.91 12.65 19.73C8.16 18.24 5 13.97 5 9V7C5 6.45 4.55 6 4 6S3 6.45 3 7V9C3 14.5 6.82 19.24 12 20.92C17.18 19.24 21 14.5 21 9Z"
+        iconPath: "M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"
     },
     {
         title: 'Sales Automation',
         description: 'Qualify leads, share product catalogs, calculate quotes, and process orders directly through WhatsApp. Turn conversations into conversions.',
-        iconPath: "M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7ZM9 8V17H11V8H9ZM13 8V17H15V8H13Z"
+        iconPath: "M20 9V7c0-1.1-.9-2-2-2h-3c0-1.66-1.34-3-3-3S9 3.34 9 5H6c-1.1 0-2 .9-2 2v2c-1.66 0-3 1.34-3 3s1.34 3 3 3v4c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-4c1.66 0 3-1.34 3-3s-1.34-3-3-3zm-2 10H6V7h12v12zm-9-6c-.83 0-1.5-.67-1.5-1.5S8.17 10 9 10s1.5.67 1.5 1.5S9.83 13 9 13zm7.5-1.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5.67-1.5 1.5-1.5 1.5.67 1.5 1.5zM8 17h8v-2H8v2z"
     },
     {
         title: 'Appointment Booking',
@@ -100,7 +100,7 @@ const whatsappCapabilitiesData = [
     {
         title: 'Smart Escalation',
         description: 'AI knows when to handle queries independently and when to seamlessly transfer to human agents with full conversation context.',
-        iconPath: "M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z"
+        iconPath: "M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"
     },
     {
         title: 'Multi-language Support',
@@ -110,7 +110,7 @@ const whatsappCapabilitiesData = [
     {
         title: 'Rich Media Support',
         description: 'Send images, documents, location pins, and interactive buttons. Create engaging experiences that drive action and sales.',
-        iconPath: "M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z"
+        iconPath: "M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"
     }
 ];
 
@@ -242,22 +242,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const industriesContent = document.getElementById('industries-content');
     let successTimeout;
 
-    // --- Functions ---
     const renderSolutions = () => {
-        solutionsContainer.innerHTML = solutionsData.map(solution => `
-            <a href="${(solution.id === 'voice-agents' || solution.id === 'whatsapp-agents') ? '#ai-agents' : '#'}"
-                class="group backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 hover:bg-white/30 dark:hover:bg-slate-800/60
-                transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
-                <div class="w-12 h-12 rounded-xl bg-gradient-to-r ${solution.gradient} flex items-center justify-center mb-6
-                    transform group-hover:scale-110 transition-transform duration-300">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+        solutionsContainer.innerHTML = solutionsData.map(solution => {
+            const isPng = solution.icon.endsWith('.png') || solution.icon.startsWith('assets/');
+            const iconHtml = isPng
+                ? `<img src="${solution.icon}" alt="${solution.title}" class="w-6 h-6 object-contain" />`
+                : `<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="${solution.icon}" />
-                    </svg>
-                </div>
-                <h3 class="text-xl font-semibold text-slate-800 dark:text-slate-100 mb-3">${solution.title}</h3>
-                <p class="text-slate-600 dark:text-slate-300 leading-relaxed">${solution.description}</p>
-            </a>
-        `).join('');
+                    </svg>`;
+            return `
+                <a href="${(solution.id === 'voice-agents' || solution.id === 'whatsapp-agents') ? '#ai-agents' : '#'}"
+                    class="group flex flex-col h-full backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-2xl p-8 hover:bg-white/30 dark:hover:bg-slate-800/60
+                    transform transition-all duration-300 hover:scale-[1.02] hover:shadow-xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 flex-shrink-0 rounded-xl bg-gradient-to-r ${solution.gradient} flex items-center justify-center
+                            transform group-hover:scale-110 transition-transform duration-300">
+                            ${iconHtml}
+                        </div>
+                        <h3 class="text-xl font-semibold text-slate-800 dark:text-slate-100">${solution.title}</h3>
+                    </div>
+                    <p class="flex-grow text-slate-600 dark:text-slate-300 leading-relaxed">${solution.description}</p>
+                </a>
+            `;
+        }).join('');
     };
 
     const renderVoiceCapabilities = () => {

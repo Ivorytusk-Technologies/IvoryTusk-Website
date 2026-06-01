@@ -61,17 +61,17 @@
                 <div class="flex justify-between items-center py-4">
                     <!-- Logo Component (Extra Large Size) -->
                     <div
-                        class="flex items-center space-x-3 transition-transform duration-300 transform group-hover:scale-105">
-                        <img id="logo-light" src="assets/IvoryTusk.svg" alt="IvoryTusk" class="h-16 w-auto">
-                        <img id="logo-dark" src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk" class="h-16 w-auto hidden">
+                        class="relative transition-transform duration-300 transform group-hover:scale-105 w-48 h-16">
+                        <img id="logo-light" src="assets/IvoryTusk.svg" alt="IvoryTusk" class="absolute inset-0 w-full h-full object-contain">
+                        <img id="logo-dark" src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk" class="absolute inset-0 w-full h-full object-contain hidden">
                     </div>
-                    <!-- Desktop Navigation Links -->
-                    <div class="hidden md:flex items-center space-x-6">
+                    <!-- Desktop Navigation Links & Action Controls -->
+                    <div class="hidden md:flex items-center gap-6">
                         <a href="https://liveloop.ivorytusk.co.in" target="_blank"
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 dark:from-purple-400 dark:to-blue-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-bold relative group">
+                            class="liveloop-nav-link text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-bold relative group">
                             <span>LiveLoop</span>
                             <span
-                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-blue-500 transition-all duration-300 group-hover:w-full"></span>
+                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
                         </a>
                         <a href="#solutions"
                             class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-bold relative group">
@@ -97,16 +97,14 @@
                             <span
                                 class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
                         </button>
-                    </div>
-                    <!-- Dark Mode Toggle and CTA Button -->
-                    <div class="flex items-center gap-4">
+                        
                         <!-- Dark Mode Toggle -->
                         <button id="theme-toggle"
-                            class="p-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-700/50 transition-colors duration-300">
+                            class="p-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-700/50 transition-colors duration-300 -translate-y-1">
                             <svg id="sun-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path
-                                    d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                                    d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
                             </svg>
                             <svg id="moon-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400 hidden"
                                 fill="currentColor" viewBox="0 0 24 24">
@@ -114,10 +112,11 @@
                                     d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" />
                             </svg>
                         </button>
+                        
                         <!-- CTA Button -->
                         <button id="demo-nav-btn"
                             class="relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full font-semibold
-                            shadow-lg shadow-orange-200/50 transform hover:scale-105 transition-all duration-300
+                            shadow-lg shadow-orange-200/50 transform hover:scale-105 transition-all duration-300 -translate-y-1
                             after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20">
                             <span>Book Demo</span>
                         </button>
@@ -127,20 +126,20 @@
         </nav>
 
         <!-- Hero Section -->
-        <section class="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden">
+        <section class="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden">
             <!-- Subtle Background Elements -->
             <div class="absolute inset-0 z-0">
                 <div class="absolute -top-10 -left-20 w-80 h-80 bg-orange-300/5 rounded-full blur-[100px]"></div>
                 <div class="absolute top-1/2 right-0 w-96 h-96 bg-orange-200/10 rounded-full blur-[120px]"></div>
                 <div class="absolute -bottom-20 left-1/4 w-72 h-72 bg-orange-100/15 rounded-full blur-[150px]"></div>
             </div>
-            <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl -mt-16">
+            <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl">
                 <div class="space-y-8">
                     <!-- Main Headline with text gradient -->
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-tight text-center flex flex-col items-center justify-center">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl 2xl:text-8xl font-extrabold leading-tight text-center flex flex-col items-center justify-center">
                         <span class="block bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-white dark:to-slate-100 bg-clip-text text-transparent">Transform</span>
-                        <span class="flex justify-center items-center gap-x-[0.25em] whitespace-nowrap"><span class="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-white dark:to-slate-100 bg-clip-text text-transparent">your</span><span class="text-orange-shine">Business</span><span class="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-white dark:to-slate-100 bg-clip-text text-transparent">with</span></span>
-                        <span class="block text-orange-shine whitespace-nowrap">Customized AI</span>
+                        <span class="flex flex-wrap justify-center items-center gap-x-[0.25em] sm:flex-nowrap"><span class="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-white dark:to-slate-100 bg-clip-text text-transparent">your</span><span class="text-orange-shine">Business</span><span class="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 dark:from-slate-100 dark:via-white dark:to-slate-100 bg-clip-text text-transparent">with</span></span>
+                        <span class="block text-orange-shine sm:whitespace-nowrap">Customized AI</span>
                     </h1>
 
                     <!-- Subtitle -->
@@ -334,7 +333,7 @@
         </section>
 
         <!-- The Problem & Solution Section -->
-        <section class="py-24 relative">
+        <section class="pt-24 pb-12 relative">
             <div
                 class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/20 to-transparent dark:via-orange-900/10">
             </div>
@@ -359,11 +358,12 @@
                             customers</strong> due to missed calls, delayed responses, and poor follow-up. Our AI agents
                         ensure every lead gets immediate, professional attention.
                     </p>
+                </div>
 
-                    <!-- How It Works Section -->
-                    <div
-                        class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
-                        <h3 class="text-3xl md:text-4xl font-bold text-orange-600 mb-12">
+                <!-- How It Works Section -->
+                <div
+                    class="backdrop-blur-xl bg-white/20 dark:bg-slate-800/40 border border-white/50 dark:border-slate-700/50 rounded-3xl p-8 md:p-12 shadow-2xl">
+                        <h3 class="text-3xl md:text-4xl font-bold text-orange-600 mb-12 text-center">
                             How Our AI Agents Work
                         </h3>
 
@@ -526,11 +526,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
         <!-- Our Solutions Section -->
-        <section id="solutions" class="py-24 relative">
+        <section id="solutions" class="pt-12 pb-12 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-4">
@@ -547,7 +546,7 @@
         </section>
 
         <!-- AI Agents Section -->
-        <section id="ai-agents" class="py-24 relative">
+        <section id="ai-agents" class="pt-12 pb-12 relative">
             <div class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/30 to-transparent"></div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
                 <div class="text-center mb-16">
@@ -577,8 +576,8 @@
                             </button>
                             <button id="whatsapp-tab"
                                 class="channel-tab px-6 py-3 rounded-full font-semibold transition-all duration-300 text-slate-600 dark:text-slate-300 hover:text-orange-600">
-                                <span class="flex items-center justify-center gap-2">
-                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <span class="flex items-center justify-center gap-2 whitespace-nowrap">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                                         <path
                                             d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488" />
                                     </svg>
@@ -699,7 +698,7 @@
         </section>
 
         <!-- Industries Section -->
-        <section id="industries" class="py-24 relative">
+        <section id="industries" class="pt-12 pb-12 relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-4">
@@ -744,7 +743,7 @@
         </section>
 
         <!-- The Numbers Will Speak Section -->
-        <section class="py-24 relative">
+        <section class="pt-12 pb-12 relative">
             <div
                 class="absolute inset-0 bg-gradient-to-b from-transparent via-orange-50/20 to-transparent dark:via-orange-900/10">
             </div>
@@ -828,17 +827,42 @@
         </section>
 
         <!-- Footer (Dark Glassmorphism) -->
-        <footer class="bg-gradient-to-b from-slate-800 to-slate-900 text-white py-16">
+        <footer class="bg-gradient-to-b from-slate-800 to-slate-900 text-white pt-16 pb-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-4 gap-8">
-                    <div>
+                <div class="flex flex-col md:flex-row justify-between gap-12 md:gap-8">
+                    <div class="max-w-xs w-full">
                         <!-- Logo for footer (Larger Size) -->
-                        <div class="flex items-center justify-start space-x-3">
-                            <img src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk" class="h-16 w-auto">
+                        <div class="flex items-center justify-start">
+                            <img src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk" class="h-16 w-auto -ml-4">
                         </div>
-                        <p class="text-slate-400 mt-4 leading-relaxed">
-                            TRANSFORM YOUR BUSINESS WITH CUSTOMIZED AI.
+                        <p class="font-heading text-white mt-4 leading-normal text-xs tracking-wider uppercase">
+                            TRANSFORM YOUR <span class="!font-heading text-orange-500">BUSINESS</span> WITH <span class="!font-heading text-orange-500">CUSTOMIZED AI</span>
                         </p>
+                        
+                        <!-- Social Media Links -->
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-700/50 mt-4">
+                            <a href="https://www.instagram.com/ivorytusk.ai/" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="Instagram">
+                                <img src="assets/social media logos/instagram-white-icon.png" alt="Instagram" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://www.facebook.com/IvoryTuskTechnologies" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="Facebook">
+                                <img src="assets/social media logos/facebook-app-round-white-icon.png" alt="Facebook" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="#" class="transition-all duration-300 transform hover:scale-110" aria-label="YouTube">
+                                <img src="assets/social media logos/youtube-app-white-icon.png" alt="YouTube" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://www.linkedin.com/company/ivorytusk-ai-solutions/" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="LinkedIn">
+                                <img src="assets/social media logos/linkedin-app-white-icon.png" alt="LinkedIn" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://x.com/ivorytusk_ai" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="X">
+                                <img src="assets/social media logos/x-logo-white.png" alt="X" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://www.threads.net/@ivorytusk.ai" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="Threads">
+                                <img src="assets/social media logos/threads-white-icon.png" alt="Threads" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://in.pinterest.com/IvoryTuskTechnologies/" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="Pinterest">
+                                <img src="assets/social media logos/icons8-pinterest-logo-100.png" alt="Pinterest" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                        </div>
                     </div>
                     <div>
                         <h3 class="font-semibold mb-4 text-orange-400">Solutions</h3>
@@ -872,16 +896,20 @@
                                 class="block text-slate-400 hover:text-white transition-colors duration-200">Automation</a>
                         </div>
                     </div>
-                    <div>
+                    <div class="max-w-xs w-full">
                         <h3 class="font-semibold mb-4 text-orange-400">Contact</h3>
-                        <div class="space-y-2 text-slate-400 text-sm leading-relaxed">
-                            <p class="font-medium text-slate-300">IvoryTusk Technologies Private Limited</p>
-                            <p>contact@ivorytusk.co.in</p>
-                            <p>+91 9909507799</p>
+                        <div class="space-y-2">
+                            <p class="block text-slate-400">IvoryTusk Technologies Private Limited</p>
+                            <a href="mailto:contact@ivorytusk.ai" class="block text-slate-400 hover:text-white transition-colors duration-200">contact@ivorytusk.ai</a>
+                            <div class="pt-2">
+                                <a href="https://wa.me/919664501475" target="_blank" class="inline-block transition-all duration-300 transform hover:scale-105" aria-label="WhatsApp">
+                                    <img src="assets/social media logos/whatsapp png.png" alt="WhatsApp" class="w-[88px] h-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="border-t border-slate-700 mt-12 pt-6 text-center text-slate-400">
+                <div class="border-t border-slate-700 mt-16 pt-12 text-center text-slate-400">
                     <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm mb-4">
                         <a href="company-info.html" class="hover:text-orange-400 transition-colors duration-200">Company Information</a>
                         <span>·</span>

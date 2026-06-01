@@ -44,11 +44,11 @@
                 <div class="flex justify-center items-center py-6">
                     <!-- Logo Component (Enlarged) -->
                     <div
-                        class="flex items-center space-x-3 transition-transform duration-300 transform group-hover:scale-105">
-                        <a href="index.html">
-                            <img id="logo-light" src="assets/IvoryTusk.svg" alt="IvoryTusk" class="h-32 w-auto">
+                        class="transition-transform duration-300 transform group-hover:scale-105 w-96 h-32">
+                        <a href="index.html" class="relative block w-full h-full">
+                            <img id="logo-light" src="assets/IvoryTusk.svg" alt="IvoryTusk" class="absolute inset-0 w-full h-full object-contain">
                             <img id="logo-dark" src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk"
-                                class="h-32 w-auto hidden">
+                                class="absolute inset-0 w-full h-full object-contain hidden">
                         </a>
                     </div>
                 </div>
@@ -408,17 +408,43 @@
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer class="bg-gradient-to-b from-slate-800 to-slate-900 text-white py-16">
+        <!-- Footer (Dark Glassmorphism) -->
+        <footer class="bg-gradient-to-b from-slate-800 to-slate-900 text-white pt-16 pb-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-4 gap-8">
-                    <div>
-                        <div class="flex items-center justify-start space-x-3">
-                            <img src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk" class="h-16 w-auto">
+                <div class="flex flex-col md:flex-row justify-between gap-12 md:gap-8">
+                    <div class="max-w-xs w-full">
+                        <!-- Logo for footer (Larger Size) -->
+                        <div class="flex items-center justify-start">
+                            <img src="assets/IvoryTusk_Dark.svg" alt="IvoryTusk" class="h-16 w-auto -ml-4">
                         </div>
-                        <p class="text-slate-400 mt-4 leading-relaxed">
-                            TRANSFORM YOUR BUSINESS WITH CUSTOMIZED AI.
+                        <p class="font-heading text-white mt-4 leading-normal text-xs tracking-wider uppercase">
+                            TRANSFORM YOUR <span class="!font-heading text-orange-500">BUSINESS</span> WITH <span class="!font-heading text-orange-500">CUSTOMIZED AI</span>
                         </p>
+                        
+                        <!-- Social Media Links -->
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-700/50 mt-4">
+                            <a href="https://www.instagram.com/ivorytusk.ai/" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="Instagram">
+                                <img src="assets/social media logos/instagram-white-icon.png" alt="Instagram" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://www.facebook.com/IvoryTuskTechnologies" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="Facebook">
+                                <img src="assets/social media logos/facebook-app-round-white-icon.png" alt="Facebook" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="#" class="transition-all duration-300 transform hover:scale-110" aria-label="YouTube">
+                                <img src="assets/social media logos/youtube-app-white-icon.png" alt="YouTube" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://www.linkedin.com/company/ivorytusk-ai-solutions/" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="LinkedIn">
+                                <img src="assets/social media logos/linkedin-app-white-icon.png" alt="LinkedIn" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://x.com/ivorytusk_ai" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="X">
+                                <img src="assets/social media logos/x-logo-white.png" alt="X" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://www.threads.net/@ivorytusk.ai" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="Threads">
+                                <img src="assets/social media logos/threads-white-icon.png" alt="Threads" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                            <a href="https://in.pinterest.com/IvoryTuskTechnologies/" target="_blank" class="transition-all duration-300 transform hover:scale-110" aria-label="Pinterest">
+                                <img src="assets/social media logos/icons8-pinterest-logo-100.png" alt="Pinterest" class="w-6 h-6 object-contain opacity-70 hover:opacity-100 transition-opacity duration-300">
+                            </a>
+                        </div>
                     </div>
                     <div>
                         <h3 class="font-semibold mb-4 text-orange-400">Solutions</h3>
@@ -452,16 +478,33 @@
                                 class="block text-slate-400 hover:text-white transition-colors duration-200">Automation</a>
                         </div>
                     </div>
-                    <div>
+                    <div class="max-w-xs w-full">
                         <h3 class="font-semibold mb-4 text-orange-400">Contact</h3>
-                        <div class="space-y-2 text-slate-400">
-                            <p>contact@ivorytusk.co.in</p>
-                            <p>+91 9909507799</p>
+                        <div class="space-y-2 text-slate-400 text-sm leading-relaxed">
+                            <p class="font-medium text-slate-300">IvoryTusk Technologies Private Limited</p>
+                            <p><a href="mailto:contact@ivorytusk.ai" class="hover:text-white transition-colors duration-200">contact@ivorytusk.ai</a></p>
+                            <div class="pt-2">
+                                <a href="https://wa.me/919664501475" target="_blank" class="inline-block transition-all duration-300 transform hover:scale-105" aria-label="WhatsApp">
+                                    <img src="assets/social media logos/whatsapp png.png" alt="WhatsApp" class="w-[88px] h-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300">
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="border-t border-slate-700 mt-12 pt-8 text-center text-slate-400">
-                    <p>&copy; 2026 IvoryTusk AI Solutions. All rights reserved.</p>
+                <div class="border-t border-slate-700 mt-16 pt-12 text-center text-slate-400">
+                    <div class="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm mb-4">
+                        <a href="company-info.html" class="hover:text-orange-400 transition-colors duration-200">Company Information</a>
+                        <span>·</span>
+                        <a href="terms-of-service.html" class="hover:text-orange-400 transition-colors duration-200">Terms &amp; Conditions</a>
+                        <span>·</span>
+                        <a href="privacy-policy.html" class="hover:text-orange-400 transition-colors duration-200">Privacy Policy</a>
+                        <span>·</span>
+                        <a href="refund-policy.html" class="hover:text-orange-400 transition-colors duration-200">Refund &amp; Cancellation Policy</a>
+                        <span>·</span>
+                        <a href="contact.html" class="hover:text-orange-400 transition-colors duration-200">Contact Us</a>
+                    </div>
+                    <p class="text-sm">&copy; 2026 IvoryTusk Technologies Private Limited. All rights reserved.</p>
+                    <p class="text-xs mt-1 text-slate-500">"IvoryTusk · AI Solutions" and "LiveLoop" are trading names of IvoryTusk Technologies Private Limited.</p>
                 </div>
             </div>
         </footer>
