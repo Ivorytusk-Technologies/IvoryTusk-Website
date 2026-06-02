@@ -372,7 +372,7 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans
 .detail-card { border-radius: 10px; padding: 20px; background-color: #fff7ed; }
 .detail-row { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #fed7aa; font-size: 14px; }
 .detail-row:last-child { border-bottom: none; }
-.detail-label { font-weight: 600; color: #1f2937; flex-shrink: 0; }
+.detail-label { font-weight: 600; color: #1f2937; flex-shrink: 0; padding-right: 16px; }
 .detail-value { text-align: right; color: #4b5563; word-break: break-word; }
 .footer { background-color: #f9fafb; color: #6b7280; padding: 20px; text-align: center; font-size: 12px; }
 </style></head>
