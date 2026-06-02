@@ -25,7 +25,7 @@ compatibility_flags = ["nodejs_compat"]
 # `cloudflare:sockets` — port 587/STARTTLS is NOT supported.
 [vars]
 ENVIRONMENT = "production"
-SMTP_HOST = "smtpout.secureserver.net"
+SMTP_HOST = "smtp.gmail.com"
 SMTP_PORT = "465"
 SMTP_USERNAME = "general@ivorytusk.co.in"
 SMTP_FROM = "IvoryTusk AI Solutions <support@ivorytusk.co.in>"
