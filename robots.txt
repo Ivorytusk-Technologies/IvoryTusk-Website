@@ -1,0 +1,17 @@
+# robots.txt for IvoryTusk AI Solutions
+# https://ivorytusk.co.in
+
+User-agent: *
+Allow: /
+
+# Block search engines from crawling utility/development/redirect pages
+Disallow: /public/
+Disallow: /api/
+Disallow: /qr
+Disallow: /qr.html
+Disallow: /visualizer.html
+Disallow: /visualizer2.html
+Disallow: /test-audio.html
+
+# Sitemap location
+Sitemap: https://ivorytusk.co.in/sitemap.xml

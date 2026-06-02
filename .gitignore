@@ -1,3 +1,6 @@
 assets/video.mp4
 assets/recording.mp3
 node_modules
+.env
+.DS_Store
+.DS_Store
