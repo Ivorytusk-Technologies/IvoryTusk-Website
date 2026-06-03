@@ -122,21 +122,11 @@ button, .btn, a.btn {
     letter-spacing: 0.05em !important;
 }
 
-/* Specific styling for LiveLoop header link to use Plus Jakarta Sans, camel case, and proper weight */
+/* Specific styling for LiveLoop header link to use images */
 #navbar a.liveloop-nav-link {
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
-    text-transform: none !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.02em !important;
-    font-size: 1.1rem !important; /* Slightly increased size to match visual weight */
-    display: inline-block !important;
-    transform: translateY(-2px) !important; /* Shifted upwards for perfect visual baseline alignment */
-}
-
-#navbar a.liveloop-nav-link span {
-    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif !important;
-    text-transform: none !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.02em !important;
-    font-size: 1.1rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: translateY(-2px) !important;
+    height: 1.75rem !important; /* Match h-7 (28px) */
 }
