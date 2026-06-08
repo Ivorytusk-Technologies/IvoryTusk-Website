@@ -111,6 +111,6 @@ def generate_svg_qr_with_padded_logo(data, logo_path, filename="qr_with_padded_l
 
 if __name__ == "__main__":
     my_data = "https://ivorytusk.co.in/qr"
-    my_logo = "IvoryTusk.svg"
+    my_logo = "IvoryTusk_LightMode.svg"
 
     generate_svg_qr_with_padded_logo(my_data, my_logo)
