@@ -1,0 +1,26 @@
+name: Deploy to Cloudflare Pages
+
+# Auto-deploy on every push to the production branch.
+# Requires repo/org secret: CLOUDFLARE_API_TOKEN (Pages:Edit + Workers Scripts:Edit).
+on:
+  push:
+    branches: [cloudflare]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 22f2d508ecc5bfd7136f19d48df110db
+          # Production deploy: --branch matches the project's production branch.
+          command: pages deploy . --project-name=ivorytusk-website --branch=cloudflare --commit-dirty=true
