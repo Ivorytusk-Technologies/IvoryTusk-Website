@@ -16,6 +16,8 @@
 import { connect } from 'cloudflare:sockets';
 
 const ALLOWED_ORIGINS = [
+  'https://ivorytusk.ai',
+  'https://www.ivorytusk.ai',
   'https://ivorytusk.co.in',
   'https://www.ivorytusk.co.in',
   'https://ivorytusk-website.pages.dev',
