@@ -81,71 +81,69 @@
                 <div class="flex justify-between items-center py-4">
                     <!-- Logo Component (Extra Large Size) -->
                     <div
-                        class="relative transition-transform duration-300 transform group-hover:scale-105 w-48 h-16">
+                        class="relative shrink-0 transition-transform duration-300 transform group-hover:scale-105 w-40 lg:w-48 h-16">
                         <img id="logo-light" src="assets/IvoryTusk_LightModeTM.svg" alt="IvoryTusk" class="absolute inset-0 w-full h-full object-contain">
                         <img id="logo-dark" src="assets/IvoryTusk_DarkModeTM.svg" alt="IvoryTusk" class="absolute inset-0 w-full h-full object-contain hidden">
                     </div>
-                    <div class="hidden md:flex items-center gap-6 xl:gap-4 xl:whitespace-nowrap">
-                        <a href="https://liveloop.ivorytusk.co.in" target="_blank"
-                            class="liveloop-nav-link relative group flex items-center">
-                            <img src="assets/liveloop/LiveLoop_LightModeTM.svg" alt="LiveLoop" class="h-7 w-auto object-contain dark:hidden">
-                            <img src="assets/liveloop/LiveLoop_DarkModeTM.svg" alt="LiveLoop" class="h-7 w-auto object-contain hidden dark:block">
-                            <span
-                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <a href="#solutions"
-                            class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-bold relative group">
-                            <span>Solutions</span>
-                            <span
-                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <a href="#industries"
-                            class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-bold relative group">
-                            <span>Industries</span>
-                            <span
-                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <a href="#ai-agents"
-                            class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-bold relative group">
-                            <span>AI Agents</span>
-                            <span
-                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <a href="brochures.html"
-                            class="hidden xl:block text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-bold relative group">
-                            <span>Brochures</span>
-                            <span
-                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                        <button id="contact-nav-btn"
-                            class="text-slate-700 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 font-bold relative group">
-                            <span>Contact</span>
-                            <span
-                                class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
-                        </button>
-                        
-                        <!-- Dark Mode Toggle -->
-                        <button id="theme-toggle"
-                            class="p-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-700/50 transition-colors duration-300">
-                            <svg id="sun-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
-                            </svg>
-                            <svg id="moon-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400 hidden"
-                                fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" />
-                            </svg>
-                        </button>
-                        
-                        <!-- CTA Button -->
-                        <button id="demo-nav-btn"
-                            class="xl:shrink-0 relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-6 py-2 rounded-full font-semibold
-                            shadow-lg shadow-orange-200/50 transform hover:scale-105 transition-all duration-300
-                            after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20">
-                            <span>Book Demo</span>
-                        </button>
+                    <div class="hidden md:flex items-center gap-4 lg:gap-6 xl:gap-8 whitespace-nowrap">
+                        <!-- Page links -->
+                        <div class="flex items-center gap-4 lg:gap-5 xl:gap-7">
+                            <a href="#solutions"
+                                class="text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 relative group py-1">
+                                <span>Solutions</span>
+                                <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#industries"
+                                class="text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 relative group py-1">
+                                <span>Industries</span>
+                                <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#ai-agents"
+                                class="text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 relative group py-1">
+                                <span>AI Agents</span>
+                                <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="#brochures"
+                                class="hidden lg:block text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 relative group py-1">
+                                <span>Brochures</span>
+                                <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <button id="contact-nav-btn"
+                                class="hidden lg:block text-slate-600 dark:text-slate-300 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-300 relative group py-1">
+                                <span>Contact</span>
+                                <span class="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-orange-600 transition-all duration-300 group-hover:w-full"></span>
+                            </button>
+                        </div>
+
+                        <span class="hidden xl:block w-px h-6 bg-slate-300/80 dark:bg-slate-600" aria-hidden="true"></span>
+
+                        <!-- Sister product, theme, CTA -->
+                        <div class="flex items-center gap-3 lg:gap-4">
+                            <a href="https://liveloop.ivorytusk.co.in" target="_blank" rel="noopener" aria-label="LiveLoop"
+                                class="liveloop-nav-link relative group shrink-0 hidden xl:flex items-center">
+                                <img src="assets/liveloop/LiveLoop_LightModeTM.svg" alt="LiveLoop" class="h-6 w-auto object-contain dark:hidden">
+                                <img src="assets/liveloop/LiveLoop_DarkModeTM.svg" alt="LiveLoop" class="h-6 w-auto object-contain hidden dark:block">
+                            </a>
+                            <button id="theme-toggle"
+                                class="p-2 rounded-lg hover:bg-slate-100/50 dark:hover:bg-slate-700/50 transition-colors duration-300">
+                                <svg id="sun-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+                                </svg>
+                                <svg id="moon-icon" class="w-5 h-5 text-slate-600 dark:text-slate-400 hidden"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" />
+                                </svg>
+                            </button>
+                            <button id="demo-nav-btn"
+                                class="shrink-0 relative overflow-hidden bg-gradient-to-r from-orange-500 to-orange-600 text-white px-5 py-2.5 rounded-full
+                                shadow-lg shadow-orange-200/50 transform hover:scale-105 transition-all duration-300
+                                after:content-[''] after:absolute after:inset-0 after:bg-white after:opacity-0 after:transition-opacity after:duration-500 after:mix-blend-overlay hover:after:opacity-20">
+                                <span>Book Demo</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -769,6 +767,82 @@
             </div>
         </section>
 
+        <!-- Brochures Section -->
+        <section id="brochures" class="pt-12 pb-12 relative scroll-mt-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 mb-4">
+                        Product Brochures
+                    </h2>
+                    <p class="text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto">
+                        Read a brochure right here, or download it to share with your team.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <article class="group backdrop-blur-xl bg-white/60 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 hover:border-orange-400 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col">
+                        <a href="assets/brochures/IvoryTusk-Voice-AI-India-Brochure.pdf" data-brochure="IvoryTusk-Voice-AI-India-Brochure" data-title="Voice AI Agents for India" data-pages="5" data-height="1754" class="block aspect-[3/4] overflow-hidden bg-slate-100 dark:bg-slate-900">
+                            <img src="assets/brochures/IvoryTusk-Voice-AI-India-Brochure-cover.jpg" alt="Voice AI Agents for India brochure cover" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <span class="text-xs font-bold uppercase tracking-wide text-orange-600 dark:text-orange-400 mb-2">IvoryTusk Voice AI</span>
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3">Voice AI Agents for India</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 flex-1">Outbound voice agents that qualify leads and book meetings in Hindi, Gujarati, Tamil, Hinglish and more. Billed by the second.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">PDF · 5 pages · 2.5 MB</p>
+                            <div class="flex gap-2">
+                                <a href="assets/brochures/IvoryTusk-Voice-AI-India-Brochure.pdf" download class="flex-1 text-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm font-semibold px-3 py-2.5 rounded-lg transition-colors">Download</a>
+                                <a href="assets/brochures/IvoryTusk-Voice-AI-India-Brochure.pdf" data-brochure="IvoryTusk-Voice-AI-India-Brochure" data-title="Voice AI Agents for India" data-pages="5" data-height="1754" class="text-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors">View</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="group backdrop-blur-xl bg-white/60 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 hover:border-orange-400 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col">
+                        <a href="assets/brochures/IvoryTusk-Voice-AI-US-Brochure.pdf" data-brochure="IvoryTusk-Voice-AI-US-Brochure" data-title="Voice AI Agents for US sales teams" data-pages="4" data-height="1605" class="block aspect-[3/4] overflow-hidden bg-slate-100 dark:bg-slate-900">
+                            <img src="assets/brochures/IvoryTusk-Voice-AI-US-Brochure-cover.jpg" alt="Voice AI Agents for US sales teams brochure cover" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <span class="text-xs font-bold uppercase tracking-wide text-orange-600 dark:text-orange-400 mb-2">IvoryTusk Voice AI</span>
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3">Voice AI Agents for US sales teams</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 flex-1">An AI caller that works every US time zone: it calls prospects in their business hours, qualifies them and books meetings on your calendar.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">PDF · 4 pages · 1.9 MB</p>
+                            <div class="flex gap-2">
+                                <a href="assets/brochures/IvoryTusk-Voice-AI-US-Brochure.pdf" download class="flex-1 text-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm font-semibold px-3 py-2.5 rounded-lg transition-colors">Download</a>
+                                <a href="assets/brochures/IvoryTusk-Voice-AI-US-Brochure.pdf" data-brochure="IvoryTusk-Voice-AI-US-Brochure" data-title="Voice AI Agents for US sales teams" data-pages="4" data-height="1605" class="text-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors">View</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="group backdrop-blur-xl bg-white/60 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 hover:border-orange-400 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col">
+                        <a href="assets/brochures/LiveLoop-Brochure.pdf" data-brochure="LiveLoop-Brochure" data-title="LiveLoop" data-pages="9" data-height="1754" class="block aspect-[3/4] overflow-hidden bg-slate-100 dark:bg-slate-900">
+                            <img src="assets/brochures/LiveLoop-Brochure-cover.jpg" alt="LiveLoop brochure cover" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <span class="text-xs font-bold uppercase tracking-wide text-orange-600 dark:text-orange-400 mb-2">Omnichannel AI CRM</span>
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3">LiveLoop</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 flex-1">Bulk WhatsApp campaigns, a shared inbox for WhatsApp, Instagram and Messenger, AI agents that answer every reply, and lead pipelines for your team.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">PDF · 9 pages · 5.3 MB</p>
+                            <div class="flex gap-2">
+                                <a href="assets/brochures/LiveLoop-Brochure.pdf" download class="flex-1 text-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm font-semibold px-3 py-2.5 rounded-lg transition-colors">Download</a>
+                                <a href="assets/brochures/LiveLoop-Brochure.pdf" data-brochure="LiveLoop-Brochure" data-title="LiveLoop" data-pages="9" data-height="1754" class="text-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors">View</a>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="group backdrop-blur-xl bg-white/60 dark:bg-slate-800/40 border border-white/60 dark:border-slate-700/50 hover:border-orange-400 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col">
+                        <a href="assets/brochures/DMLoop-Brochure.pdf" data-brochure="DMLoop-Brochure" data-title="DMLoop" data-pages="4" data-height="1754" class="block aspect-[3/4] overflow-hidden bg-slate-100 dark:bg-slate-900">
+                            <img src="assets/brochures/DMLoop-Brochure-cover.jpg" alt="DMLoop brochure cover" loading="lazy" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+                        </a>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <span class="text-xs font-bold uppercase tracking-wide text-orange-600 dark:text-orange-400 mb-2">Instagram comment-to-DM</span>
+                            <h3 class="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3">DMLoop</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-4 flex-1">Turn Instagram comments and story replies into private messages that qualify the lead, capture the email and track the click.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">PDF · 4 pages · 1.8 MB</p>
+                            <div class="flex gap-2">
+                                <a href="assets/brochures/DMLoop-Brochure.pdf" download class="flex-1 text-center bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm font-semibold px-3 py-2.5 rounded-lg transition-colors">Download</a>
+                                <a href="assets/brochures/DMLoop-Brochure.pdf" data-brochure="DMLoop-Brochure" data-title="DMLoop" data-pages="4" data-height="1754" class="text-center bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors">View</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
         <!-- The Numbers Will Speak Section -->
         <section class="pt-12 pb-12 relative">
             <div
@@ -987,7 +1061,7 @@
                         <span>·</span>
                         <a href="contact.html" class="hover:text-orange-400 transition-colors duration-200">Contact Us</a>
                         <span>·</span>
-                        <a href="brochures.html" class="hover:text-orange-400 transition-colors duration-200">Brochures</a>
+                        <a href="#brochures" class="hover:text-orange-400 transition-colors duration-200">Brochures</a>
                     </div>
                     <p class="text-sm">&copy; 2026 IvoryTusk Technologies Private Limited. All rights reserved.</p>
                     <p class="text-xs mt-1 text-slate-500">"IvoryTusk · AI Solutions" and "LiveLoop" are trading names of IvoryTusk Technologies Private Limited.</p>
@@ -1419,6 +1493,90 @@
       })();
     </script>
     -->
+    <!-- Inline brochure viewer: pages are pre-rendered JPGs, so it works on phones that cannot display an embedded PDF -->
+    <div id="viewer" class="hidden fixed inset-0 z-[60] bg-slate-900/90 backdrop-blur-sm flex-col" role="dialog" aria-modal="true" aria-labelledby="viewer-title">
+        <div class="flex items-center justify-between gap-3 px-4 sm:px-6 py-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 shadow-sm">
+            <h2 id="viewer-title" class="font-semibold text-slate-900 dark:text-slate-100 truncate"></h2>
+            <div class="flex items-center gap-2 shrink-0">
+                <a id="viewer-download" href="#" download class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white text-sm font-semibold px-4 py-2 rounded-lg">Download</a>
+                <button id="viewer-close" type="button" aria-label="Close" class="w-10 h-10 inline-flex items-center justify-center rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-2xl leading-none">&times;</button>
+            </div>
+        </div>
+        <div id="viewer-scroll" class="flex-1 overflow-y-auto overscroll-contain px-3 sm:px-6 py-6">
+            <div id="viewer-pages" class="max-w-3xl mx-auto space-y-4"></div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var viewer = document.getElementById('viewer');
+            var pages = document.getElementById('viewer-pages');
+            var title = document.getElementById('viewer-title');
+            var download = document.getElementById('viewer-download');
+            var scroller = document.getElementById('viewer-scroll');
+            var links = document.querySelectorAll('[data-brochure]');
+
+            function find(id) {
+                for (var i = 0; i < links.length; i++) if (links[i].dataset.brochure === id) return links[i];
+                return null;
+            }
+
+            function show(link) {
+                var id = link.dataset.brochure;
+                var n = parseInt(link.dataset.pages, 10);
+                title.textContent = link.dataset.title + ' brochure';
+                download.href = 'assets/brochures/' + id + '.pdf';
+                pages.innerHTML = '';
+                for (var i = 1; i <= n; i++) {
+                    var img = document.createElement('img');
+                    img.src = 'assets/brochures/pages/' + id + '/p-' + i + '.jpg';
+                    img.alt = link.dataset.title + ' brochure, page ' + i + ' of ' + n;
+                    img.loading = i === 1 ? 'eager' : 'lazy';
+                    img.width = 1240;
+                    img.height = parseInt(link.dataset.height, 10);
+                    img.className = 'w-full h-auto rounded-lg shadow-2xl bg-white';
+                    pages.appendChild(img);
+                }
+                scroller.scrollTop = 0;
+                viewer.classList.remove('hidden');
+                viewer.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+                document.getElementById('viewer-close').focus();
+            }
+
+            function hide() {
+                viewer.classList.add('hidden');
+                viewer.classList.remove('flex');
+                document.body.style.overflow = '';
+                pages.innerHTML = '';
+            }
+
+            links.forEach(function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    history.pushState({ brochure: link.dataset.brochure }, '', '#' + link.dataset.brochure);
+                    show(link);
+                });
+            });
+
+            function close() {
+                if (history.state && history.state.brochure) history.back();
+                else { history.replaceState(null, '', location.pathname + '#brochures'); hide(); }
+            }
+
+            document.getElementById('viewer-close').addEventListener('click', close);
+            scroller.addEventListener('click', function (e) { if (e.target === scroller) close(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !viewer.classList.contains('hidden')) close(); });
+
+            window.addEventListener('popstate', function () {
+                var link = find(location.hash.slice(1));
+                if (link) show(link); else hide();
+            });
+
+            var initial = find(location.hash.slice(1));
+            if (initial) show(initial);
+        })();
+    </script>
 </body>
 
 </html>
