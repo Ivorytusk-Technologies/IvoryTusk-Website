@@ -128,10 +128,10 @@ button, .btn, a.btn {
 #navbar a, #navbar button, nav a, nav button, #navbar a span, #navbar button span, nav a span, nav button span {
     font-family: 'Nunito Sans', sans-serif !important;
     text-transform: uppercase !important;
-    font-weight: 700 !important;
-    font-variation-settings: 'wght' 700, 'wdth' 100, 'opsz' 6, 'YTLC' 500 !important;
-    letter-spacing: 0.06em !important;
-    font-size: 0.8125rem !important;
+    font-weight: 800 !important;
+    font-variation-settings: 'wght' 800, 'wdth' 125, 'opsz' 6, 'YTLC' 500 !important;
+    letter-spacing: -0.02em !important;
+    font-size: 0.875rem !important;
 }
 
 /* Specific styling for LiveLoop header link to use images */
