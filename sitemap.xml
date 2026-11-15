@@ -16,6 +16,14 @@
     <priority>0.80</priority>
   </url>
   
+  <!-- Brochures Page -->
+  <url>
+    <loc>https://ivorytusk.co.in/brochures.html</loc>
+    <lastmod>2026-11-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
   <!-- Contact Us Page -->
   <url>
     <loc>https://ivorytusk.co.in/contact.html</loc>
